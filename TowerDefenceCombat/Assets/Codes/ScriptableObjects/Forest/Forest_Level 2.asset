@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90826034bb00d5b409eecdc158342021, type: 3}
+  m_Name: Forest_Level 2
+  m_EditorClassIdentifier: 
+  MapType: 1
+  LevelIndex: 1
+  UnitRewardList: 
+  DelayAtStart: 3
+  DelayBetweenWaves: 7.7
+  BaseHealth: 200
+  WaveDatas:
+  - WaveHeroDatas:
+    - UnitType: 3
+      Count: 1
+  - WaveHeroDatas:
+    - UnitType: 1
+      Count: 2
+    - UnitType: 2
+      Count: 1
+  - WaveHeroDatas:
+    - UnitType: 3
+      Count: 2
+  - WaveHeroDatas:
+    - UnitType: 1
+      Count: 2
+    - UnitType: 3
+      Count: 2
+  - WaveHeroDatas:
+    - UnitType: 3
+      Count: 3
+    - UnitType: 2
+      Count: 1
+  LevelMapType: 1
+  TotalCoinReward: 2300
+  UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
