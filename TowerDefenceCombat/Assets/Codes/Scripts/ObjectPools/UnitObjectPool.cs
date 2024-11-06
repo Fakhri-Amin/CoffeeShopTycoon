@@ -16,11 +16,35 @@ public class UnitObjectPool : Singleton<UnitObjectPool>
         [HideInInspector] public ObjectPool<Unit> ObjectPool;
     }
 
-    [TableList(ShowIndexLabels = true)] public List<UnitHeroReference> UnitHeroReferences = new List<UnitHeroReference>();
+    [TableList(ShowIndexLabels = true)] public List<UnitHeroReference> PlayerUnitHeroReferences = new List<UnitHeroReference>();
+    [TableList(ShowIndexLabels = true)] public List<UnitHeroReference> EnemyUnitHeroReferences = new List<UnitHeroReference>();
 
     private void Start()
     {
-        foreach (var item in UnitHeroReferences)
+        foreach (var item in PlayerUnitHeroReferences)
+        {
+            item.ObjectPool = new ObjectPool<Unit>(() =>
+            {
+                if (item.ParentTransform == null)
+                {
+                    item.ParentTransform = Instantiate(new GameObject(), transform).transform;
+                    item.ParentTransform.name = item.Type.ToString();
+                }
+                return Instantiate(item.Unit, item.ParentTransform);
+            }, obj =>
+            {
+                obj.gameObject.SetActive(true);
+                obj.ResetState();
+            }, obj =>
+            {
+                obj.gameObject.SetActive(false);
+            }, obj =>
+            {
+                Destroy(obj.gameObject);
+            }, false, 10, 20);
+        }
+
+        foreach (var item in EnemyUnitHeroReferences)
         {
             item.ObjectPool = new ObjectPool<Unit>(() =>
             {
@@ -44,14 +68,28 @@ public class UnitObjectPool : Singleton<UnitObjectPool>
         }
     }
 
-    public Unit GetPooledObject(UnitHero type)
+    public Unit GetPooledObject(UnitType unitType, UnitHero unitHero)
     {
-        return UnitHeroReferences.Find(i => i.Type == type).ObjectPool.Get();
+        if (unitType == UnitType.Player)
+        {
+            return PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
+        }
+        else
+        {
+            return EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
+        }
     }
 
-    public void ReturnToPool(UnitHero type, Unit effect)
+    public void ReturnToPool(UnitType unitType, UnitHero unitHero, Unit effect)
     {
-        UnitHeroReferences.Find(i => i.Type == type).ObjectPool.Release(effect);
+        if (unitType == UnitType.Player)
+        {
+            PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
+        }
+        else
+        {
+            EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
+        }
     }
 }
 

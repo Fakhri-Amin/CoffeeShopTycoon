@@ -103,7 +103,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         {
             spawnedUnits.Remove(unit);
             unit.ResetState(); // Reset unit state before returning it to the pool
-            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
+            UnitObjectPool.Instance.ReturnToPool(UnitType.Player, unit.UnitData.UnitHero, unit);
         }
     }
 
@@ -130,7 +130,7 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     private void SpawnUnit(UnitData unitData, Vector2 position)
     {
-        Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitData.UnitHero);
+        Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(UnitType.Player, unitData.UnitHero);
         if (spawnedUnit == null)
         {
             Debug.LogWarning("No available pooled object for unit: " + unitData.UnitHero);
@@ -138,7 +138,6 @@ public class PlayerUnitSpawner : MonoBehaviour
         }
 
         ModifySeedCount(-unitData.SeedCost);
-        // spawnedUnit.transform.parent = gridLayout.transform;
         spawnedUnit.transform.position = position;
 
         InitializeSpawnedUnit(spawnedUnit, unitData);

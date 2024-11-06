@@ -4120,24 +4120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05269bf589fd5d748a7e82f92816f5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitHeroReferences:
-  - Type: 1
-    Unit: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
-    ParentTransform: {fileID: 0}
+  PlayerUnitHeroReferences:
   - Type: 2
     Unit: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
     ParentTransform: {fileID: 0}
-  - Type: 3
-    Unit: {fileID: 530729902207760050, guid: c3ee7013187f9b345b42288859abb4a4, type: 3}
-    ParentTransform: {fileID: 0}
-  - Type: 4
-    Unit: {fileID: 4989259402293661077, guid: eb9868a683cd3134c81f8e6accae5da4, type: 3}
-    ParentTransform: {fileID: 0}
-  - Type: 5
-    Unit: {fileID: 2147124410541410135, guid: fb4edc960b7f10844bd7bcc2c89f12c3, type: 3}
-    ParentTransform: {fileID: 0}
-  - Type: 6
-    Unit: {fileID: 530729902207760050, guid: 82db81a023d77c44c8347429585d84ff, type: 3}
+  EnemyUnitHeroReferences:
+  - Type: 1
+    Unit: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
     ParentTransform: {fileID: 0}
 --- !u!1 &589298601
 GameObject:

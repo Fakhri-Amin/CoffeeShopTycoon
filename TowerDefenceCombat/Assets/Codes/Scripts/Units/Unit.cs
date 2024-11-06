@@ -18,7 +18,6 @@ public class Unit : MonoBehaviour, IAttackable
     [SerializeField] private SpriteRenderer bodySprite;
     [SerializeField] private SpriteRenderer weaponSprite;
     [SerializeField] private Image healthBar;
-    [SerializeField] private Color initialHealthBarColor;
 
 
     protected bool isIdle;

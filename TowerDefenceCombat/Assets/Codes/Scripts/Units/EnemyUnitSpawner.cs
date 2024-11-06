@@ -102,7 +102,7 @@ public class EnemyUnitSpawner : MonoBehaviour
         {
             EventManager<UnitData>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData);
             spawnedUnits.Remove(unit);
-            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
+            UnitObjectPool.Instance.ReturnToPool(UnitType.Enemy, unit.UnitData.UnitHero, unit);
         }
     }
 
@@ -115,7 +115,7 @@ public class EnemyUnitSpawner : MonoBehaviour
     private void SpawnUnit(UnitHero unitHero, UnitData unitData)
     {
         Vector3 offset = new Vector3(0, UnityEngine.Random.Range(-0.5f, 0.5f), 0);
-        Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitHero);
+        Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(UnitType.Enemy, unitHero);
 
         if (spawnedUnit == null)
         {
