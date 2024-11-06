@@ -16,7 +16,7 @@ public class HealthBarUI : MonoBehaviour
 
     private void Start()
     {
-        startingBarFront = barFront.color;
+        // startingBarFront = barFront.color;
     }
 
     private void OnEnable()

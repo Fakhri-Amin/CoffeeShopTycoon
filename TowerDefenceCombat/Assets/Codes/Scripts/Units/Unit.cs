@@ -58,7 +58,7 @@ public class Unit : MonoBehaviour, IAttackable
 
     public virtual void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
+        // healthSystem = GetComponent<HealthSystem>();
         unitAnimation = GetComponent<UnitAnimation>();
         unitParticle = GetComponent<UnitParticle>();
         unitAudio = GetComponent<UnitAudio>();
@@ -66,14 +66,14 @@ public class Unit : MonoBehaviour, IAttackable
 
     private void OnEnable()
     {
-        healthSystem.OnDead += HandleOnDead;
+        // healthSystem.OnDead += HandleOnDead;
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     private void OnDisable()
     {
-        healthSystem.OnDead -= HandleOnDead;
+        // healthSystem.OnDead -= HandleOnDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
@@ -106,7 +106,7 @@ public class Unit : MonoBehaviour, IAttackable
         // Handle movement and attack
         if (canMove)
         {
-            Move();
+            // Move();
         }
         else if (!canMove && canAttack)
         {
@@ -145,7 +145,7 @@ public class Unit : MonoBehaviour, IAttackable
         targetMask = LayerMask.GetMask(unitType == UnitType.Player ? "Enemy" : "Player");
 
         // Reset state
-        healthSystem.ResetHealth(this.unitData.Health + unitHealthBoost);
+        // healthSystem.ResetHealth(this.unitData.Health + unitHealthBoost);
 
         // Set the move direction
         moveDirection = unitType == UnitType.Player ? Vector3.right : Vector3.left;
@@ -164,9 +164,7 @@ public class Unit : MonoBehaviour, IAttackable
 
     public void ResetState()
     {
-        bodySprite.material.SetFloat("_HitEffectBlend", 0);
-        weaponSprite.material.SetFloat("_HitEffectBlend", 0);
-        healthBar.color = initialHealthBarColor;
+
     }
 
     private void Move()
@@ -244,6 +242,6 @@ public class Unit : MonoBehaviour, IAttackable
         unitParticle.PlayHitParticle();
         unitAudio.PlayHitSound();
 
-        healthSystem.Damage(damageAmount);
+        // healthSystem.Damage(damageAmount);
     }
 }

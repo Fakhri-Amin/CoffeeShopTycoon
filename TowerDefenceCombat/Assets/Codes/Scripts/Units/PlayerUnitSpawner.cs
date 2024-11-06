@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Farou.Utility;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerUnitSpawner : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class PlayerUnitSpawner : MonoBehaviour
     public float SeedCount = 0;
 
     [SerializeField] private UnitDataSO unitDataSO;
-    [SerializeField] private Transform baseTransform;
-    [SerializeField] private Transform unitSpawnPoint;
     [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
+    [SerializeField] private Transform gridLayout;
+    [SerializeField] private UnitData selectedUnit;
 
     private List<UnitHero> selectedUnitHeroList = new List<UnitHero>();
     private float seedProductionRate;
@@ -37,6 +38,8 @@ public class PlayerUnitSpawner : MonoBehaviour
     {
         ModifySeedCount(0);
         // seedProductionCoroutine = StartCoroutine(ProduceSeedRoutine());
+
+        selectedUnit = unitDataSO.UnitStatDataList[1];
     }
 
     private void OnEnable()
@@ -58,6 +61,11 @@ public class PlayerUnitSpawner : MonoBehaviour
         Unit.OnAnyUnitDead -= PlayerUnit_OnAnyPlayerUnitDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
+    }
+
+    private void Update()
+    {
+
     }
 
     public void Initialize(List<UnitHero> selectedUnitHerolist, float seedProductionRate)
@@ -105,7 +113,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         return foundUnit ? foundUnit.transform.position : Vector3.zero;
     }
 
-    public void OnUnitSpawn(UnitHero unitHero)
+    public void OnUnitSpawn(UnitHero unitHero, Vector2 position)
     {
         UnitData unitData = unitDataSO?.UnitStatDataList.Find(i => i.UnitHero == unitHero);
         if (unitData == null)
@@ -114,15 +122,14 @@ public class PlayerUnitSpawner : MonoBehaviour
             return;
         }
 
-        var unitSeedCost = unitData.SeedCost;
-        if (SeedCount < unitSeedCost) return;
+        // var unitSeedCost = unitData.SeedCost;
+        // if (SeedCount < unitSeedCost) return;
 
-        SpawnUnit(unitData);
+        SpawnUnit(unitData, position);
     }
 
-    private void SpawnUnit(UnitData unitData)
+    private void SpawnUnit(UnitData unitData, Vector2 position)
     {
-        Vector3 offset = new Vector3(0, UnityEngine.Random.Range(-0.5f, 0.5f), 0);
         Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitData.UnitHero);
         if (spawnedUnit == null)
         {
@@ -131,7 +138,8 @@ public class PlayerUnitSpawner : MonoBehaviour
         }
 
         ModifySeedCount(-unitData.SeedCost);
-        spawnedUnit.transform.position = unitSpawnPoint.position + offset;
+        // spawnedUnit.transform.parent = gridLayout.transform;
+        spawnedUnit.transform.position = position;
 
         InitializeSpawnedUnit(spawnedUnit, unitData);
         spawnedUnits.Add(spawnedUnit);
@@ -150,7 +158,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         float attackSpeed = unitDataSO.AttackSpeedDataList
             .Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType).AttackSpeed;
 
-        unit.InitializeUnit(UnitType.Player, unitData, baseTransform.position,
+        unit.InitializeUnit(UnitType.Player, unitData, new Vector2(0, 0),
             attackDamageBoost, unitHealthBoost, moveSpeed, attackSpeed);
     }
 
@@ -158,5 +166,32 @@ public class PlayerUnitSpawner : MonoBehaviour
     {
         SeedCount += amount;
         OnSeedCountChanged?.Invoke(SeedCount);
+    }
+
+    public void SetSelectedDefender(UnitData selectedUnit)
+    {
+        this.selectedUnit = selectedUnit;
+    }
+
+    private void AttemptToPlaceDefenderAt(Vector2 gridPosition)
+    {
+        if (selectedUnit != null)
+        {
+            SpawnUnit(selectedUnit, gridPosition);
+        }
+    }
+
+    private Vector2 GetSquareClicked(Vector2 position)
+    {
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(position);
+        Vector2 gridPos = SnapToGrid(worldPos);
+        return gridPos;
+    }
+
+    private Vector2 SnapToGrid(Vector2 rawWorldPos)
+    {
+        float newX = Mathf.RoundToInt(rawWorldPos.x);
+        float newY = Mathf.RoundToInt(rawWorldPos.y);
+        return new Vector2(newX, newY);
     }
 }
