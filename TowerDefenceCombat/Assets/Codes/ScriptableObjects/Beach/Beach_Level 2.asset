@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90826034bb00d5b409eecdc158342021, type: 3}
   m_Name: Beach_Level 2
   m_EditorClassIdentifier: 
-  MapType: 0
   LevelIndex: 1
   UnitRewardList: 02000000
   DelayAtStart: 3
@@ -38,6 +37,5 @@ MonoBehaviour:
       Count: 2
     - UnitType: 2
       Count: 2
-  LevelMapType: 1
   TotalCoinReward: 1400
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

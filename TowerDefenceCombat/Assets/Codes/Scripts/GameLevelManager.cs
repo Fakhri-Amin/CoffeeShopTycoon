@@ -35,7 +35,6 @@ public class GameLevelManager : MonoBehaviour
         EventManager<UnitData>.Subscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
         EventManager.Subscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
-        coinManager.SetMapCurrency(levelManager.CurrentLevelWave.MapType);
         coinManager.UpdateCoinUI();
 
     }
@@ -66,14 +65,7 @@ public class GameLevelManager : MonoBehaviour
 
     private void HandleEnemyCoinDropped(UnitData unitData)
     {
-        if (levelManager.CurrentLevelWave.MapType == MapType.Dungeon)
-        {
-            coinManager.AddCoins(Mathf.RoundToInt(unitData.CoinReward * 0.1f));
-        }
-        else
-        {
-            coinManager.AddCoins(unitData.CoinReward);
-        }
+        coinManager.AddCoins(unitData.CoinReward);
     }
 
     private void HandleEnemyBaseDestroyed()

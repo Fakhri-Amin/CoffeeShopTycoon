@@ -7,10 +7,6 @@ public enum ProjectileType
 {
     None,
     Arrow,
-    Stone,
-    Axe,
     Ammo,
-    Boomerang,
-    IceBall,
-    FireBall
+    Dagger
 }

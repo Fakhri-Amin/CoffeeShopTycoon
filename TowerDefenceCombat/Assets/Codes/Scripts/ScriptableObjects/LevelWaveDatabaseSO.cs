@@ -8,7 +8,6 @@ public class LevelWaveDatabaseSO : ScriptableObject
     [System.Serializable]
     public class MapLevelReference
     {
-        public MapType MapType;
         public List<LevelWaveSO> Levels = new();
     }
     public List<MapLevelReference> MapLevelReferences = new List<MapLevelReference>();

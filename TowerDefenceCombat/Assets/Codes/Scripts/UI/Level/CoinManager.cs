@@ -8,22 +8,6 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CoinCollectedUI coinCollectedUI;
 
-    public void SetMapCurrency(MapType mapType)
-    {
-        Sprite sprite;
-
-        if (mapType == MapType.Dungeon)
-        {
-            sprite = gameAssetSO.AzureCoinSprite;
-        }
-        else
-        {
-            sprite = gameAssetSO.GoldCoinSprite;
-        }
-
-        coinCollectedUI.InitializeCoinImage(sprite);
-    }
-
     public void AddCoins(float amount)
     {
         CoinCollected += amount;

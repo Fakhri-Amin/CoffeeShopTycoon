@@ -10,11 +10,7 @@ public class GameUnitCardUI : MonoBehaviour
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private Transform buttonParent;
     [SerializeField] private UnitCardUI normalUnitCardTemplate;
-    [SerializeField] private UnitCardUI longUnitCardTemplate;
     [SerializeField] private TMP_Text seedCountText;
-
-    [SerializeField] private UnitHero[] normalUnitCardSize;
-    [SerializeField] private UnitHero[] longUnitCardSize;
 
     [Header("Reference To Other Gameobject")]
     [SerializeField] private PlayerUnitSpawner playerUnitSpawner;
@@ -36,30 +32,19 @@ public class GameUnitCardUI : MonoBehaviour
     private void Start()
     {
         normalUnitCardTemplate.gameObject.SetActive(false);
-        longUnitCardTemplate.gameObject.SetActive(false);
 
-        List<UnitHero> selectedUnitHeroList = GameDataManager.Instance.SelectedUnitList;
+        List<UnitHero> unlockedUnitHeroList = GameDataManager.Instance.UnlockedUnitList;
 
-        foreach (var item in selectedUnitHeroList)
+        foreach (var item in unlockedUnitHeroList)
         {
             UnitData unitData = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == item);
 
             if (unitData == null) continue;
 
-            if (normalUnitCardSize.Contains(unitData.UnitHero))
-            {
-                UnitCardUI unitCardUI = Instantiate(normalUnitCardTemplate, buttonParent);
-                unitCardUI.Initialize(unitData);
-                unitCardUI.gameObject.SetActive(true);
-                unitCardUIList.Add(unitCardUI);
-            }
-            else if (longUnitCardSize.Contains(unitData.UnitHero))
-            {
-                UnitCardUI unitCardUI = Instantiate(longUnitCardTemplate, buttonParent);
-                unitCardUI.Initialize(unitData);
-                unitCardUI.gameObject.SetActive(true);
-                unitCardUIList.Add(unitCardUI);
-            }
+            UnitCardUI unitCardUI = Instantiate(normalUnitCardTemplate, buttonParent);
+            unitCardUI.Initialize(unitData);
+            unitCardUI.gameObject.SetActive(true);
+            unitCardUIList.Add(unitCardUI);
         }
     }
 

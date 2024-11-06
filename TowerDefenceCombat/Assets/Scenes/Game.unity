@@ -1385,9 +1385,9 @@ RectTransform:
   m_Father: {fileID: 1619043670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.734627, y: -67.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 76.137, y: 76.137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243112126
@@ -3730,9 +3730,6 @@ MonoBehaviour:
   unitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
   winUI: {fileID: 199873501}
   loseUI: {fileID: 1297302555}
-  unitLevelRewardUI: {fileID: 1573958434}
-  worldRenderer: {fileID: 984960237}
-  groundRenderer: {fileID: 1635230272}
   waitTimeBeforeShowingUI: 2.5
   grid: {fileID: 1499349115520151881, guid: 7cf35dc79d500b341abe20fd45f45733, type: 3}
   gridLayout: {fileID: 899857458}
@@ -4551,9 +4548,9 @@ RectTransform:
   m_Father: {fileID: 1619043670}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132.86612, y: -67.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 63.4615, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &617693556
@@ -5712,7 +5709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &814707519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5730,9 +5727,9 @@ RectTransform:
   m_Father: {fileID: 891743694}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 344.3405, y: -220}
   m_SizeDelta: {x: 268.681, y: 220}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &814707520
@@ -6341,7 +6338,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 603.13153, y: -125}
-  m_SizeDelta: {x: 478.681, y: 305}
+  m_SizeDelta: {x: 180, y: 305}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &891743695
 MonoBehaviour:
@@ -7065,7 +7062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9cc40604c1690ca43960570047b8e2ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7116,9 +7113,9 @@ RectTransform:
   m_Father: {fileID: 931669351}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70.38463, y: -30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023857900
@@ -10934,9 +10931,9 @@ RectTransform:
   m_Father: {fileID: 931669351}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.88462, y: -30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 63.4615, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1623858698
@@ -11447,7 +11444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 45335998baa0c4cf588a6dbba5968f1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7f7231915879b44db6920aadb3d70d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -12953,10 +12950,7 @@ MonoBehaviour:
   unitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
   buttonParent: {fileID: 891743694}
   normalUnitCardTemplate: {fileID: 814852549}
-  longUnitCardTemplate: {fileID: 814707524}
   seedCountText: {fileID: 617693556}
-  normalUnitCardSize: 010000000200000004000000050000000600000009000000
-  longUnitCardSize: 030000000700000008000000
   playerUnitSpawner: {fileID: 685728919}
 --- !u!225 &2034937106
 CanvasGroup:

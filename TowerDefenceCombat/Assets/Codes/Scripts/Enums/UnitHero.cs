@@ -7,14 +7,8 @@ public enum UnitHero
     None,
     Sword,
     Bow,
-    Catapult,
-    Shield,
     Axe,
     Sniper,
     GreatSword,
-    Lance,
     Dagger,
-    Boomerang,
-    IceOrb,
-    FireOrb
 }

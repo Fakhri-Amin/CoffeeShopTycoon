@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         // InitializeLevelGraphics();
-        waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
+        // waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
 
         // Hide UI initially
         winUI.Hide();
@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
     {
         yield return HideInGameHUDAndWait();
 
-        CurrencyType currencyType = currentLevelWave.MapType == MapType.Dungeon ? CurrencyType.AzureCoin : CurrencyType.GoldCoin;
+        CurrencyType currencyType = CurrencyType.GoldCoin;
         loseUI.Show(currencyType, coinManager.CoinCollected, LoadMainMenu);
 
         CollectCurrencyRewards();

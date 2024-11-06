@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90826034bb00d5b409eecdc158342021, type: 3}
   m_Name: Forest_Level 7
   m_EditorClassIdentifier: 
-  MapType: 1
   LevelIndex: 6
   UnitRewardList: 
   DelayAtStart: 3
@@ -46,6 +45,5 @@ MonoBehaviour:
       Count: 4
     - UnitType: 9
       Count: 4
-  LevelMapType: 2
-  TotalCoinReward: 4050
+  TotalCoinReward: 2850
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

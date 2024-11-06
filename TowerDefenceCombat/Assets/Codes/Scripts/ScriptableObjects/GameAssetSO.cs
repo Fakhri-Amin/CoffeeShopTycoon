@@ -7,5 +7,4 @@ public class GameAssetSO : ScriptableObject
 {
     public Sprite GoldCoinSprite;
     public Sprite AzureCoinSprite;
-    public List<WorldSpriteReference> WorldSpriteReferences = new();
 }
