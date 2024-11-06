@@ -24,16 +24,10 @@ public class CoinEffectManager : Singleton<CoinEffectManager>
     private void Start()
     {
         totalGoldCoinCollected = GameDataManager.Instance.GoldCoinCollected;
-        totalAzureCoinCollected = GameDataManager.Instance.AzureCoinCollected;
 
         if (totalGoldCoinCollected > 0)
         {
             StartSpawnCoins(CurrencyType.GoldCoin, totalGoldCoinCollected);
-        }
-
-        if (totalAzureCoinCollected > 0)
-        {
-            StartSpawnCoins(CurrencyType.AzureCoin, totalAzureCoinCollected);
         }
     }
 

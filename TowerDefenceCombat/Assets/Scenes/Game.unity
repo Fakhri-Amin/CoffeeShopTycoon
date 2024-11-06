@@ -3737,7 +3737,7 @@ MonoBehaviour:
   grid: {fileID: 1499349115520151881, guid: 7cf35dc79d500b341abe20fd45f45733, type: 3}
   gridLayout: {fileID: 899857458}
   gridColor1: {r: 0.5568628, g: 0.75686276, b: 0.23921569, a: 1}
-  gridColor2: {r: 0.2627451, g: 0.6901961, b: 0.3254902, a: 1}
+  gridColor2: {r: 0.3913677, g: 0.690566, b: 0.22280525, a: 1}
   inGameHUD: {fileID: 2034937106}
   fader: {fileID: 945761792}
   waveProgressionBar: {fileID: 1202352687}

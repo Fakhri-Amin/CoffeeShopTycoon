@@ -13,11 +13,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
-    [SerializeField] private UnitLevelRewardUI unitLevelRewardUI;
-    // [SerializeField] private MMFeedbacks loadMainMenuFeedbacks;
-    [SerializeField] private SpriteRenderer worldRenderer;
-    [SerializeField] private SpriteRenderer groundRenderer;
-
     [SerializeField] private float waitTimeBeforeShowingUI = 3f;
 
     [Header("Other Reference")]
@@ -29,10 +24,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private Slider waveProgressionBar;
 
-    private SelectedLevelMap selectedLevelMap;
     private LevelWaveSO currentLevelWave;
     private CoinManager coinManager;
-    private int rewardIndex = 0;
     private float timePassed;
 
     public LevelWaveSO CurrentLevelWave => currentLevelWave;
@@ -40,9 +33,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         coinManager = GetComponent<CoinManager>();
-        selectedLevelMap = GameDataManager.Instance.SelectedLevelMap;
-        currentLevelWave = levelWaveDatabaseSO.MapLevelReferences.Find(i => i.MapType == selectedLevelMap.MapType)
-                                                        .Levels[selectedLevelMap.SelectedLevelIndex];
     }
 
     private void Start()
@@ -53,14 +43,16 @@ public class LevelManager : MonoBehaviour
         // Hide UI initially
         winUI.Hide();
         loseUI.Hide();
-        unitLevelRewardUI.Hide();
 
+        List<int> angleList = new List<int>() { 0, 90, 180, 270 };
         for (int i = 0; i < 11; i++)
         {
             for (int j = 0; j < 5; j++)
             {
                 GameObject newGrid = Instantiate(grid, gridLayout);
                 newGrid.transform.localPosition = new Vector3(i, -j);
+
+                newGrid.transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angleList[Random.Range(0, angleList.Count)]);
 
                 if ((i + j) % 2 == 0)
                 {
@@ -72,14 +64,6 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void InitializeLevelGraphics()
-    {
-        WorldSpriteReference worldSpriteReference = gameAssetSO.WorldSpriteReferences
-            .Find(i => i.MapType == currentLevelWave.MapType);
-        worldRenderer.sprite = worldSpriteReference.LevelMapSprites[(int)currentLevelWave.LevelMapType];
-        groundRenderer.color = worldSpriteReference.GroundColor;
     }
 
     private void Update()
@@ -97,7 +81,7 @@ public class LevelManager : MonoBehaviour
 
         ShowWinUI();
 
-        GameDataManager.Instance.AddNewCompletedLevel(selectedLevelMap.MapType, selectedLevelMap.SelectedLevelIndex);
+        // GameDataManager.Instance.AddNewCompletedLevel();
 
         CollectCurrencyRewards();
     }
@@ -114,58 +98,17 @@ public class LevelManager : MonoBehaviour
 
     private void CollectCurrencyRewards()
     {
-        CurrencyType currencyType = currentLevelWave.MapType == MapType.Dungeon ? CurrencyType.AzureCoin : CurrencyType.GoldCoin;
-        GameDataManager.Instance.SetCoinCollected(currencyType, coinManager.CoinCollected);
+        GameDataManager.Instance.SetCoinCollected(coinManager.CoinCollected);
     }
 
     private void ShowWinUI()
     {
-        CurrencyType currencyType = currentLevelWave.MapType == MapType.Dungeon ? CurrencyType.AzureCoin : CurrencyType.GoldCoin;
-        winUI.Show(currencyType, coinManager.CoinCollected, OnWinUIContinue);
+        winUI.Show(coinManager.CoinCollected, OnWinUIContinue);
     }
 
     private void OnWinUIContinue()
     {
-        rewardIndex = 0;
-        ShowNextUnitReward();
-    }
-
-    private void ShowNextUnitReward()
-    {
-        if (rewardIndex >= currentLevelWave.UnitRewardList.Count)
-        {
-            LoadMainMenu();
-            return;
-        }
-
-        var currentReward = currentLevelWave.UnitRewardList[rewardIndex];
-
-        if (GameDataManager.Instance.IsUnitAlreadyUnlocked(currentReward))
-        {
-            rewardIndex++;
-            ShowNextUnitReward();
-        }
-        else
-        {
-            UnlockAndShowReward(currentReward);
-        }
-    }
-
-    private void UnlockAndShowReward(UnitHero currentReward)
-    {
-        GameDataManager.Instance.AddUnlockedUnit(currentReward); // Unlock the unit
-
-        fader.DOFade(1, 0.1f).OnComplete(() =>
-        {
-            winUI.Hide();
-            UnitData unitData = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == currentReward);
-            unitLevelRewardUI.Show(unitData, () =>
-            {
-                rewardIndex++;
-                ShowNextUnitReward();
-            });
-            fader.DOFade(0, 0.1f);
-        });
+        // Go to Day time
     }
 
     private IEnumerator HideInGameHUDAndWait()

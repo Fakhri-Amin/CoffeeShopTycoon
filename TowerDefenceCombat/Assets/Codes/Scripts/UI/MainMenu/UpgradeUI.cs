@@ -109,7 +109,6 @@ public class UpgradeUI : MonoBehaviour
         if (gameDataManager.GoldCoin >= gameDataManager.UpgradeSeedProductionRatePrice)
         {
             gameDataManager.ModifyCoin(CurrencyType.GoldCoin, -gameDataManager.UpgradeSeedProductionRatePrice);
-            gameDataManager.UpgradeSeedProductionRate();
         }
         else
         {

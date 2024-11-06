@@ -139,10 +139,10 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     private void InitializeSpawnedUnit(Unit unit, UnitData unitData)
     {
-        float totalAttackDamage = GameDataManager.Instance.GetTotalAttackDamagePercentage();
+        float totalAttackDamage = 0;
         float attackDamageBoost = unitData.DamageAmount * totalAttackDamage / 100;
 
-        float totalUnitHealth = GameDataManager.Instance.GetTotalUnitHealthPercentage();
+        float totalUnitHealth = 0;
         float unitHealthBoost = unitData.Health * totalUnitHealth / 100;
 
         float moveSpeed = unitDataSO.MoveSpeedDataList

@@ -46,13 +46,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameDataManager.Instance.OnSelectedUnitListChanged += HandleSelectedUnitListChanged;
         HandleSelectedUnitListChanged(GameDataManager.Instance.SelectedUnitList);
-    }
-
-    private void OnDisable()
-    {
-        GameDataManager.Instance.OnSelectedUnitListChanged -= HandleSelectedUnitListChanged;
     }
 
     private void HandleSelectedUnitListChanged(List<UnitHero> unitHeroes)

@@ -26,7 +26,7 @@ public class WinUI : MonoBehaviour
     [SerializeField] private Color azureCoinButtonColor;
 
 
-    public void Show(CurrencyType currencyType, float coinCollectedAmount, Action onContinueButtonClicked)
+    public void Show(float coinCollectedAmount, Action onContinueButtonClicked)
     {
         AudioManager.Instance.PlayCoinFeedbacks();
 
@@ -38,26 +38,13 @@ public class WinUI : MonoBehaviour
 
         collectDoubleButton.onClick.AddListener(() =>
         {
-            Debug.Log("Clicked");
-
             AudioManager.Instance.PlayClickFeedbacks();
-
         });
 
-        if (currencyType == CurrencyType.GoldCoin)
-        {
-            coinImage.sprite = gameAssetSO.GoldCoinSprite;
-            coinOutline.color = goldCoinOutlineColor;
+        coinImage.sprite = gameAssetSO.GoldCoinSprite;
+        coinOutline.color = goldCoinOutlineColor;
 
-            collectDoubleButton.GetComponent<Image>().color = azureCoinButtonColor;
-        }
-        else
-        {
-            coinImage.sprite = gameAssetSO.AzureCoinSprite;
-            coinOutline.color = azureCoinOutlineColor;
-
-            collectDoubleButton.GetComponent<Image>().color = goldCoinButtonColor;
-        }
+        collectDoubleButton.GetComponent<Image>().color = azureCoinButtonColor;
 
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(() =>
