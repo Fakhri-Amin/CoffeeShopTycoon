@@ -12,32 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894fb651d06920a4d8a8aee15aaebe67, type: 3}
   m_Name: LevelWaveDatabaseSO
   m_EditorClassIdentifier: 
-  MapLevelReferences:
-  - MapType: 0
-    Levels:
-    - {fileID: 11400000, guid: ae5e5f03e226d33488cd392947e4382f, type: 2}
-    - {fileID: 11400000, guid: 8e534b8936d44a940ac2e982c4227d50, type: 2}
-    - {fileID: 11400000, guid: d1236032118443e4c90f08e3b5404bae, type: 2}
-    - {fileID: 11400000, guid: 0201cacb4c89db2419e21e7cf6b92796, type: 2}
-    - {fileID: 11400000, guid: 1c2294c5994bf7b44bb979304458164c, type: 2}
-    - {fileID: 11400000, guid: a134a5f6835f4a04c8f493d329a148aa, type: 2}
-  - MapType: 1
-    Levels:
-    - {fileID: 11400000, guid: 03ade2c67c1201c40ae79166863922d1, type: 2}
-    - {fileID: 11400000, guid: b3967368406894e429e239aca4ddd6de, type: 2}
-    - {fileID: 11400000, guid: 374388c5b5e967d40bbd1ba33497f129, type: 2}
-    - {fileID: 11400000, guid: 44880a67a2bbca94baf5410d2b060bdc, type: 2}
-    - {fileID: 11400000, guid: c57033de4c893fb46afa223dad02ff13, type: 2}
-    - {fileID: 11400000, guid: 9a5da5778d5cdb34182d8fd2c5f1d06b, type: 2}
-    - {fileID: 11400000, guid: bc446a28542429d41b65090f1d69c751, type: 2}
-    - {fileID: 11400000, guid: 9c1a5106337762a4ba7c75fcbc5fed26, type: 2}
-    - {fileID: 11400000, guid: 0d986f54ec9b6094dba1da8016709a93, type: 2}
-    - {fileID: 11400000, guid: 8717dd788f734e14783edee652fe5445, type: 2}
-    - {fileID: 11400000, guid: d7c0ac6fc130779449ba013c3d45ac9b, type: 2}
-    - {fileID: 11400000, guid: fd0f5fc5d66a7ac4e841beccbb6dfe7c, type: 2}
-    - {fileID: 11400000, guid: 9d95933dd6c23f44386456db11b0dd8e, type: 2}
-    - {fileID: 11400000, guid: da37e815c57e31248a672a7ae47dc7c6, type: 2}
-    - {fileID: 11400000, guid: ce405ecc054159d4397b351e6ca64309, type: 2}
-    - {fileID: 11400000, guid: cd6a9340bf7cdfb4bba7abd186d9f3d2, type: 2}
-    - {fileID: 11400000, guid: a2804dd5b5e09784eb8387ce8c09686e, type: 2}
-    - {fileID: 11400000, guid: be6a7d879ae7d38468c3a124b0a56eb8, type: 2}
+  DayWaves:
+  - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}

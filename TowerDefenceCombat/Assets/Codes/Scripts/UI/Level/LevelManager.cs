@@ -39,6 +39,7 @@ public class LevelManager : MonoBehaviour
     {
         // InitializeLevelGraphics();
         // waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
+        currentLevelWave = levelWaveDatabaseSO.DayWaves[0];
 
         // Hide UI initially
         winUI.Hide();

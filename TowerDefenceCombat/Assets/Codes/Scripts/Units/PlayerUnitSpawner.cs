@@ -158,7 +158,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         float attackSpeed = unitDataSO.AttackSpeedDataList
             .Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType).AttackSpeed;
 
-        unit.InitializeUnit(UnitType.Player, unitData, new Vector2(0, 0),
+        unit.InitializeUnit(UnitType.Player, unitData,
             attackDamageBoost, unitHealthBoost, moveSpeed, attackSpeed);
     }
 

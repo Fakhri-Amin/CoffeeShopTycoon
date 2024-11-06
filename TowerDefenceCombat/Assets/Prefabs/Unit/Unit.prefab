@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1614605046769336516}
   - component: {fileID: 4171669522886264677}
   - component: {fileID: 8896333557505629462}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1754300141508292697}
   - component: {fileID: 2272017547782301160}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6375359433396832491}
   - component: {fileID: 7407876514876931392}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8820177487835407135}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8399957858055266630}
   - component: {fileID: 7626386149970038175}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HealthBarUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7006459065488840092}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 2362768142782697195}
   - component: {fileID: 7266712907134090192}
   - component: {fileID: 5291670769451464138}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Unit
   m_TagString: Player
   m_Icon: {fileID: 0}

@@ -35,8 +35,6 @@ public class UnitData
     [TabGroup("Stat")]
     public UnitAttackSpeedType AttackSpeedType;
     [TabGroup("Stat")]
-    public float DetectRadius;
-    [TabGroup("Stat")]
     public float AttackRadius;
     [TabGroup("Stat")]
     [HideIf("UnitRangeType", UnitRangeType.Melee)] public float ProjectileSpeed;

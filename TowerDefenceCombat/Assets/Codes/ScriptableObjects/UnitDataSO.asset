@@ -38,7 +38,7 @@ MonoBehaviour:
   - UnitHero: 1
     UnitRangeType: 0
     UnitAttackType: 0
-    Prefab: {fileID: 2147124410541410135, guid: da1c27dc42ab57f41b1a77db62449eb4, type: 3}
+    Prefab: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
     Sprite: {fileID: 21300000, guid: 8f0fce45afbceee4e878a0c78c2b5da3, type: 3}
     Name: Sword
     SeedCost: 3
@@ -46,15 +46,14 @@ MonoBehaviour:
     DamageAmount: 20
     MoveSpeedType: 2
     AttackSpeedType: 2
-    DetectRadius: 4
-    AttackRadius: 1.3
+    AttackRadius: 0.9
     ProjectileSpeed: 0
     AreaOfEffectRadius: 0
     CoinReward: 100
   - UnitHero: 2
     UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 4989259402293661077, guid: e9eda3bdfd579e044af24661f1ee0886, type: 3}
+    Prefab: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
     Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
     Name: Bow
     SeedCost: 5
@@ -62,8 +61,7 @@ MonoBehaviour:
     DamageAmount: 25
     MoveSpeedType: 2
     AttackSpeedType: 3
-    DetectRadius: 9
-    AttackRadius: 5
+    AttackRadius: 15
     ProjectileSpeed: 15
     AreaOfEffectRadius: 0
     CoinReward: 150
@@ -78,7 +76,6 @@ MonoBehaviour:
     DamageAmount: 40
     MoveSpeedType: 1
     AttackSpeedType: 3
-    DetectRadius: 8
     AttackRadius: 3
     ProjectileSpeed: 12
     AreaOfEffectRadius: 0
@@ -94,7 +91,6 @@ MonoBehaviour:
     DamageAmount: 70
     MoveSpeedType: 4
     AttackSpeedType: 1
-    DetectRadius: 12
     AttackRadius: 11
     ProjectileSpeed: 25
     AreaOfEffectRadius: 0
@@ -110,7 +106,6 @@ MonoBehaviour:
     DamageAmount: 60
     MoveSpeedType: 0
     AttackSpeedType: 0
-    DetectRadius: 4
     AttackRadius: 1
     ProjectileSpeed: 0
     AreaOfEffectRadius: 1.2
@@ -126,7 +121,6 @@ MonoBehaviour:
     DamageAmount: 25
     MoveSpeedType: 4
     AttackSpeedType: 4
-    DetectRadius: 4
     AttackRadius: 1
     ProjectileSpeed: 0
     AreaOfEffectRadius: 0

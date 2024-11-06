@@ -70,7 +70,7 @@ public class GameLevelManager : MonoBehaviour
 
     private void HandleEnemyBaseDestroyed()
     {
-        coinManager.AddCoins(levelManager.CurrentLevelWave.BaseHealth);
+
     }
 }
 

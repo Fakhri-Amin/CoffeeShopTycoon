@@ -8,10 +8,8 @@ public class EnemyUnitSpawner : MonoBehaviour
 {
     public static EnemyUnitSpawner Instance { get; private set; }
     [SerializeField] private UnitDataSO unitDataSO;
-
-    [SerializeField] private Transform baseTransform;
-    [SerializeField] private Transform unitSpawnPoint;
     [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
+    [SerializeField] private Transform spawnPoint;
 
     private LevelWaveSO levelWaveSO;
 
@@ -30,7 +28,8 @@ public class EnemyUnitSpawner : MonoBehaviour
     public void Initialize(LevelWaveSO levelWaveSO)
     {
         this.levelWaveSO = levelWaveSO;
-        // StartCoroutine(SpawnUnitWaveRoutine());
+        StartCoroutine(SpawnUnitWaveRoutine());
+        // SpawnUnit(UnitHero.Sword);
     }
 
     private void OnEnable()
@@ -132,8 +131,8 @@ public class EnemyUnitSpawner : MonoBehaviour
         float attackSpeed = unitDataSO.AttackSpeedDataList.Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType).AttackSpeed;
 
         // Initialize unit with specific stats and position
-        spawnedUnit.transform.position = unitSpawnPoint.position + offset;
-        spawnedUnit.InitializeUnit(UnitType.Enemy, unitData, baseTransform.position,
+        spawnedUnit.transform.position = spawnPoint.position;
+        spawnedUnit.InitializeUnit(UnitType.Enemy, unitData,
             0 /* attackDamageBoost */, 0 /* unitHealthBoost */, moveSpeed, attackSpeed);
 
         spawnedUnits.Add(spawnedUnit);

@@ -6,11 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelWaveSO", menuName = "Farou/Level Wave")]
 public class LevelWaveSO : ScriptableObject
 {
-    public int LevelIndex;
-    public List<UnitHero> UnitRewardList;
     public float DelayAtStart;
     public float DelayBetweenWaves;
-    public int BaseHealth;
     [TableList(ShowIndexLabels = true)] public List<WaveData> WaveDatas = new();
     public float TotalCoinReward;
     public UnitDataSO UnitDataSO;
