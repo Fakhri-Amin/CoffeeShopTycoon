@@ -5,22 +5,20 @@ using UnityEngine;
 public class EnemyUnitAnimation : UnitAnimation
 {
     private Animator animator;
-    private EnemyUnit unit;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        unit = GetComponent<EnemyUnit>();
     }
 
-    public void PlayAttackAnimation()
+    public void PlayAttackAnimation(int paramterIndex)
     {
-        animator.SetInteger(UNIT_HERO_PARAMETER, (int)unit.UnitHero);
+        animator.SetInteger(UNIT_HERO_PARAMETER, paramterIndex);
         animator.SetTrigger(ATTACK_PARAMETER);
     }
 
-    public void PlayIdleAnimation()
+    public void PlayIdleAnimation(int paramterIndex)
     {
-        animator.SetInteger(UNIT_HERO_PARAMETER, (int)unit.UnitHero);
+        animator.SetInteger(UNIT_HERO_PARAMETER, paramterIndex);
     }
 }

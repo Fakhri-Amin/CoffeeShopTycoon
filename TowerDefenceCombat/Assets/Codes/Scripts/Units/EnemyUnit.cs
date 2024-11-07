@@ -49,7 +49,7 @@ public class EnemyUnit : Unit, IMovable
         }
         else if (!canMove && canAttack)
         {
-            unitAnimation.PlayAttackAnimation();
+            unitAnimation.PlayAttackAnimation((int)unitData.UnitHero);
             attackCooldown = attackSpeed;
             canAttack = false;
         }
@@ -91,7 +91,7 @@ public class EnemyUnit : Unit, IMovable
             : new Vector3(-Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z);
 
         // Set the animation to idle 
-        unitAnimation.PlayIdleAnimation();
+        unitAnimation.PlayIdleAnimation((int)unitData.UnitHero);
     }
 
     public void Move()

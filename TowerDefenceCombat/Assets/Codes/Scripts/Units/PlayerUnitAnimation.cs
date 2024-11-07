@@ -5,12 +5,10 @@ using UnityEngine;
 public class PlayerUnitAnimation : UnitAnimation
 {
     private Animator animator;
-    private PlayerUnit unit;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        unit = GetComponent<PlayerUnit>();
     }
 
     public void PlayAttackAnimation(int paramterIndex)

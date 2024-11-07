@@ -37,8 +37,8 @@ MonoBehaviour:
   PlayerUnitStatDataList:
   - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 0}
-    Sprite: {fileID: 0}
+    Prefab: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
+    Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
     Name: Bow
     Health: 60
     DamageAmount: 25
@@ -50,7 +50,7 @@ MonoBehaviour:
     AreaOfEffectRadius: 0
   - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 8386274159714352262, guid: 49ca4137e7447a548991be9981774818, type: 3}
     Sprite: {fileID: 0}
     Name: Sniper
     Health: 30
@@ -77,7 +77,7 @@ MonoBehaviour:
   EnemyUnitStatDataList:
   - UnitRangeType: 0
     UnitAttackType: 0
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
     Sprite: {fileID: 0}
     Name: Sword
     Health: 100
