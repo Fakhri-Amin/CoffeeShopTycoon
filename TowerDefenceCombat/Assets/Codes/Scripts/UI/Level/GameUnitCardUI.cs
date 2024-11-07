@@ -39,12 +39,27 @@ public class GameUnitCardUI : MonoBehaviour
             if (unitData == null) continue;
 
             UnitCardUI unitCardUI = Instantiate(normalUnitCardTemplate, buttonParent);
-            unitCardUI.Initialize(unitData);
+            unitCardUI.Initialize(this, unitData);
             unitCardUI.gameObject.SetActive(true);
             unitCardUIList.Add(unitCardUI);
         }
 
         CheckForCardClickable(GameDataManager.Instance.GoldCoin);
+
+        foreach (var item in unitCardUIList)
+        {
+            item.Deselect();
+        }
+    }
+
+    public void SelectCard(UnitCardUI unitCardUI)
+    {
+        foreach (var item in unitCardUIList)
+        {
+            item.Deselect();
+        }
+
+        unitCardUIList.Find(i => i == unitCardUI).Select();
     }
 
     private void CheckForCardClickable(float currentCoin)

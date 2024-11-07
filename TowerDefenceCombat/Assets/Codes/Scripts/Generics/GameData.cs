@@ -7,7 +7,7 @@ public class GameData : BaseData
     public override string Name => "Game Data";
     public override string Key => "GameData";
 
-    public int GoldCoin = 0;
+    public float GoldCoin = 0;
     public int BaseHealthLevel = 1;
     public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
 }

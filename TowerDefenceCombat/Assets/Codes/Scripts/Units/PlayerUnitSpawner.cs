@@ -12,7 +12,7 @@ public class PlayerUnitSpawner : MonoBehaviour
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
     [SerializeField] private Transform gridLayout;
-    [SerializeField] private PlayerUnitData selectedUnit;
+    [SerializeField] private PlayerUnitHero selectedUnit;
 
     private List<PlayerUnitHero> unlockedUnitHeroList = new List<PlayerUnitHero>();
 
@@ -28,11 +28,6 @@ public class PlayerUnitSpawner : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        selectedUnit = unitDataSO.PlayerUnitStatDataList[1];
     }
 
     private void OnEnable()
@@ -76,12 +71,12 @@ public class PlayerUnitSpawner : MonoBehaviour
         return foundUnit ? foundUnit.transform.position : Vector3.zero;
     }
 
-    public void OnUnitSpawn(PlayerUnitHero unitHero, Vector2 position)
+    public void OnUnitSpawn(Vector2 position)
     {
-        PlayerUnitData unitData = unitDataSO?.PlayerUnitStatDataList.Find(i => i.UnitHero == unitHero);
+        PlayerUnitData unitData = unitDataSO?.PlayerUnitStatDataList.Find(i => i.UnitHero == selectedUnit);
         if (unitData == null)
         {
-            Debug.LogWarning("Unit data not found for unitHero: " + unitHero);
+            Debug.LogWarning("Unit data not found for unitHero: " + selectedUnit);
             return;
         }
 
@@ -128,7 +123,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         GameDataManager.Instance.ModifyCoin(CurrencyType.GoldCoin, amount);
     }
 
-    public void SetSelectedDefender(PlayerUnitData selectedUnit)
+    public void SetSelectedUnit(PlayerUnitHero selectedUnit)
     {
         this.selectedUnit = selectedUnit;
     }

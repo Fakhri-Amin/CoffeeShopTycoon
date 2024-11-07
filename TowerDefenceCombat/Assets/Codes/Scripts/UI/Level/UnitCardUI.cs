@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +9,16 @@ public class UnitCardUI : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private Image unitImage;
     [SerializeField] private TMP_Text seedAmountText;
+    [SerializeField] private Image outline;
     [SerializeField] private Image frame;
+    [SerializeField] private Color selectedColor;
     [SerializeField] private Color activeColor;
     [SerializeField] private Color inActiveColor;
 
-    public void Initialize(PlayerUnitData unitData)
+    private static readonly Color TransparentWhite = new Color(1, 1, 1, 0.3f);
+    private static readonly Color OpaqueWhite = new Color(1, 1, 1, 1f);
+
+    public void Initialize(GameUnitCardUI gameUnitCardUI, PlayerUnitData unitData)
     {
         UnitData = unitData;
         unitImage.sprite = unitData.Sprite;
@@ -23,24 +26,38 @@ public class UnitCardUI : MonoBehaviour
 
         button.onClick.AddListener(() =>
         {
-            // PlayerUnitSpawner.Instance.OnUnitSpawn(unitData.UnitHero);
-            AudioManager.Instance.PlayClickFeedbacks();
+            gameUnitCardUI.SelectCard(this);
+            PlayerUnitSpawner.Instance.SetSelectedUnit(unitData.UnitHero);
+            // AudioManager.Instance.PlayClickFeedbacks();
         });
+    }
 
-        Disable();
+    public void Select()
+    {
+        UpdateUI(opaque: true, frameColor: activeColor, outlineColor: selectedColor);
+    }
+
+    public void Deselect()
+    {
+        UpdateUI(opaque: true, frameColor: activeColor, outlineColor: activeColor);
     }
 
     public void Enable()
     {
         button.interactable = true;
-        unitImage.color = new Color(1, 1, 1, 1);
         frame.color = activeColor;
     }
 
     public void Disable()
     {
         button.interactable = false;
-        unitImage.color = new Color(1, 1, 1, .3f);
-        frame.color = inActiveColor;
+        UpdateUI(opaque: false, frameColor: inActiveColor, outlineColor: activeColor);
+    }
+
+    private void UpdateUI(bool opaque, Color frameColor, Color outlineColor)
+    {
+        unitImage.color = opaque ? OpaqueWhite : TransparentWhite;
+        frame.color = frameColor;
+        outline.color = outlineColor;
     }
 }

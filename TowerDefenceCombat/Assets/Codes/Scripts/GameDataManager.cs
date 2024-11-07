@@ -74,8 +74,10 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
     private void ModifyGoldCoin(float amount)
     {
-        Data.Get<GameData>().GoldCoin += (int)amount;
-        GoldCoin = Data.Get<GameData>().GoldCoin;
+        var gameData = Data.Get<GameData>();
+        gameData.GoldCoin = Mathf.Clamp(gameData.GoldCoin + amount, 0, Mathf.Infinity);
+
+        GoldCoin = gameData.GoldCoin;
         OnGoldCoinUpdated?.Invoke(GoldCoin);
         Save();
     }
