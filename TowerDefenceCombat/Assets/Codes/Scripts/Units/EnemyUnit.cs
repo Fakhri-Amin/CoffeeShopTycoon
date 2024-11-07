@@ -6,8 +6,12 @@ using UnityEngine;
 public class EnemyUnit : Unit, IMovable
 {
     public static event Action<EnemyUnit> OnAnyUnitDead;
+    [SerializeField] protected EnemyUnitHero unitHero;
+    [SerializeField] bool canMove = true;
     protected EnemyUnitData unitData;
+    protected EnemyUnitAnimation unitAnimation;
 
+    public EnemyUnitHero UnitHero => unitHero;
     public EnemyUnitData UnitData
     {
         get
@@ -20,7 +24,12 @@ public class EnemyUnit : Unit, IMovable
         }
     }
 
-    [SerializeField] bool canMove = true;
+
+    public new void Awake()
+    {
+        base.Awake();
+        unitAnimation = GetComponent<EnemyUnitAnimation>();
+    }
 
     // Start is called before the first frame update
     void Start()

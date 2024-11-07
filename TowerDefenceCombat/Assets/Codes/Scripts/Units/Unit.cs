@@ -11,7 +11,6 @@ public class Unit : MonoBehaviour, IAttackable
     public event Action OnDead;
 
     [SerializeField] protected UnitType unitType;
-    [SerializeField] protected UnitHero unitHero;
     [SerializeField] protected LayerMask targetMask;
     [SerializeField] protected Transform visual;
     [SerializeField] protected SpriteRenderer bodySprite;
@@ -26,7 +25,6 @@ public class Unit : MonoBehaviour, IAttackable
     protected float attackCooldown;
     protected IAttackable targetUnit;
     protected HealthSystem healthSystem;
-    protected UnitAnimation unitAnimation;
     protected UnitParticle unitParticle;
     protected UnitAudio unitAudio;
     protected Vector3 moveDirection;
@@ -37,7 +35,6 @@ public class Unit : MonoBehaviour, IAttackable
     public IAttackable TargetUnit => targetUnit;
 
     public UnitType UnitType => unitType;
-    public UnitHero UnitHero => unitHero;
     public LayerMask TargetMask => targetMask;
 
     public GameObject GameObject => gameObject;
@@ -46,7 +43,6 @@ public class Unit : MonoBehaviour, IAttackable
     public virtual void Awake()
     {
         // healthSystem = GetComponent<HealthSystem>();
-        unitAnimation = GetComponent<UnitAnimation>();
         unitParticle = GetComponent<UnitParticle>();
         unitAudio = GetComponent<UnitAudio>();
     }

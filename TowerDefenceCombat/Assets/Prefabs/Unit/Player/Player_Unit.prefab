@@ -122,6 +122,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3228670454581676198, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bd6f18e623b9a1e478487594cd31f816, type: 2}
     - target: {fileID: 4330208910676024566, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -157,6 +161,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6942206049368192244, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
     - {fileID: 3227390528768859159, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
+    - {fileID: 2362768142782697195, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
 --- !u!4 &2323607351940363095 stripped
 Transform:
@@ -178,27 +183,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8108510425585971553, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
   m_PrefabInstance: {fileID: 4304441925794869385}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2703705726365698674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5421001778425971176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb79b1e5295b324c8f8b6eadb3109af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitType: 0
-  unitHero: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
-  visual: {fileID: 4745636846508086166}
-  bodySprite: {fileID: 6733553593330142665}
-  weaponSprite: {fileID: 2610857207768126817}
-  healthBar: {fileID: 0}
 --- !u!114 &-987971152349857038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +198,39 @@ MonoBehaviour:
   unitRangeType: 0
   shootingTransform: {fileID: 0}
   projectileType: 0
+--- !u!114 &2703705726365698674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421001778425971176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb79b1e5295b324c8f8b6eadb3109af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitType: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  visual: {fileID: 4745636846508086166}
+  bodySprite: {fileID: 6733553593330142665}
+  weaponSprite: {fileID: 2610857207768126817}
+  healthBar: {fileID: 0}
+  unitHero: 0
+--- !u!114 &9130715468110133817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421001778425971176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd9041bbfd4bef4a8718f87ae5113f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &6733553593330142665 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7407876514876931392, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}

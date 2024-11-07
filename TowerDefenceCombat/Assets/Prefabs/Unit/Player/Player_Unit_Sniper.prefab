@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: projectileType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: shootingTransform
@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2703705726365698674, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: unitHero
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4394663544299090447, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_IsActive
@@ -117,7 +117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421001778425971176, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Name
-      value: Player_Unit_Bow
+      value: Player_Unit_Sniper
       objectReference: {fileID: 0}
     - target: {fileID: 6733553593330142665, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Sprite

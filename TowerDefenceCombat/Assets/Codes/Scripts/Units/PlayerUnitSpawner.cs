@@ -16,11 +16,11 @@ public class PlayerUnitSpawner : MonoBehaviour
     [SerializeField] private Transform gridLayout;
     [SerializeField] private PlayerUnitData selectedUnit;
 
-    private List<UnitHero> selectedUnitHeroList = new List<UnitHero>();
+    private List<PlayerUnitHero> unlockedUnitHeroList = new List<PlayerUnitHero>();
     private float seedProductionRate;
     private Coroutine seedProductionCoroutine;
 
-    public List<UnitHero> SelectedUnitTypeList => selectedUnitHeroList;
+    public List<PlayerUnitHero> UnlockedUnitHeroList => unlockedUnitHeroList;
 
     private void Awake()
     {
@@ -68,9 +68,9 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     }
 
-    public void Initialize(List<UnitHero> selectedUnitHerolist, float seedProductionRate)
+    public void Initialize(List<PlayerUnitHero> unlockedUnitHeroList, float seedProductionRate)
     {
-        this.selectedUnitHeroList = selectedUnitHerolist;
+        this.unlockedUnitHeroList = unlockedUnitHeroList;
         this.seedProductionRate = seedProductionRate;
     }
 
@@ -133,7 +133,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         PlayerUnit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitData.UnitHero);
         if (spawnedUnit == null)
         {
-            Debug.LogWarning("No available pooled object for unit: " + unitData.UnitHero);
+            Debug.LogWarning((object)("No available pooled object for unit: " + unitData.UnitHero));
             return;
         }
 

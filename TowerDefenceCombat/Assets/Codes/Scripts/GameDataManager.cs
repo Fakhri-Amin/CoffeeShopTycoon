@@ -16,7 +16,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
     public UnitDataSO UnitDataSO;
     public LevelWaveDatabaseSO LevelWaveDatabaseSO;
-    public List<UnitHero> SelectedUnitList = new List<UnitHero>(3);
+    public List<PlayerUnitHero> SelectedUnitList = new List<PlayerUnitHero>(3);
     public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
     public float GoldCoinCollected;
     public float GoldCoin;

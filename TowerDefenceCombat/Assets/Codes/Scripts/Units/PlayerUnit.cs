@@ -6,8 +6,11 @@ using UnityEngine;
 public class PlayerUnit : Unit
 {
     public static event Action<PlayerUnit> OnAnyUnitDead;
+    [SerializeField] protected PlayerUnitHero unitHero;
     protected PlayerUnitData unitData;
+    protected PlayerUnitAnimation unitAnimation;
 
+    public PlayerUnitHero UnitHero => unitHero;
     public PlayerUnitData UnitData
     {
         get
@@ -18,6 +21,12 @@ public class PlayerUnit : Unit
         {
             unitData = value;
         }
+    }
+
+    public new void Awake()
+    {
+        base.Awake();
+        unitAnimation = GetComponent<PlayerUnitAnimation>();
     }
 
     // Start is called before the first frame update
@@ -34,7 +43,7 @@ public class PlayerUnit : Unit
         // Handle movement and attack
         if (canAttack && targetUnit != null)
         {
-            unitAnimation.PlayAttackAnimation();
+            unitAnimation.PlayAttackAnimation((int)unitData.UnitHero);
             attackCooldown = attackSpeed;
             canAttack = false;
         }
@@ -76,7 +85,7 @@ public class PlayerUnit : Unit
             : new Vector3(-Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z);
 
         // Set the animation to idle 
-        unitAnimation.PlayIdleAnimation();
+        unitAnimation.PlayIdleAnimation((int)unitData.UnitHero);
     }
 
     private void DetectEnemiesAndHandleAttack()

@@ -134,6 +134,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6942206049368192244, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
     - {fileID: 3227390528768859159, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
+    - {fileID: 2362768142782697195, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
 --- !u!212 &2610857207768126817 stripped
 SpriteRenderer:
@@ -150,28 +151,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8108510425585971553, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
   m_PrefabInstance: {fileID: 4304441925794869385}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6996556053366110403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5421001778425971176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78376bd196f06a840ab20001da420faf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitType: 1
-  unitHero: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  visual: {fileID: 4745636846508086166}
-  bodySprite: {fileID: 6733553593330142665}
-  weaponSprite: {fileID: 2610857207768126817}
-  healthBar: {fileID: 0}
-  canMove: 1
 --- !u!114 &6741802703092120941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +166,40 @@ MonoBehaviour:
   unitRangeType: 0
   shootingTransform: {fileID: 0}
   projectileType: 0
+--- !u!114 &6996556053366110403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421001778425971176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78376bd196f06a840ab20001da420faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitType: 1
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  visual: {fileID: 4745636846508086166}
+  bodySprite: {fileID: 6733553593330142665}
+  weaponSprite: {fileID: 2610857207768126817}
+  healthBar: {fileID: 0}
+  unitHero: 0
+  canMove: 1
+--- !u!114 &4379747561672093918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421001778425971176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138473bea0ed1ea4d9962ac2e71a526d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &6733553593330142665 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7407876514876931392, guid: 670b48a6894f0174ca869be0d22f4e9c, type: 3}
