@@ -31,12 +31,6 @@ public class EnemyUnit : Unit, IMovable
         unitAnimation = GetComponent<EnemyUnitAnimation>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     public new void Update()
     {
@@ -80,7 +74,7 @@ public class EnemyUnit : Unit, IMovable
         targetMask = LayerMask.GetMask(unitType == UnitType.Player ? "Enemy" : "Player");
 
         // Reset state
-        // healthSystem.ResetHealth(this.unitData.Health + unitHealthBoost);
+        healthSystem.ResetHealth(this.unitData.Health);
 
         // Set the move direction
         moveDirection = unitType == UnitType.Player ? Vector3.right : Vector3.left;
@@ -92,6 +86,12 @@ public class EnemyUnit : Unit, IMovable
 
         // Set the animation to idle 
         unitAnimation.PlayIdleAnimation((int)unitData.UnitHero);
+    }
+
+    public override void HandleOnDead()
+    {
+        base.HandleOnDead();
+        OnAnyUnitDead?.Invoke(this);
     }
 
     public void Move()

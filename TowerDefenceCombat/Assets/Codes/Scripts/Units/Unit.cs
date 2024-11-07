@@ -15,8 +15,6 @@ public class Unit : MonoBehaviour, IAttackable
     [SerializeField] protected Transform visual;
     [SerializeField] protected SpriteRenderer bodySprite;
     [SerializeField] protected SpriteRenderer weaponSprite;
-    [SerializeField] protected Image healthBar;
-
 
     protected bool isIdle;
     protected float attackDamageBoost;
@@ -42,29 +40,29 @@ public class Unit : MonoBehaviour, IAttackable
 
     public virtual void Awake()
     {
-        // healthSystem = GetComponent<HealthSystem>();
+        healthSystem = GetComponent<HealthSystem>();
         unitParticle = GetComponent<UnitParticle>();
         unitAudio = GetComponent<UnitAudio>();
     }
 
     private void OnEnable()
     {
-        // healthSystem.OnDead += HandleOnDead;
+        healthSystem.OnDead += HandleOnDead;
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     private void OnDisable()
     {
-        // healthSystem.OnDead -= HandleOnDead;
+        healthSystem.OnDead -= HandleOnDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
-    private void HandleOnDead()
+    public virtual void HandleOnDead()
     {
         unitParticle.PlayDeadParticle();
-        unitAudio.PlayDeadSound();
+        // unitAudio.PlayDeadSound();
 
         OnDead?.Invoke();
         // OnAnyUnitDead?.Invoke(this);
@@ -99,6 +97,6 @@ public class Unit : MonoBehaviour, IAttackable
         unitParticle.PlayHitParticle();
         // unitAudio.PlayHitSound();
 
-        // healthSystem.Damage(damageAmount);
+        healthSystem.Damage(damageAmount);
     }
 }

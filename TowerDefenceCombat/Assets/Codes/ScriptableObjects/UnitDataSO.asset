@@ -51,7 +51,7 @@ MonoBehaviour:
   - UnitRangeType: 1
     UnitAttackType: 0
     Prefab: {fileID: 8386274159714352262, guid: 49ca4137e7447a548991be9981774818, type: 3}
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 93ad7e9051eaa8646809e6177a29adf5, type: 3}
     Name: Sniper
     Health: 30
     DamageAmount: 70
@@ -63,9 +63,9 @@ MonoBehaviour:
     AreaOfEffectRadius: 0
   - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 0}
-    Sprite: {fileID: 0}
-    Name: Dagger
+    Prefab: {fileID: 8386274159714352262, guid: df6dbfd4016df8748aba76d923afcec2, type: 3}
+    Sprite: {fileID: 21300000, guid: df950dd5f21111d4f8418d9d12f09cc8, type: 3}
+    Name: Blowgun
     Health: 50
     DamageAmount: 25
     AttackSpeedType: 4
