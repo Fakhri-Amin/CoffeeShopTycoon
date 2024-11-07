@@ -28,15 +28,12 @@ public class GameLevelManager : MonoBehaviour
     private void Start()
     {
         enemyUnitSpawner.Initialize(levelManager.CurrentLevelWave);
-        playerUnitSpawner.Initialize(GameDataManager.Instance.SelectedUnitList, GameDataManager.Instance.SeedProductionRate);
+        playerUnitSpawner.Initialize(GameDataManager.Instance.SelectedUnitList);
 
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
         EventManager<EnemyUnitData>.Subscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
         EventManager.Subscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
-
-        coinManager.UpdateCoinUI();
-
     }
 
     private void OnDisable()

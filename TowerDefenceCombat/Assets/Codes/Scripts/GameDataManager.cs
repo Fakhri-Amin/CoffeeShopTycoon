@@ -35,6 +35,8 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         GoldCoin = gameData.GoldCoin;
         OnGoldCoinUpdated?.Invoke(GoldCoin);
 
+        UnlockedUnitList = gameData.UnlockedUnitList;
+
         SetInitialDefaultData();
 
         UpdateSeedProductionRate();

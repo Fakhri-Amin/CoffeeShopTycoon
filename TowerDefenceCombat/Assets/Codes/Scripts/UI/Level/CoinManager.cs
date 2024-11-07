@@ -8,15 +8,31 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CoinCollectedUI coinCollectedUI;
 
+    private void Start()
+    {
+        CoinCollected = GameDataManager.Instance.GoldCoin;
+        UpdateCoinUI(CoinCollected);
+    }
+
+    private void OnEnable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated += UpdateCoinUI;
+    }
+
+    private void OnDisable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated -= UpdateCoinUI;
+    }
+
     public void AddCoins(float amount)
     {
         CoinCollected += amount;
-        UpdateCoinUI();
+        UpdateCoinUI(CoinCollected);
     }
 
-    public void UpdateCoinUI()
+    public void UpdateCoinUI(float amount)
     {
-        coinCollectedUI.UpdateCoinCollectedUI(CoinCollected);
+        coinCollectedUI.UpdateCoinCollectedUI(amount);
     }
 }
 

@@ -10,7 +10,6 @@ public class GameUnitCardUI : MonoBehaviour
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private Transform buttonParent;
     [SerializeField] private UnitCardUI normalUnitCardTemplate;
-    [SerializeField] private TMP_Text seedCountText;
 
     [Header("Reference To Other Gameobject")]
     [SerializeField] private PlayerUnitSpawner playerUnitSpawner;
@@ -19,14 +18,12 @@ public class GameUnitCardUI : MonoBehaviour
 
     private void OnEnable()
     {
-        playerUnitSpawner.OnSeedCountChanged += OnSeedProductionCountChanged;
-        playerUnitSpawner.OnSeedCountChanged += CheckForCardClickable;
+        GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
     }
 
     private void OnDisable()
     {
-        playerUnitSpawner.OnSeedCountChanged -= OnSeedProductionCountChanged;
-        playerUnitSpawner.OnSeedCountChanged -= CheckForCardClickable;
+        GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
     }
 
     private void Start()
@@ -46,18 +43,15 @@ public class GameUnitCardUI : MonoBehaviour
             unitCardUI.gameObject.SetActive(true);
             unitCardUIList.Add(unitCardUI);
         }
+
+        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
     }
 
-    private void OnSeedProductionCountChanged(float currentSeedCount)
-    {
-        seedCountText.text = currentSeedCount.ToString();
-    }
-
-    private void CheckForCardClickable(float currentSeedCount)
+    private void CheckForCardClickable(float currentCoin)
     {
         foreach (var item in unitCardUIList)
         {
-            if (item.UnitData.CoinCost > currentSeedCount)
+            if (item.UnitData.CoinCost > currentCoin)
             {
                 item.Disable();
             }
