@@ -4124,9 +4124,21 @@ MonoBehaviour:
   - Type: 1
     Unit: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
     ParentTransform: {fileID: 0}
+  - Type: 2
+    Unit: {fileID: 8386274159714352262, guid: 49ca4137e7447a548991be9981774818, type: 3}
+    ParentTransform: {fileID: 0}
+  - Type: 3
+    Unit: {fileID: 8386274159714352262, guid: df6dbfd4016df8748aba76d923afcec2, type: 3}
+    ParentTransform: {fileID: 0}
   EnemyUnitHeroReferences:
   - Type: 1
     Unit: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
+    ParentTransform: {fileID: 0}
+  - Type: 2
+    Unit: {fileID: 1212487335186581284, guid: ef2e74170c24fe64488d85aa317b3d65, type: 3}
+    ParentTransform: {fileID: 0}
+  - Type: 3
+    Unit: {fileID: 1212487335186581284, guid: 8085ee9a43bf52c4ab7ca0165f17fd81, type: 3}
     ParentTransform: {fileID: 0}
 --- !u!1 &589298601
 GameObject:
@@ -10683,7 +10695,7 @@ MonoBehaviour:
     Projectile: {fileID: 5190286326426748155, guid: 7aac861c8bfcea44484a19258abf93c5, type: 3}
     ParentTransform: {fileID: 0}
   - Type: 3
-    Projectile: {fileID: 5190286326426748155, guid: 8e3729cd199fe454793589fbe0e1cbe5, type: 3}
+    Projectile: {fileID: 5190286326426748155, guid: badd405ca0f556e40a77c7bc144182b7, type: 3}
     ParentTransform: {fileID: 0}
 --- !u!1 &1619043669
 GameObject:

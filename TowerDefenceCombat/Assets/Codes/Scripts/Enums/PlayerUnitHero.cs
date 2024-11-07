@@ -7,5 +7,5 @@ public enum PlayerUnitHero
     None,
     Bow,
     Sniper,
-    Dagger
+    Blowgun
 }

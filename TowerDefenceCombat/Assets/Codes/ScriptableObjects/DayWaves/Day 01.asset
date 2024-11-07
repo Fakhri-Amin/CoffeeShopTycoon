@@ -16,7 +16,9 @@ MonoBehaviour:
   DelayBetweenWaves: 0
   WaveDatas:
   - WaveHeroDatas:
-    - UnitType: 1
+    - UnitType: 2
       Count: 1
-  TotalCoinReward: 10
+    - UnitType: 3
+      Count: 1
+  TotalCoinReward: 75
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

@@ -7,7 +7,7 @@ public class SingleGrid : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        PlayerUnitSpawner.Instance.OnUnitSpawn(PlayerUnitHero.Bow, transform.position);
+        PlayerUnitSpawner.Instance.OnUnitSpawn(PlayerUnitHero.Blowgun, transform.position);
     }
 
     // Start is called before the first frame update

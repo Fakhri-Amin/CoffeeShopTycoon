@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: projectileType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: shootingTransform
@@ -25,7 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 787907282948883670, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 787907282948883670, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.096
       objectReference: {fileID: 0}
     - target: {fileID: 1690413048071154846, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: unitRangeType
@@ -85,11 +89,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_LocalPosition.y
+      value: -0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99949276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalRotation.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.031846903
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586462081541325008, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 3.65
       objectReference: {fileID: 0}
     - target: {fileID: 2610857207768126817, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Size.x
@@ -102,14 +126,14 @@ PrefabInstance:
     - target: {fileID: 2610857207768126817, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 902b453f0ea1bd24e9ea8ef5cc33b563, type: 3}
+      objectReference: {fileID: 21300000, guid: f974e4d38e231a44aaee37199d9d27ec, type: 3}
     - target: {fileID: 2610857207768126817, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2703705726365698674, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: unitHero
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4394663544299090447, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_IsActive
@@ -117,12 +141,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421001778425971176, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Name
-      value: Player_Unit_Sniper
+      value: Player_Unit_Blowgun
       objectReference: {fileID: 0}
     - target: {fileID: 6733553593330142665, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 14381ee22fff0cc4a9df111d2e4632bc, type: 3}
+      objectReference: {fileID: 21300000, guid: 3609c23b5b7a19540a2ad94a5e0229f0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
 --- !u!4 &6559577095128003106 stripped

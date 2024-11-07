@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dagger_Idle
+  m_Name: Blowgun_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: eb10d25503005d34ea2948dc61db8e66, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6a289735b896af642acfbcbe93184310, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -349,7 +349,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 219c8763ee6b158448f50119cd97d2d1, type: 2}
+  m_Motion: {fileID: 7400000, guid: fa2a7ae23c8c47c47886234242405792, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

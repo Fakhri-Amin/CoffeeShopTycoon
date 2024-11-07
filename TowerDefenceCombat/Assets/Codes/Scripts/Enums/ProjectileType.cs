@@ -8,5 +8,5 @@ public enum ProjectileType
     None,
     Arrow,
     Ammo,
-    Dagger
+    Dart
 }
