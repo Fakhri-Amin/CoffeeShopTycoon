@@ -32,7 +32,7 @@ public class GameLevelManager : MonoBehaviour
 
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
-        EventManager<UnitData>.Subscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
+        EventManager<EnemyUnitData>.Subscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
         EventManager.Subscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
         coinManager.UpdateCoinUI();
@@ -43,7 +43,7 @@ public class GameLevelManager : MonoBehaviour
     {
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
-        EventManager<UnitData>.UnSubscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
+        EventManager<EnemyUnitData>.UnSubscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
     }
 
@@ -63,7 +63,7 @@ public class GameLevelManager : MonoBehaviour
         }
     }
 
-    private void HandleEnemyCoinDropped(UnitData unitData)
+    private void HandleEnemyCoinDropped(EnemyUnitData unitData)
     {
         coinManager.AddCoins(unitData.CoinReward);
     }

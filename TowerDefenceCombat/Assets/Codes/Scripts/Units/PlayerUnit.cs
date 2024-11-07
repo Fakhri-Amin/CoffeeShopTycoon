@@ -1,9 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerUnit : Unit
 {
+    public static event Action<PlayerUnit> OnAnyUnitDead;
+    protected PlayerUnitData unitData;
+
+    public PlayerUnitData UnitData
+    {
+        get
+        {
+            return unitData;
+        }
+        set
+        {
+            unitData = value;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +40,43 @@ public class PlayerUnit : Unit
         }
 
         DetectEnemiesAndHandleAttack(); // Ensure enemy detection and handling is checked every frame
+    }
+
+    public void InitializeUnit(UnitType unitType, PlayerUnitData unitData, float attackDamageBoost, float unitHealthBoost, float moveSpeed, float attackSpeed)
+    {
+        // Set the type
+        this.unitType = unitType;
+
+        // Set the unit data
+        this.unitData = unitData;
+
+        // Set the move speed
+        this.moveSpeed = moveSpeed;
+
+        // Set the attack speed
+        this.attackSpeed = attackSpeed;
+
+        // Set the attack damage
+        this.attackDamageBoost = attackDamageBoost;
+
+        // Set the layer mask and tag
+        gameObject.layer = LayerMask.NameToLayer(unitType.ToString());
+        gameObject.tag = unitType.ToString();
+        targetMask = LayerMask.GetMask(unitType == UnitType.Player ? "Enemy" : "Player");
+
+        // Reset state
+        // healthSystem.ResetHealth(this.unitData.Health + unitHealthBoost);
+
+        // Set the move direction
+        moveDirection = unitType == UnitType.Player ? Vector3.right : Vector3.left;
+
+        // Set the scale
+        visual.localScale = unitType == UnitType.Player
+            ? new Vector3(Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z)
+            : new Vector3(-Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z);
+
+        // Set the animation to idle 
+        unitAnimation.PlayIdleAnimation();
     }
 
     private void DetectEnemiesAndHandleAttack()

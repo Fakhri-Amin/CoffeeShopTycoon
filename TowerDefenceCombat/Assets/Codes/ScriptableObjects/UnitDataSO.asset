@@ -34,94 +34,80 @@ MonoBehaviour:
     AttackSpeed: 1.5
   - UnitAttackSpeedType: 4
     AttackSpeed: 0
-  UnitStatDataList:
-  - UnitHero: 1
-    UnitRangeType: 0
+  PlayerUnitStatDataList:
+  - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
-    Sprite: {fileID: 21300000, guid: 8f0fce45afbceee4e878a0c78c2b5da3, type: 3}
-    Name: Sword
-    SeedCost: 3
-    Health: 100
-    DamageAmount: 20
-    MoveSpeedType: 2
-    AttackSpeedType: 2
-    AttackRadius: 0.9
-    ProjectileSpeed: 0
-    AreaOfEffectRadius: 0
-    CoinReward: 100
-  - UnitHero: 2
-    UnitRangeType: 1
-    UnitAttackType: 0
-    Prefab: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
-    Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
     Name: Bow
-    SeedCost: 5
     Health: 60
     DamageAmount: 25
-    MoveSpeedType: 2
     AttackSpeedType: 3
     AttackRadius: 15
+    UnitHero: 1
+    CoinCost: 30
     ProjectileSpeed: 15
     AreaOfEffectRadius: 0
-    CoinReward: 150
-  - UnitHero: 3
-    UnitRangeType: 1
+  - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 2147124410541410135, guid: fb4edc960b7f10844bd7bcc2c89f12c3, type: 3}
-    Sprite: {fileID: 21300000, guid: a78ab1ce4747f9a43ad73f01fd55a518, type: 3}
-    Name: Axe
-    SeedCost: 7
-    Health: 150
-    DamageAmount: 40
-    MoveSpeedType: 1
-    AttackSpeedType: 3
-    AttackRadius: 3
-    ProjectileSpeed: 12
-    AreaOfEffectRadius: 0
-    CoinReward: 250
-  - UnitHero: 4
-    UnitRangeType: 1
-    UnitAttackType: 0
-    Prefab: {fileID: 4989259402293661077, guid: eb9868a683cd3134c81f8e6accae5da4, type: 3}
-    Sprite: {fileID: 21300000, guid: 93ad7e9051eaa8646809e6177a29adf5, type: 3}
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
     Name: Sniper
-    SeedCost: 9
     Health: 30
     DamageAmount: 70
-    MoveSpeedType: 4
     AttackSpeedType: 1
-    AttackRadius: 11
+    AttackRadius: 15
+    UnitHero: 2
+    CoinCost: 50
     ProjectileSpeed: 25
     AreaOfEffectRadius: 0
-    CoinReward: 400
-  - UnitHero: 5
-    UnitRangeType: 0
-    UnitAttackType: 1
-    Prefab: {fileID: 2147124410541410135, guid: 42e14f3467e26d2468343571a2b54c52, type: 3}
-    Sprite: {fileID: 21300000, guid: a9e7e7021dbf0a34893dbfc3f1a76bcb, type: 3}
-    Name: Great Sword
-    SeedCost: 12
-    Health: 350
-    DamageAmount: 60
-    MoveSpeedType: 0
-    AttackSpeedType: 0
-    AttackRadius: 1
-    ProjectileSpeed: 0
-    AreaOfEffectRadius: 1.2
-    CoinReward: 500
-  - UnitHero: 6
-    UnitRangeType: 0
+  - UnitRangeType: 1
     UnitAttackType: 0
-    Prefab: {fileID: 2147124410541410135, guid: 76d4d949f231663438699c0ee6563bf3, type: 3}
-    Sprite: {fileID: 21300000, guid: d72119113e6d4ae479d51933e4d0a678, type: 3}
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
     Name: Dagger
-    SeedCost: 2
     Health: 50
     DamageAmount: 25
-    MoveSpeedType: 4
     AttackSpeedType: 4
-    AttackRadius: 1
-    ProjectileSpeed: 0
+    AttackRadius: 15
+    UnitHero: 3
+    CoinCost: 15
+    ProjectileSpeed: 20
     AreaOfEffectRadius: 0
-    CoinReward: 100
+  EnemyUnitStatDataList:
+  - UnitRangeType: 0
+    UnitAttackType: 0
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
+    Name: Sword
+    Health: 100
+    DamageAmount: 20
+    AttackSpeedType: 2
+    AttackRadius: 0.9
+    UnitHero: 1
+    MoveSpeedType: 2
+    CoinReward: 10
+  - UnitRangeType: 0
+    UnitAttackType: 0
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
+    Name: Axe
+    Health: 150
+    DamageAmount: 40
+    AttackSpeedType: 3
+    AttackRadius: 0.9
+    UnitHero: 2
+    MoveSpeedType: 1
+    CoinReward: 25
+  - UnitRangeType: 0
+    UnitAttackType: 0
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
+    Name: Great Sword
+    Health: 350
+    DamageAmount: 60
+    AttackSpeedType: 0
+    AttackRadius: 1
+    UnitHero: 3
+    MoveSpeedType: 0
+    CoinReward: 50

@@ -4121,7 +4121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerUnitHeroReferences:
-  - Type: 2
+  - Type: 1
     Unit: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
     ParentTransform: {fileID: 0}
   EnemyUnitHeroReferences:
@@ -4814,21 +4814,19 @@ MonoBehaviour:
   spawnedUnits: []
   gridLayout: {fileID: 899857458}
   selectedUnit:
-    UnitHero: 0
     UnitRangeType: 0
     UnitAttackType: 0
     Prefab: {fileID: 0}
     Sprite: {fileID: 0}
     Name: 
-    SeedCost: 0
     Health: 0
     DamageAmount: 0
-    MoveSpeedType: 0
     AttackSpeedType: 0
     AttackRadius: 0
+    UnitHero: 0
+    CoinCost: 0
     ProjectileSpeed: 0
     AreaOfEffectRadius: 0
-    CoinReward: 0
 --- !u!1001 &697766329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5805,21 +5803,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitData:
-    UnitHero: 0
     UnitRangeType: 0
     UnitAttackType: 0
     Prefab: {fileID: 0}
     Sprite: {fileID: 0}
     Name: 
-    SeedCost: 0
     Health: 0
     DamageAmount: 0
-    MoveSpeedType: 0
     AttackSpeedType: 0
     AttackRadius: 0
+    UnitHero: 0
+    CoinCost: 0
     ProjectileSpeed: 0
     AreaOfEffectRadius: 0
-    CoinReward: 0
   button: {fileID: 814707520}
   unitImage: {fileID: 1054246411}
   seedAmountText: {fileID: 267424436}
@@ -5979,21 +5975,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitData:
-    UnitHero: 0
     UnitRangeType: 0
     UnitAttackType: 0
     Prefab: {fileID: 0}
     Sprite: {fileID: 0}
     Name: 
-    SeedCost: 0
     Health: 0
     DamageAmount: 0
-    MoveSpeedType: 0
     AttackSpeedType: 0
     AttackRadius: 0
+    UnitHero: 0
+    CoinCost: 0
     ProjectileSpeed: 0
     AreaOfEffectRadius: 0
-    CoinReward: 0
   button: {fileID: 814852545}
   unitImage: {fileID: 996352750}
   seedAmountText: {fileID: 1623858698}

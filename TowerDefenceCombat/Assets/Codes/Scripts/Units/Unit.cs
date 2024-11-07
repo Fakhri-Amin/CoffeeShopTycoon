@@ -8,16 +8,15 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour, IAttackable
 {
-    public static event Action<Unit> OnAnyUnitDead;
     public event Action OnDead;
 
-    [SerializeField] private UnitType unitType;
-    [SerializeField] private UnitHero unitHero;
-    [SerializeField] private LayerMask targetMask;
-    [SerializeField] private Transform visual;
-    [SerializeField] private SpriteRenderer bodySprite;
-    [SerializeField] private SpriteRenderer weaponSprite;
-    [SerializeField] private Image healthBar;
+    [SerializeField] protected UnitType unitType;
+    [SerializeField] protected UnitHero unitHero;
+    [SerializeField] protected LayerMask targetMask;
+    [SerializeField] protected Transform visual;
+    [SerializeField] protected SpriteRenderer bodySprite;
+    [SerializeField] protected SpriteRenderer weaponSprite;
+    [SerializeField] protected Image healthBar;
 
 
     protected bool isIdle;
@@ -32,22 +31,11 @@ public class Unit : MonoBehaviour, IAttackable
     protected UnitAudio unitAudio;
     protected Vector3 moveDirection;
     protected Vector3 basePosition;
-    protected UnitData unitData;
 
     protected bool canAttack = true;
     public float AttackDamageBoost => attackDamageBoost;
     public IAttackable TargetUnit => targetUnit;
-    public UnitData UnitData
-    {
-        get
-        {
-            return unitData;
-        }
-        set
-        {
-            unitData = value;
-        }
-    }
+
     public UnitType UnitType => unitType;
     public UnitHero UnitHero => unitHero;
     public LayerMask TargetMask => targetMask;
@@ -83,7 +71,7 @@ public class Unit : MonoBehaviour, IAttackable
         unitAudio.PlayDeadSound();
 
         OnDead?.Invoke();
-        OnAnyUnitDead?.Invoke(this);
+        // OnAnyUnitDead?.Invoke(this);
     }
 
     private void HandleLevelEnd()
@@ -101,44 +89,6 @@ public class Unit : MonoBehaviour, IAttackable
             attackCooldown -= Time.deltaTime;
             canAttack = attackCooldown <= 0;
         }
-    }
-
-
-    public void InitializeUnit(UnitType unitType, UnitData unitData, float attackDamageBoost, float unitHealthBoost, float moveSpeed, float attackSpeed)
-    {
-        // Set the type
-        this.unitType = unitType;
-
-        // Set the unit data
-        this.unitData = unitData;
-
-        // Set the move speed
-        this.moveSpeed = moveSpeed;
-
-        // Set the attack speed
-        this.attackSpeed = attackSpeed;
-
-        // Set the attack damage
-        this.attackDamageBoost = attackDamageBoost;
-
-        // Set the layer mask and tag
-        gameObject.layer = LayerMask.NameToLayer(unitType.ToString());
-        gameObject.tag = unitType.ToString();
-        targetMask = LayerMask.GetMask(unitType == UnitType.Player ? "Enemy" : "Player");
-
-        // Reset state
-        // healthSystem.ResetHealth(this.unitData.Health + unitHealthBoost);
-
-        // Set the move direction
-        moveDirection = unitType == UnitType.Player ? Vector3.right : Vector3.left;
-
-        // Set the scale
-        visual.localScale = unitType == UnitType.Player
-            ? new Vector3(Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z)
-            : new Vector3(-Mathf.Abs(visual.localScale.x), visual.localScale.y, visual.localScale.z);
-
-        // Set the animation to idle 
-        unitAnimation.PlayIdleAnimation();
     }
 
     public void ResetState()

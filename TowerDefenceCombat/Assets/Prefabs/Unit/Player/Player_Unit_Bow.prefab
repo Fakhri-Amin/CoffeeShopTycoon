@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: unitRangeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: projectileType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -987971152349857038, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: shootingTransform
+      value: 
+      objectReference: {fileID: 6559577095128003106}
     - target: {fileID: 787907282948883670, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -8,22 +8,31 @@ using UnityEngine.Pool;
 public class UnitObjectPool : Singleton<UnitObjectPool>
 {
     [System.Serializable]
-    public class UnitHeroReference
+    public class PlayerUnitHeroReference
     {
-        public UnitHero Type;
-        public Unit Unit;
+        public PlayerUnitHero Type;
+        public PlayerUnit Unit;
         [HideInInspector] public Transform ParentTransform;
-        [HideInInspector] public ObjectPool<Unit> ObjectPool;
+        [HideInInspector] public ObjectPool<PlayerUnit> ObjectPool;
     }
 
-    [TableList(ShowIndexLabels = true)] public List<UnitHeroReference> PlayerUnitHeroReferences = new List<UnitHeroReference>();
-    [TableList(ShowIndexLabels = true)] public List<UnitHeroReference> EnemyUnitHeroReferences = new List<UnitHeroReference>();
+    [System.Serializable]
+    public class EnemyUnitHeroReference
+    {
+        public EnemyUnitHero Type;
+        public EnemyUnit Unit;
+        [HideInInspector] public Transform ParentTransform;
+        [HideInInspector] public ObjectPool<EnemyUnit> ObjectPool;
+    }
+
+    [TableList(ShowIndexLabels = true)] public List<PlayerUnitHeroReference> PlayerUnitHeroReferences = new List<PlayerUnitHeroReference>();
+    [TableList(ShowIndexLabels = true)] public List<EnemyUnitHeroReference> EnemyUnitHeroReferences = new List<EnemyUnitHeroReference>();
 
     private void Start()
     {
         foreach (var item in PlayerUnitHeroReferences)
         {
-            item.ObjectPool = new ObjectPool<Unit>(() =>
+            item.ObjectPool = new ObjectPool<PlayerUnit>(() =>
             {
                 if (item.ParentTransform == null)
                 {
@@ -46,7 +55,7 @@ public class UnitObjectPool : Singleton<UnitObjectPool>
 
         foreach (var item in EnemyUnitHeroReferences)
         {
-            item.ObjectPool = new ObjectPool<Unit>(() =>
+            item.ObjectPool = new ObjectPool<EnemyUnit>(() =>
             {
                 if (item.ParentTransform == null)
                 {
@@ -68,28 +77,24 @@ public class UnitObjectPool : Singleton<UnitObjectPool>
         }
     }
 
-    public Unit GetPooledObject(UnitType unitType, UnitHero unitHero)
+    public PlayerUnit GetPooledObject(PlayerUnitHero unitHero)
     {
-        if (unitType == UnitType.Player)
-        {
-            return PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
-        }
-        else
-        {
-            return EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
-        }
+        return PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
     }
 
-    public void ReturnToPool(UnitType unitType, UnitHero unitHero, Unit effect)
+    public EnemyUnit GetPooledObject(EnemyUnitHero unitHero)
     {
-        if (unitType == UnitType.Player)
-        {
-            PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
-        }
-        else
-        {
-            EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
-        }
+        return EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
+    }
+
+    public void ReturnToPool(PlayerUnitHero unitHero, PlayerUnit effect)
+    {
+        PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
+    }
+
+    public void ReturnToPool(EnemyUnitHero unitHero, EnemyUnit effect)
+    {
+        EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
     }
 }
 

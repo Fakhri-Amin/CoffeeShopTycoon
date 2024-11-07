@@ -34,21 +34,21 @@ public class EnemyUnitSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        Unit.OnAnyUnitDead += EnemyUnit_OnAnyEnemyUnitDead;
+        EnemyUnit.OnAnyUnitDead += EnemyUnit_OnAnyEnemyUnitDead;
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     private void OnDisable()
     {
-        Unit.OnAnyUnitDead -= EnemyUnit_OnAnyEnemyUnitDead;
+        EnemyUnit.OnAnyUnitDead -= EnemyUnit_OnAnyEnemyUnitDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     private void OnDestroy()
     {
-        Unit.OnAnyUnitDead -= EnemyUnit_OnAnyEnemyUnitDead;
+        EnemyUnit.OnAnyUnitDead -= EnemyUnit_OnAnyEnemyUnitDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
@@ -81,7 +81,7 @@ public class EnemyUnitSpawner : MonoBehaviour
 
         foreach (WaveHeroData unitData in waveUnitDatas)
         {
-            UnitData unitStatData = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == unitData.UnitType);
+            EnemyUnitData unitStatData = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitData.UnitType);
             if (unitStatData == null)
             {
                 Debug.LogWarning("Unit data not found for hero: " + unitData.UnitType);
@@ -96,13 +96,13 @@ public class EnemyUnitSpawner : MonoBehaviour
         }
     }
 
-    private void EnemyUnit_OnAnyEnemyUnitDead(Unit unit)
+    private void EnemyUnit_OnAnyEnemyUnitDead(EnemyUnit unit)
     {
         if (unit && unit.UnitType == UnitType.Enemy)
         {
             EventManager<UnitData>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData);
             spawnedUnits.Remove(unit);
-            UnitObjectPool.Instance.ReturnToPool(UnitType.Enemy, unit.UnitData.UnitHero, unit);
+            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
         }
     }
 
@@ -112,10 +112,10 @@ public class EnemyUnitSpawner : MonoBehaviour
         return foundUnit ? foundUnit.transform.position : Vector3.zero;
     }
 
-    private void SpawnUnit(UnitHero unitHero, UnitData unitData)
+    private void SpawnUnit(EnemyUnitHero unitHero, EnemyUnitData unitData)
     {
         Vector3 offset = new Vector3(0, UnityEngine.Random.Range(-0.5f, 0.5f), 0);
-        Unit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(UnitType.Enemy, unitHero);
+        EnemyUnit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitHero);
 
         if (spawnedUnit == null)
         {
@@ -124,8 +124,8 @@ public class EnemyUnitSpawner : MonoBehaviour
         }
 
         // Fetch and initialize unit stats
-        unitData.DamageAmount = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == unitHero).DamageAmount;
-        unitData.Health = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == unitHero).Health;
+        unitData.DamageAmount = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitHero).DamageAmount;
+        unitData.Health = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitHero).Health;
 
         float moveSpeed = unitDataSO.MoveSpeedDataList.Find(i => i.UnitMoveSpeedType == unitData.MoveSpeedType).MoveSpeed;
         float attackSpeed = unitDataSO.AttackSpeedDataList.Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType).AttackSpeed;

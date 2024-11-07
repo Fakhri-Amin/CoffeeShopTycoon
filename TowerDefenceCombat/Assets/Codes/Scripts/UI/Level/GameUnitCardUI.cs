@@ -33,11 +33,11 @@ public class GameUnitCardUI : MonoBehaviour
     {
         normalUnitCardTemplate.gameObject.SetActive(false);
 
-        List<UnitHero> unlockedUnitHeroList = GameDataManager.Instance.UnlockedUnitList;
+        List<PlayerUnitHero> unlockedUnitHeroList = GameDataManager.Instance.UnlockedUnitList;
 
         foreach (var item in unlockedUnitHeroList)
         {
-            UnitData unitData = unitDataSO.UnitStatDataList.Find(i => i.UnitHero == item);
+            PlayerUnitData unitData = unitDataSO.PlayerUnitStatDataList.Find(i => i.UnitHero == item);
 
             if (unitData == null) continue;
 
@@ -57,7 +57,7 @@ public class GameUnitCardUI : MonoBehaviour
     {
         foreach (var item in unitCardUIList)
         {
-            if (item.UnitData.SeedCost > currentSeedCount)
+            if (item.UnitData.CoinCost > currentSeedCount)
             {
                 item.Disable();
             }
@@ -67,6 +67,4 @@ public class GameUnitCardUI : MonoBehaviour
             }
         }
     }
-
-
 }

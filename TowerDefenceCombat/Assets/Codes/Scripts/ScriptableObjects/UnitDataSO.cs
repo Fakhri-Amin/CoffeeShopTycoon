@@ -8,5 +8,6 @@ public class UnitDataSO : ScriptableObject
 {
     [TableList] public List<UnitMoveSpeedData> MoveSpeedDataList;
     [TableList] public List<UnitAttackSpeedData> AttackSpeedDataList;
-    [TableList(ShowIndexLabels = true)] public List<UnitData> UnitStatDataList;
+    [TableList(ShowIndexLabels = true)] public List<PlayerUnitData> PlayerUnitStatDataList;
+    [TableList(ShowIndexLabels = true)] public List<EnemyUnitData> EnemyUnitStatDataList;
 }

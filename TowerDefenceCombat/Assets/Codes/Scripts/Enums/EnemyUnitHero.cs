@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UnitHero
+public enum EnemyUnitHero
 {
     None,
+    Sword,
+    Axe,
+    GreatSword,
 }

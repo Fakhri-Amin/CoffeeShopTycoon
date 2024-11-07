@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UnitCardUI : MonoBehaviour
 {
-    [HideInInspector] public UnitData UnitData;
+    [HideInInspector] public PlayerUnitData UnitData;
 
     [SerializeField] private Button button;
     [SerializeField] private Image unitImage;
@@ -15,11 +15,11 @@ public class UnitCardUI : MonoBehaviour
     [SerializeField] private Color activeColor;
     [SerializeField] private Color inActiveColor;
 
-    public void Initialize(UnitData unitData)
+    public void Initialize(PlayerUnitData unitData)
     {
         UnitData = unitData;
         unitImage.sprite = unitData.Sprite;
-        seedAmountText.text = unitData.SeedCost.ToString();
+        seedAmountText.text = unitData.CoinCost.ToString();
 
         button.onClick.AddListener(() =>
         {

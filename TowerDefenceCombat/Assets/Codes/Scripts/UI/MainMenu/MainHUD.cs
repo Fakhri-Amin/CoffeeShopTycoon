@@ -14,9 +14,6 @@ public class MainHUD : Singleton<MainHUD>
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button quitButton;
 
-    [Header("Main Menu")]
-    [SerializeField] private MainMenuUI mainMenuUI;
-
     [Header("Currency")]
     [SerializeField] private TMP_Text goldCoinText;
     [SerializeField] private TMP_Text azureCoinText;

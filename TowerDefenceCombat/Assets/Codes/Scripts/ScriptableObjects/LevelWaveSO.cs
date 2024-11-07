@@ -31,7 +31,7 @@ public class LevelWaveSO : ScriptableObject
                 var unitType = waveUnitData.UnitType;
 
                 // Find the UnitData for the current UnitType
-                UnitData unitData = UnitDataSO.UnitStatDataList.Find(i => i.UnitHero == unitType);
+                EnemyUnitData unitData = UnitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitType);
 
                 if (unitData != null)
                 {

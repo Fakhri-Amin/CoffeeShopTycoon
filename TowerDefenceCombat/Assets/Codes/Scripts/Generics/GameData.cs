@@ -9,6 +9,6 @@ public class GameData : BaseData
 
     public int GoldCoin = 0;
     public int BaseHealthLevel = 1;
-    public List<UnitHero> UnlockedUnitList = new List<UnitHero>();
+    public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
 }
 

@@ -17,7 +17,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
     public UnitDataSO UnitDataSO;
     public LevelWaveDatabaseSO LevelWaveDatabaseSO;
     public List<UnitHero> SelectedUnitList = new List<UnitHero>(3);
-    public List<UnitHero> UnlockedUnitList = new List<UnitHero>();
+    public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
     public float GoldCoinCollected;
     public float GoldCoin;
     public float SeedProductionRate;
@@ -46,13 +46,13 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         if (SelectedUnitList.Count <= 1)
         {
             // Set default data
-            AddDefaultUnlockedUnit(UnitHero.Sword);
+            AddDefaultUnlockedUnit(PlayerUnitHero.Bow);
 
-            List<UnitHero> unitHeroes = new List<UnitHero>
+            List<PlayerUnitHero> unitHeroes = new List<PlayerUnitHero>
             {
-                UnitHero.Sword,
-                UnitHero.None,
-                UnitHero.None
+                PlayerUnitHero.Bow,
+                PlayerUnitHero.None,
+                PlayerUnitHero.None
             };
         }
     }
@@ -78,7 +78,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         Save();
     }
 
-    public void AddDefaultUnlockedUnit(UnitHero unitHero)
+    public void AddDefaultUnlockedUnit(PlayerUnitHero unitHero)
     {
         // Retrieve the GameData instance
         var gameData = Data.Get<GameData>();
@@ -91,7 +91,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         Save();
     }
 
-    public void AddUnlockedUnit(UnitHero unitHero)
+    public void AddUnlockedUnit(PlayerUnitHero unitHero)
     {
         // Retrieve the GameData instance
         var gameData = Data.Get<GameData>();
@@ -104,7 +104,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         Save();
     }
 
-    public bool IsUnitAlreadyUnlocked(UnitHero unitHero)
+    public bool IsUnitAlreadyUnlocked(PlayerUnitHero unitHero)
     {
         if (UnlockedUnitList.Contains(unitHero))
         {

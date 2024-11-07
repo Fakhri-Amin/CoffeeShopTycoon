@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private AnimationCurve animationCurve;
     [SerializeField] private float heightY = 1.8f;
     [SerializeField] private Rigidbody2D rb;
-    private Unit sourceUnit;
+    private PlayerUnit sourceUnit;
     private IAttackable targetUnit;
     private ProjectileType projectileType;
     private SpriteRenderer spriteRenderer;
@@ -86,7 +86,7 @@ public class Projectile : MonoBehaviour
         ReturnToPool();
     }
 
-    public void Initialize(Unit sourceUnit, IAttackable targetUnit, ProjectileType projectileType)
+    public void Initialize(PlayerUnit sourceUnit, IAttackable targetUnit, ProjectileType projectileType)
     {
         this.sourceUnit = sourceUnit;
         this.targetUnit = targetUnit;

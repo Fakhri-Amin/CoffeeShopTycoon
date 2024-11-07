@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class WaveHeroData
 {
-    public UnitHero UnitType;
+    public EnemyUnitHero UnitType;
     public int Count;
 }
