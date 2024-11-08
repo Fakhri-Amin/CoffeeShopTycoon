@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Day 01
   m_EditorClassIdentifier: 
   DelayAtStart: 1
-  DelayBetweenWaves: 3
+  DelayBetweenWaves: 5
   WaveDatas:
   - WaveHeroDatas:
     - UnitType: 2

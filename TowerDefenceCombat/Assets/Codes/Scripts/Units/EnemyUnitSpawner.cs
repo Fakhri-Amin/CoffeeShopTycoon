@@ -91,7 +91,7 @@ public class EnemyUnitSpawner : MonoBehaviour
     private IEnumerator SpawnUnitsForWave(WaveData waveData)
     {
         List<WaveHeroData> waveUnitDatas = waveData.WaveHeroDatas;
-        float delayBetweenUnitSpawn = levelWaveSO.DelayBetweenWaves * 0.01f;
+        float delayBetweenUnitSpawn = levelWaveSO.DelayBetweenWaves * 0.05f;
 
         foreach (WaveHeroData unitData in waveUnitDatas)
         {
