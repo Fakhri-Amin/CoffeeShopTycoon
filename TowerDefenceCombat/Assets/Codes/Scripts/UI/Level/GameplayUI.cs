@@ -12,6 +12,10 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private CanvasGroup panel;
 
+    [Header("UI : Day")]
+    [SerializeField] private TMP_Text dayText;
+    [SerializeField] private Slider waveProgressionBar;
+
     [Header("UI : Card")]
     [SerializeField] private Transform buttonParent;
     [SerializeField] private UnitCardUI normalUnitCardTemplate;
@@ -60,11 +64,29 @@ public class GameplayUI : MonoBehaviour
     private void OnEnable()
     {
         GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
+        GameDataManager.Instance.OnDayChanged += UpdateDayUI;
     }
 
     private void OnDisable()
     {
         GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
+        GameDataManager.Instance.OnDayChanged -= UpdateDayUI;
+    }
+
+    private void UpdateDayUI(int currentDay)
+    {
+        dayText.text = $"Day {currentDay}";
+    }
+
+    public void SetWaveProgressionMaxValue(float maxValue)
+    {
+        waveProgressionBar.maxValue = maxValue;
+        UpdateWaveProgressionUI(0);
+    }
+
+    public void UpdateWaveProgressionUI(float progressValue)
+    {
+        waveProgressionBar.value = progressValue;
     }
 
     public void SelectCard(UnitCardUI unitCardUI)

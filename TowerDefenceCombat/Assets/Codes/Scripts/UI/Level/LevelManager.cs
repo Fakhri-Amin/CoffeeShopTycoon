@@ -23,10 +23,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Color gridColor1;
     [SerializeField] private Color gridColor2;
 
-    [Header("UI Elements")]
-    [SerializeField] private CanvasGroup fader;
-    [SerializeField] private Slider waveProgressionBar;
-
     private LevelWaveSO currentLevelWave;
     private CoinManager coinManager;
     private float timePassed;
@@ -51,6 +47,8 @@ public class LevelManager : MonoBehaviour
         winUI.InstantHide();
         loseUI.InstantHide();
 
+        gameplayUI.UpdateWaveProgressionUI(0);
+
         SpawnGrids();
     }
 
@@ -60,11 +58,12 @@ public class LevelManager : MonoBehaviour
         UpdateWaveProgress();
     }
 
-    public void StartGame()
+    public void StartGame(int currentDay)
     {
         isGameStart = true;
+
         // Initialize the current level wave
-        currentLevelWave = levelWaveDatabaseSO.DayWaves.FirstOrDefault();
+        currentLevelWave = levelWaveDatabaseSO.DayWaves[currentDay - 1];
         if (currentLevelWave == null)
         {
             Debug.LogError("No level wave data found.");
@@ -72,7 +71,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Set the max value of the wave progress bar based on wave data
-        waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
+        gameplayUI.SetWaveProgressionMaxValue(currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count);
 
         EnemyUnitSpawner.Instance.Initialize(CurrentLevelWave, enemySpawnPoints);
         HideInGameHUD();
@@ -81,27 +80,15 @@ public class LevelManager : MonoBehaviour
     public void StopGame()
     {
         isGameStart = false;
-        waveProgressionBar.value = 0;
+        timePassed = 0;
+        gameplayUI.UpdateWaveProgressionUI(0);
+        ShowInGameHUD();
     }
 
     private void UpdateWaveProgress()
     {
-        if (waveProgressionBar.value < waveProgressionBar.maxValue)
-        {
-            timePassed += Time.deltaTime;
-            waveProgressionBar.value = timePassed;
-        }
-        else
-        {
-            // Handle wave completion here
-            OnWavesCompleted();
-        }
-    }
-
-    private void OnWavesCompleted()
-    {
-        // Handle wave completion logic here
-
+        timePassed += Time.deltaTime;
+        gameplayUI.UpdateWaveProgressionUI(timePassed);
     }
 
     public List<Transform> SpawnGrids()

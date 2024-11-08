@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90826034bb00d5b409eecdc158342021, type: 3}
-  m_Name: Day 01
+  m_Name: Day 02
   m_EditorClassIdentifier: 
   DelayAtStart: 1
   DelayBetweenWaves: 5
   WaveDatas:
   - WaveHeroDatas:
+    - UnitType: 2
+      Count: 5
+  - WaveHeroDatas:
     - UnitType: 1
       Count: 5
-  TotalCoinReward: 50
+  TotalCoinReward: 175
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

@@ -54,7 +54,8 @@ public class GameLevelManager : MonoBehaviour
     public void SetDay()
     {
         gameState = GameState.Day;
-        levelManager.ShowInGameHUD();
+        GameDataManager.Instance.IncrementCurrentDay();
+        levelManager.StopGame();
         HandleCoinUpdate(GameDataManager.Instance.GoldCoin);
 
         if (coinManager.CoinCollected > 0)
@@ -64,7 +65,7 @@ public class GameLevelManager : MonoBehaviour
     public void SetNight()
     {
         gameState = GameState.Night;
-        levelManager.StartGame();
+        levelManager.StartGame(GameDataManager.Instance.CurrentDay);
         coinManager.Reset();
     }
 

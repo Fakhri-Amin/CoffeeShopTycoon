@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 // [DefaultExecutionOrder(-99999999)]
 public class GameDataManager : PersistentSingleton<GameDataManager>
 {
+    public event Action<int> OnDayChanged;
     public event Action<float> OnGoldCoinUpdated;
     public event Action<float, float> OnSeedProductionRateChanged;
     public event Action<float, float> OnBaseHealthChanged;
@@ -18,6 +19,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
     public LevelWaveDatabaseSO LevelWaveDatabaseSO;
     public List<PlayerUnitHero> SelectedUnitList = new List<PlayerUnitHero>(3);
     public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
+    public int CurrentDay;
     public float GoldCoinCollected;
     public float GoldCoin;
     public float SeedProductionRate;
@@ -31,6 +33,8 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         base.Awake();
 
         var gameData = Data.Get<GameData>();
+
+        CurrentDay = gameData.CurrentDay;
 
         GoldCoin = gameData.GoldCoin;
         OnGoldCoinUpdated?.Invoke(GoldCoin);
@@ -149,6 +153,17 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
     public void ClearCoinCollected()
     {
         GoldCoinCollected = 0;
+    }
+
+    public void IncrementCurrentDay()
+    {
+        var gameData = Data.Get<GameData>();
+        gameData.CurrentDay++;
+        CurrentDay = gameData.CurrentDay;
+
+        OnDayChanged?.Invoke(CurrentDay);
+
+        Save();
     }
 
 }

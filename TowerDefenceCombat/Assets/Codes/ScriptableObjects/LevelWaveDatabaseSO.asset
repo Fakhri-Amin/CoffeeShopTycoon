@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DayWaves:
   - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}
+  - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}
+  - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}
+  - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}
+  - {fileID: 11400000, guid: f681db80c575e494dbfb07b858ba9dfe, type: 2}
