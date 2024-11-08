@@ -4,26 +4,31 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
-public class GameUnitCardUI : MonoBehaviour
+public class GameplayUI : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private UnitDataSO unitDataSO;
+    [SerializeField] private CanvasGroup panel;
+
+    [Header("UI : Card")]
     [SerializeField] private Transform buttonParent;
     [SerializeField] private UnitCardUI normalUnitCardTemplate;
 
-    [Header("Reference To Other Gameobject")]
-    [SerializeField] private PlayerUnitSpawner playerUnitSpawner;
+    [Header("UI : Button")]
+    [SerializeField] private Button battleButton;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Button researchButton;
 
     private List<UnitCardUI> unitCardUIList = new List<UnitCardUI>();
 
-    private void OnEnable()
+    private void Awake()
     {
-        GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
-    }
-
-    private void OnDisable()
-    {
-        GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
+        battleButton.onClick.AddListener(() =>
+        {
+            GameLevelManager.Instance.SetNight();
+        });
     }
 
     private void Start()
@@ -52,6 +57,16 @@ public class GameUnitCardUI : MonoBehaviour
         CheckForCardClickable(GameDataManager.Instance.GoldCoin);
     }
 
+    private void OnEnable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
+    }
+
+    private void OnDisable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
+    }
+
     public void SelectCard(UnitCardUI unitCardUI)
     {
         foreach (var item in unitCardUIList)
@@ -75,5 +90,21 @@ public class GameUnitCardUI : MonoBehaviour
                 item.Enable();
             }
         }
+    }
+
+    public void Show()
+    {
+        panel.gameObject.SetActive(true);
+        panel.alpha = 0;
+        panel.DOFade(1, 0.1f);
+    }
+
+    public void Hide()
+    {
+        panel.alpha = 1;
+        panel.DOFade(0, 0.1f).OnComplete(() =>
+        {
+            panel.gameObject.SetActive(false);
+        });
     }
 }

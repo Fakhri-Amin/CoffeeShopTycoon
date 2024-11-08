@@ -143,7 +143,6 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
     public void SetCoinCollected(float amount)
     {
-
         GoldCoinCollected = amount;
     }
 

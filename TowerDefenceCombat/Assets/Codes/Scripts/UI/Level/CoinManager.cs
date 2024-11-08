@@ -8,6 +8,12 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CoinCollectedUI coinCollectedUI;
 
+    public void Reset()
+    {
+        CoinCollected = 0;
+        UpdateCoinUI(CoinCollected);
+    }
+
     public void AddCoins(float amount)
     {
         CoinCollected += amount;

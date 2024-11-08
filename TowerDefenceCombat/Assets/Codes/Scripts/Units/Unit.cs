@@ -48,15 +48,15 @@ public class Unit : MonoBehaviour, IAttackable
     private void OnEnable()
     {
         healthSystem.OnDead += HandleOnDead;
-        EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
-        EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
+        // EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
+        // EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     private void OnDisable()
     {
         healthSystem.OnDead -= HandleOnDead;
-        EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
-        EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
+        // EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
+        // EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
     public virtual void HandleOnDead()

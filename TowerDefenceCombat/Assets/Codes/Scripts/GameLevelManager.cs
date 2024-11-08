@@ -7,12 +7,18 @@ using UnityEngine.UI;
 
 public class GameLevelManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        Day,
+        Night
+    }
+
     public static GameLevelManager Instance { get; private set; }
+    public GameState gameState;
+
     private CoinManager coinManager;
     private LevelManager levelManager;
     private PauseManager pauseManager;
-    private EnemyUnitSpawner enemyUnitSpawner;
-    private PlayerUnitSpawner playerUnitSpawner;
 
     private void Awake()
     {
@@ -21,14 +27,11 @@ public class GameLevelManager : MonoBehaviour
         coinManager = GetComponent<CoinManager>();
         levelManager = GetComponent<LevelManager>();
         pauseManager = GetComponent<PauseManager>();
-        enemyUnitSpawner = FindObjectOfType<EnemyUnitSpawner>();
-        playerUnitSpawner = FindObjectOfType<PlayerUnitSpawner>();
     }
 
     private void Start()
     {
-        enemyUnitSpawner.Initialize(levelManager.CurrentLevelWave, levelManager.SpawnGrids());
-        playerUnitSpawner.Initialize(GameDataManager.Instance.SelectedUnitList);
+        SetDay();
 
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
@@ -36,8 +39,6 @@ public class GameLevelManager : MonoBehaviour
         EventManager.Subscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
         GameDataManager.Instance.OnGoldCoinUpdated += HandleCoinUpdate;
-
-        HandleCoinUpdate(GameDataManager.Instance.GoldCoin);
     }
 
     private void OnDisable()
@@ -48,6 +49,23 @@ public class GameLevelManager : MonoBehaviour
         EventManager.UnSubscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
         GameDataManager.Instance.OnGoldCoinUpdated -= HandleCoinUpdate;
+    }
+
+    public void SetDay()
+    {
+        gameState = GameState.Day;
+        levelManager.ShowInGameHUD();
+        HandleCoinUpdate(GameDataManager.Instance.GoldCoin);
+
+        if (coinManager.CoinCollected > 0)
+            CoinEffectManager.Instance.StartSpawnCoins(coinManager.CoinCollected);
+    }
+
+    public void SetNight()
+    {
+        gameState = GameState.Night;
+        levelManager.StartGame();
+        coinManager.Reset();
     }
 
     private void OnLevelWin()

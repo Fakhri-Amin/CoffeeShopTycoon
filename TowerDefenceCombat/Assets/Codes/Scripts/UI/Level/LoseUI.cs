@@ -73,4 +73,10 @@ public class LoseUI : MonoBehaviour
             popup.gameObject.SetActive(false);
         });
     }
+
+    public void InstantHide()
+    {
+        popup.alpha = 0;
+        popup.gameObject.SetActive(false);
+    }
 }

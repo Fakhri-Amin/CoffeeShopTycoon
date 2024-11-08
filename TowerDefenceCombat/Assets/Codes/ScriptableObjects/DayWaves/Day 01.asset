@@ -12,23 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90826034bb00d5b409eecdc158342021, type: 3}
   m_Name: Day 01
   m_EditorClassIdentifier: 
-  DelayAtStart: 2
+  DelayAtStart: 1
   DelayBetweenWaves: 3
   WaveDatas:
   - WaveHeroDatas:
     - UnitType: 2
-      Count: 3
-    - UnitType: 3
-      Count: 3
-  - WaveHeroDatas:
-    - UnitType: 1
-      Count: 5
-    - UnitType: 2
-      Count: 5
-  - WaveHeroDatas:
-    - UnitType: 1
-      Count: 5
-    - UnitType: 3
-      Count: 5
-  TotalCoinReward: 700
+      Count: 10
+  TotalCoinReward: 250
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

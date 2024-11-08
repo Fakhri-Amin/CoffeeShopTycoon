@@ -15,7 +15,6 @@ public class WinUI : MonoBehaviour
     [SerializeField] private Image coinImage;
     [SerializeField] private Image coinOutline;
     [SerializeField] private Button continueButton;
-    [SerializeField] private Button collectDoubleButton;
 
     [Header("Gold Coin")]
     [SerializeField] private Color goldCoinOutlineColor;
@@ -28,7 +27,7 @@ public class WinUI : MonoBehaviour
 
     public void Show(float coinCollectedAmount, Action onContinueButtonClicked)
     {
-        AudioManager.Instance.PlayCoinFeedbacks();
+        // AudioManager.Instance.PlayCoinFeedbacks();
 
         // popup.alpha = 0;
         popup.gameObject.SetActive(true);
@@ -36,20 +35,14 @@ public class WinUI : MonoBehaviour
 
         coinCollectedText.text = "+" + coinCollectedAmount;
 
-        collectDoubleButton.onClick.AddListener(() =>
-        {
-            AudioManager.Instance.PlayClickFeedbacks();
-        });
-
         coinImage.sprite = gameAssetSO.GoldCoinSprite;
         coinOutline.color = goldCoinOutlineColor;
-
-        collectDoubleButton.GetComponent<Image>().color = azureCoinButtonColor;
 
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            // AudioManager.Instance.PlayClickFeedbacks();
+            Hide();
             onContinueButtonClicked?.Invoke();
         });
     }
@@ -61,5 +54,11 @@ public class WinUI : MonoBehaviour
         {
             popup.gameObject.SetActive(false);
         });
+    }
+
+    public void InstantHide()
+    {
+        popup.alpha = 0;
+        popup.gameObject.SetActive(false);
     }
 }

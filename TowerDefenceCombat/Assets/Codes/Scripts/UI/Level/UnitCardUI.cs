@@ -18,7 +18,7 @@ public class UnitCardUI : MonoBehaviour
     private static readonly Color TransparentWhite = new Color(1, 1, 1, 0.3f);
     private static readonly Color OpaqueWhite = new Color(1, 1, 1, 1f);
 
-    public void Initialize(GameUnitCardUI gameUnitCardUI, PlayerUnitData unitData)
+    public void Initialize(GameplayUI gameUnitCardUI, PlayerUnitData unitData)
     {
         UnitData = unitData;
         unitImage.sprite = unitData.Sprite;

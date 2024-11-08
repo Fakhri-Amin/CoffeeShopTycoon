@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private LevelWaveDatabaseSO levelWaveDatabaseSO;
     [SerializeField] private UnitDataSO unitDataSO;
+    [SerializeField] private GameplayUI gameplayUI;
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private float waitTimeBeforeShowingUI = 3f;
@@ -23,7 +24,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Color gridColor2;
 
     [Header("UI Elements")]
-    [SerializeField] private CanvasGroup inGameHUD;
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private Slider waveProgressionBar;
 
@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
     private const int gridRows = 11;
     private const int gridColumns = 5;
     private readonly List<int> gridRotationAngles = new() { 0, 90, 180, 270 };
+    private bool isGameStart;
+    private List<Transform> enemySpawnPoints = new();
 
     public LevelWaveSO CurrentLevelWave => currentLevelWave;
 
@@ -43,6 +45,24 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerUnitSpawner.Instance.Initialize(GameDataManager.Instance.SelectedUnitList);
+
+        // Hide UI elements initially
+        winUI.InstantHide();
+        loseUI.InstantHide();
+
+        SpawnGrids();
+    }
+
+    private void Update()
+    {
+        if (!isGameStart) return;
+        UpdateWaveProgress();
+    }
+
+    public void StartGame()
+    {
+        isGameStart = true;
         // Initialize the current level wave
         currentLevelWave = levelWaveDatabaseSO.DayWaves.FirstOrDefault();
         if (currentLevelWave == null)
@@ -54,14 +74,14 @@ public class LevelManager : MonoBehaviour
         // Set the max value of the wave progress bar based on wave data
         waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
 
-        // Hide UI elements initially
-        winUI.Hide();
-        loseUI.Hide();
+        EnemyUnitSpawner.Instance.Initialize(CurrentLevelWave, enemySpawnPoints);
+        HideInGameHUD();
     }
 
-    private void Update()
+    public void StopGame()
     {
-        UpdateWaveProgress();
+        isGameStart = false;
+        waveProgressionBar.value = 0;
     }
 
     private void UpdateWaveProgress()
@@ -86,8 +106,6 @@ public class LevelManager : MonoBehaviour
 
     public List<Transform> SpawnGrids()
     {
-        List<Transform> enemySpawnPoints = new();
-
         for (int row = 0; row < gridRows; row++)
         {
             for (int col = 0; col < gridColumns; col++)
@@ -136,18 +154,22 @@ public class LevelManager : MonoBehaviour
     private void OnWinUIContinue()
     {
         // Handle what happens after the win UI continues, e.g., transition to the next level
+        GameLevelManager.Instance.SetDay();
+    }
+
+    public void ShowInGameHUD()
+    {
+        gameplayUI.Show();
     }
 
     private IEnumerator HideInGameHUDAndWait()
     {
-        HideInGameHUD();
         yield return new WaitForSeconds(waitTimeBeforeShowingUI);
     }
 
-    private void HideInGameHUD()
+    public void HideInGameHUD()
     {
-        inGameHUD.blocksRaycasts = false;
-        inGameHUD.DOFade(0, 0.1f);
+        gameplayUI.Hide();
     }
 
     private void LoadMainMenu()
