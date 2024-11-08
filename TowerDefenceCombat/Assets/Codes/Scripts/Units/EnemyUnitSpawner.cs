@@ -9,8 +9,10 @@ public class EnemyUnitSpawner : MonoBehaviour
     public static EnemyUnitSpawner Instance { get; private set; }
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private int spawnXAxisOffset = 16;
+    [SerializeField] private float spawnYAxisOffset = 0.2f;
 
+    private List<Transform> spawnPoints;
     private LevelWaveSO levelWaveSO;
 
     private void Awake()
@@ -19,27 +21,39 @@ public class EnemyUnitSpawner : MonoBehaviour
         {
             Instance = this;
         }
-        else if (Instance != this)
+        else
         {
-            Destroy(gameObject); // Avoid duplicate instances
+            Destroy(gameObject); // Destroy duplicates
         }
     }
 
-    public void Initialize(LevelWaveSO levelWaveSO)
+
+    public void Initialize(LevelWaveSO levelWaveSO, List<Transform> spawnPoints)
     {
         this.levelWaveSO = levelWaveSO;
+        this.spawnPoints = spawnPoints;
         StartCoroutine(SpawnUnitWaveRoutine());
         // SpawnUnit(UnitHero.Sword);
     }
 
     private void OnEnable()
     {
+        SubscribeToEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
         EnemyUnit.OnAnyUnitDead += EnemyUnit_OnAnyEnemyUnitDead;
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, HandleLevelEnd);
     }
 
-    private void OnDisable()
+    private void UnsubscribeFromEvents()
     {
         EnemyUnit.OnAnyUnitDead -= EnemyUnit_OnAnyEnemyUnitDead;
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, HandleLevelEnd);
@@ -81,16 +95,19 @@ public class EnemyUnitSpawner : MonoBehaviour
 
         foreach (WaveHeroData unitData in waveUnitDatas)
         {
+            // Cache unit data once to avoid redundant Find() calls
             EnemyUnitData unitStatData = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitData.UnitType);
             if (unitStatData == null)
             {
-                Debug.LogWarning("Unit data not found for hero: " + unitData.UnitType);
+                Debug.LogWarning($"Unit data not found for hero: {unitData.UnitType}");
                 continue;
             }
 
             for (int i = 0; i < unitData.Count; i++)
             {
-                SpawnUnit(unitData.UnitType, unitStatData);
+                Vector3 spawnPos = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position +
+                                new Vector3(spawnXAxisOffset, UnityEngine.Random.Range(-spawnYAxisOffset, spawnYAxisOffset));
+                SpawnUnit(unitData.UnitType, unitStatData, spawnPos);
                 yield return new WaitForSeconds(delayBetweenUnitSpawn);
             }
         }
@@ -112,29 +129,32 @@ public class EnemyUnitSpawner : MonoBehaviour
         return foundUnit ? foundUnit.transform.position : Vector3.zero;
     }
 
-    private void SpawnUnit(EnemyUnitHero unitHero, EnemyUnitData unitData)
+    private void SpawnUnit(EnemyUnitHero unitHero, EnemyUnitData unitData, Vector3 spawnPosition)
     {
         Vector3 offset = new Vector3(0, UnityEngine.Random.Range(-0.5f, 0.5f), 0);
         EnemyUnit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitHero);
 
         if (spawnedUnit == null)
         {
-            Debug.LogWarning("No available pooled object for unit: " + unitHero);
+            Debug.LogWarning($"No available pooled object for unit: {unitHero}");
             return;
         }
 
-        // Fetch and initialize unit stats
-        unitData.DamageAmount = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitHero).DamageAmount;
-        unitData.Health = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitHero).Health;
+        // Get all necessary data in one go
+        var unitStats = unitDataSO.EnemyUnitStatDataList.Find(i => i.UnitHero == unitHero);
+        if (unitStats == null) return;
 
-        float moveSpeed = unitDataSO.MoveSpeedDataList.Find(i => i.UnitMoveSpeedType == unitData.MoveSpeedType).MoveSpeed;
-        float attackSpeed = unitDataSO.AttackSpeedDataList.Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType).AttackSpeed;
+        unitData.DamageAmount = unitStats.DamageAmount;
+        unitData.Health = unitStats.Health;
 
-        // Initialize unit with specific stats and position
-        spawnedUnit.transform.position = spawnPoint.position;
+        float moveSpeed = unitDataSO.MoveSpeedDataList.Find(i => i.UnitMoveSpeedType == unitData.MoveSpeedType)?.MoveSpeed ?? 0f;
+        float attackSpeed = unitDataSO.AttackSpeedDataList.Find(i => i.UnitAttackSpeedType == unitData.AttackSpeedType)?.AttackSpeed ?? 0f;
+
+        spawnedUnit.transform.position = spawnPosition;
         spawnedUnit.InitializeUnit(UnitType.Enemy, unitData,
             0 /* attackDamageBoost */, 0 /* unitHealthBoost */, moveSpeed, attackSpeed);
 
         spawnedUnits.Add(spawnedUnit);
     }
+
 }

@@ -80,8 +80,8 @@ public class PlayerUnitSpawner : MonoBehaviour
             return;
         }
 
-        // var unitSeedCost = unitData.SeedCost;
-        // if (SeedCount < unitSeedCost) return;
+        var unitCoinCost = unitData.CoinCost;
+        if (GameDataManager.Instance.GoldCoin < unitCoinCost) return;
 
         SpawnUnit(unitData, position);
     }

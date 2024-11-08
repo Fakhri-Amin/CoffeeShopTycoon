@@ -44,12 +44,12 @@ public class GameUnitCardUI : MonoBehaviour
             unitCardUIList.Add(unitCardUI);
         }
 
-        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
-
         foreach (var item in unitCardUIList)
         {
             item.Deselect();
         }
+
+        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
     }
 
     public void SelectCard(UnitCardUI unitCardUI)

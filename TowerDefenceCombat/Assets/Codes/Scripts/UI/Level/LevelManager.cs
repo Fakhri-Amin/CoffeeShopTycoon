@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Game Settings")]
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private LevelWaveDatabaseSO levelWaveDatabaseSO;
     [SerializeField] private UnitDataSO unitDataSO;
@@ -15,11 +16,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private float waitTimeBeforeShowingUI = 3f;
 
-    [Header("Other Reference")]
-    [SerializeField] private GameObject grid;
+    [Header("Grid Settings")]
+    [SerializeField] private GameObject gridPrefab;
     [SerializeField] private Transform gridLayout;
     [SerializeField] private Color gridColor1;
     [SerializeField] private Color gridColor2;
+
+    [Header("UI Elements")]
     [SerializeField] private CanvasGroup inGameHUD;
     [SerializeField] private CanvasGroup fader;
     [SerializeField] private Slider waveProgressionBar;
@@ -27,6 +30,9 @@ public class LevelManager : MonoBehaviour
     private LevelWaveSO currentLevelWave;
     private CoinManager coinManager;
     private float timePassed;
+    private const int gridRows = 11;
+    private const int gridColumns = 5;
+    private readonly List<int> gridRotationAngles = new() { 0, 90, 180, 270 };
 
     public LevelWaveSO CurrentLevelWave => currentLevelWave;
 
@@ -37,63 +43,83 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        // InitializeLevelGraphics();
-        // waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
-        currentLevelWave = levelWaveDatabaseSO.DayWaves[0];
+        // Initialize the current level wave
+        currentLevelWave = levelWaveDatabaseSO.DayWaves.FirstOrDefault();
+        if (currentLevelWave == null)
+        {
+            Debug.LogError("No level wave data found.");
+            return;
+        }
 
-        // Hide UI initially
+        // Set the max value of the wave progress bar based on wave data
+        waveProgressionBar.maxValue = currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count;
+
+        // Hide UI elements initially
         winUI.Hide();
         loseUI.Hide();
-
-        List<int> angleList = new List<int>() { 0, 90, 180, 270 };
-        for (int i = 0; i < 11; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
-                GameObject newGrid = Instantiate(grid, gridLayout);
-                newGrid.transform.localPosition = new Vector3(i, -j);
-
-                newGrid.transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angleList[Random.Range(0, angleList.Count)]);
-
-                if ((i + j) % 2 == 0)
-                {
-                    newGrid.GetComponent<SpriteRenderer>().color = gridColor1;
-                }
-                else
-                {
-                    newGrid.GetComponent<SpriteRenderer>().color = gridColor2;
-                }
-            }
-        }
     }
 
     private void Update()
+    {
+        UpdateWaveProgress();
+    }
+
+    private void UpdateWaveProgress()
     {
         if (waveProgressionBar.value < waveProgressionBar.maxValue)
         {
             timePassed += Time.deltaTime;
             waveProgressionBar.value = timePassed;
         }
+        else
+        {
+            // Handle wave completion here
+            OnWavesCompleted();
+        }
+    }
+
+    private void OnWavesCompleted()
+    {
+        // Handle wave completion logic here
+
+    }
+
+    public List<Transform> SpawnGrids()
+    {
+        List<Transform> enemySpawnPoints = new();
+
+        for (int row = 0; row < gridRows; row++)
+        {
+            for (int col = 0; col < gridColumns; col++)
+            {
+                GameObject newGrid = Instantiate(gridPrefab, gridLayout);
+                newGrid.transform.localPosition = new Vector3(row, -col);
+                newGrid.transform.localRotation = Quaternion.Euler(0, 0, gridRotationAngles[UnityEngine.Random.Range(0, gridRotationAngles.Count)]);
+
+                // Alternate colors for the grid
+                newGrid.GetComponent<SpriteRenderer>().color = (row + col) % 2 == 0 ? gridColor1 : gridColor2;
+
+                if (row == 0)
+                {
+                    enemySpawnPoints.Add(newGrid.transform);
+                }
+            }
+        }
+
+        return enemySpawnPoints;
     }
 
     public IEnumerator HandleLevelWin()
     {
         yield return HideInGameHUDAndWait();
-
         ShowWinUI();
-
-        // GameDataManager.Instance.AddNewCompletedLevel();
-
         CollectCurrencyRewards();
     }
 
     public IEnumerator HandleLevelLose()
     {
         yield return HideInGameHUDAndWait();
-
-        CurrencyType currencyType = CurrencyType.GoldCoin;
-        loseUI.Show(currencyType, coinManager.CoinCollected, LoadMainMenu);
-
+        loseUI.Show(CurrencyType.GoldCoin, coinManager.CoinCollected, LoadMainMenu);
         CollectCurrencyRewards();
     }
 
@@ -109,7 +135,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnWinUIContinue()
     {
-        // Go to Day time
+        // Handle what happens after the win UI continues, e.g., transition to the next level
     }
 
     private IEnumerator HideInGameHUDAndWait()
@@ -126,6 +152,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadMainMenu()
     {
-        // loadMainMenuFeedbacks.PlayFeedbacks();
+        // Implement loading the main menu
+        SceneManager.LoadScene("MainMenu");
     }
 }

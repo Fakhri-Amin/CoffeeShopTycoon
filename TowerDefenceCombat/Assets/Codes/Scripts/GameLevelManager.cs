@@ -27,7 +27,7 @@ public class GameLevelManager : MonoBehaviour
 
     private void Start()
     {
-        enemyUnitSpawner.Initialize(levelManager.CurrentLevelWave);
+        enemyUnitSpawner.Initialize(levelManager.CurrentLevelWave, levelManager.SpawnGrids());
         playerUnitSpawner.Initialize(GameDataManager.Instance.SelectedUnitList);
 
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
