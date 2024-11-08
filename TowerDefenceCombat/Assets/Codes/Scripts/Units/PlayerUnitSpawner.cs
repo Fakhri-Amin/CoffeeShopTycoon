@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Farou.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,11 +10,17 @@ public class PlayerUnitSpawner : MonoBehaviour
 {
     public static PlayerUnitSpawner Instance { get; private set; }
 
-    [SerializeField] private UnitDataSO unitDataSO;
-    [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
-    [SerializeField] private Transform gridLayout;
-    [SerializeField] private PlayerUnitHero selectedUnit;
+    [Serializable]
+    public class UnitGrid
+    {
+        public PlayerUnit Unit;
+        public SingleGrid SingleGrid;
+    }
 
+    [SerializeField] private UnitDataSO unitDataSO;
+    [SerializeField] private List<UnitGrid> unitGrids = new List<UnitGrid>();
+
+    private PlayerUnitHero selectedUnit;
     private List<PlayerUnitHero> unlockedUnitHeroList = new List<PlayerUnitHero>();
 
     public List<PlayerUnitHero> UnlockedUnitHeroList => unlockedUnitHeroList;
@@ -59,19 +66,13 @@ public class PlayerUnitSpawner : MonoBehaviour
     {
         if (unit && unit.UnitType == UnitType.Player)
         {
-            spawnedUnits.Remove(unit);
+            unitGrids.Remove(unitGrids.Find(i => i.Unit == unit));
             unit.ResetState(); // Reset unit state before returning it to the pool
             UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
         }
     }
 
-    public Vector3 GetUnitPosition(Unit unit)
-    {
-        Unit foundUnit = spawnedUnits.Find(i => i == unit);
-        return foundUnit ? foundUnit.transform.position : Vector3.zero;
-    }
-
-    public void OnUnitSpawn(Vector2 position)
+    public void OnUnitSpawn(SingleGrid singleGrid, Vector2 position)
     {
         PlayerUnitData unitData = unitDataSO?.PlayerUnitStatDataList.Find(i => i.UnitHero == selectedUnit);
         if (unitData == null)
@@ -83,10 +84,10 @@ public class PlayerUnitSpawner : MonoBehaviour
         var unitCoinCost = unitData.CoinCost;
         if (GameDataManager.Instance.GoldCoin < unitCoinCost) return;
 
-        SpawnUnit(unitData, position);
+        SpawnUnit(singleGrid, unitData, position);
     }
 
-    private void SpawnUnit(PlayerUnitData unitData, Vector2 position)
+    private void SpawnUnit(SingleGrid singleGrid, PlayerUnitData unitData, Vector2 position)
     {
         PlayerUnit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitData.UnitHero);
         if (spawnedUnit == null)
@@ -99,7 +100,10 @@ public class PlayerUnitSpawner : MonoBehaviour
         spawnedUnit.transform.position = position;
 
         InitializeSpawnedUnit(spawnedUnit, unitData);
-        spawnedUnits.Add(spawnedUnit);
+        UnitGrid unitGrid = new UnitGrid();
+        unitGrid.Unit = spawnedUnit;
+        unitGrid.SingleGrid = singleGrid;
+        unitGrids.Add(unitGrid);
     }
 
     private void InitializeSpawnedUnit(PlayerUnit unit, PlayerUnitData unitData)
@@ -126,5 +130,17 @@ public class PlayerUnitSpawner : MonoBehaviour
     public void SetSelectedUnit(PlayerUnitHero selectedUnit)
     {
         this.selectedUnit = selectedUnit;
+    }
+
+    public bool TryPlaceUnitOnGrid(SingleGrid singleGrid)
+    {
+        UnitGrid grid = unitGrids.FirstOrDefault(i => i.SingleGrid == singleGrid);
+
+        if (grid == null)
+        {
+            OnUnitSpawn(singleGrid, singleGrid.transform.position);
+            return true;
+        }
+        return false;
     }
 }

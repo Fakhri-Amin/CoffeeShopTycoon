@@ -84,6 +84,8 @@ public class PlayerUnit : Unit
 
     public override void HandleOnDead()
     {
+        unitAnimation.PlayIdleAnimation((int)unitData.UnitHero);
+
         base.HandleOnDead();
         OnAnyUnitDead?.Invoke(this);
     }

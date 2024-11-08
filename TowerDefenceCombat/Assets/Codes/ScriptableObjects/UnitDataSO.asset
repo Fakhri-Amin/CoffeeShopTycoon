@@ -80,7 +80,7 @@ MonoBehaviour:
     Prefab: {fileID: 1212487335186581284, guid: 9a14ad912df378d4688dcc7953bc4e8f, type: 3}
     Sprite: {fileID: 0}
     Name: Sword
-    Health: 100
+    Health: 150
     DamageAmount: 20
     AttackSpeedType: 2
     AttackRadius: 0.9
@@ -92,7 +92,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     Sprite: {fileID: 0}
     Name: Axe
-    Health: 150
+    Health: 250
     DamageAmount: 40
     AttackSpeedType: 3
     AttackRadius: 0.9
@@ -104,7 +104,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     Sprite: {fileID: 0}
     Name: Great Sword
-    Health: 350
+    Health: 500
     DamageAmount: 60
     AttackSpeedType: 0
     AttackRadius: 1

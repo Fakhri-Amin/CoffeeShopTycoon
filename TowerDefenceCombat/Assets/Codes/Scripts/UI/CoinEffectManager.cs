@@ -25,7 +25,7 @@ public class CoinEffectManager : Singleton<CoinEffectManager>
 
     private IEnumerator SpawnCoins(CurrencyType currencyType, float totalCoins)
     {
-        // AudioManager.Instance.PlayCoinSpawnFeedbacks();
+        AudioManager.Instance.PlayCoinSpawnFeedbacks();
 
         coinSpawnDelay = coinSpawnTotalDelay / coinAmount;
 
@@ -73,7 +73,7 @@ public class CoinEffectManager : Singleton<CoinEffectManager>
                         // Return the coin image to the pool and add the coin amount
                         UIEffectObjectPool.Instance.ReturnToPool(currencyType, spawnedCoinImage);
                         GameDataManager.Instance.ModifyCoin(currencyType, coinAmount);
-                        // AudioManager.Instance.PlayCoinAddedFeedbacks();
+                        AudioManager.Instance.PlayCoinAddedFeedbacks();
                     });
             });
     }

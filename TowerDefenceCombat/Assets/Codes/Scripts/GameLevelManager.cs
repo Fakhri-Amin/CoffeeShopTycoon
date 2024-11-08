@@ -68,6 +68,11 @@ public class GameLevelManager : MonoBehaviour
         coinManager.Reset();
     }
 
+    public bool IsGameStateDay()
+    {
+        return gameState == GameState.Day;
+    }
+
     private void OnLevelWin()
     {
         if (this != null && levelManager != null)

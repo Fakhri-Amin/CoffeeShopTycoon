@@ -7,7 +7,10 @@ public class SingleGrid : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        PlayerUnitSpawner.Instance.OnUnitSpawn(transform.position);
+        if (GameLevelManager.Instance.IsGameStateDay())
+        {
+            PlayerUnitSpawner.Instance.TryPlaceUnitOnGrid(this);
+        }
     }
 
     // Start is called before the first frame update

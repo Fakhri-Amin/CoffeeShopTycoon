@@ -27,7 +27,7 @@ public class WinUI : MonoBehaviour
 
     public void Show(float coinCollectedAmount, Action onContinueButtonClicked)
     {
-        // AudioManager.Instance.PlayCoinFeedbacks();
+        AudioManager.Instance.PlayCoinFeedbacks();
 
         // popup.alpha = 0;
         popup.gameObject.SetActive(true);
@@ -41,7 +41,7 @@ public class WinUI : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(() =>
         {
-            // AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickFeedbacks();
             Hide();
             onContinueButtonClicked?.Invoke();
         });

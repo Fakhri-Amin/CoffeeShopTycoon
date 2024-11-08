@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
     private ProjectileType projectileType;
     private SpriteRenderer spriteRenderer;
     private Vector3 targetPosition;
-    private bool hasCurveProjectileHit;
 
     private void Awake()
     {
@@ -49,12 +48,17 @@ public class Projectile : MonoBehaviour
             // Move towards the target position
             rb.position = Vector2.MoveTowards(rb.position, targetPosition, sourceUnit.UnitData.ProjectileSpeed * Time.deltaTime);
 
-            // Check if the projectile has reached the target position
-            if (Vector2.Distance(rb.position, targetPosition) <= 0.02f) // Adjust tolerance as needed
-            {
-                // ApplySingleTargetDamage();
-                ReturnToPool();
-            }
+
+        }
+    }
+
+    private void LateUpdate()
+    {
+        // Check if the projectile has reached the target position
+        if (Vector2.Distance(rb.position, targetPosition) <= 0.02f) // Adjust tolerance as needed
+        {
+            // ApplySingleTargetDamage();
+            ReturnToPool();
         }
     }
 

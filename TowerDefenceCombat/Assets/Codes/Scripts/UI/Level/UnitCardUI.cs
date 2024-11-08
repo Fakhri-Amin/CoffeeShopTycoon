@@ -28,7 +28,7 @@ public class UnitCardUI : MonoBehaviour
         {
             gameUnitCardUI.SelectCard(this);
             PlayerUnitSpawner.Instance.SetSelectedUnit(unitData.UnitHero);
-            // AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickFeedbacks();
         });
     }
 
