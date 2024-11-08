@@ -95,5 +95,9 @@ PrefabInstance:
       propertyPath: unitHero
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8621348631936316042, guid: 2303fa016abe04e43b10dd72b1c699bc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2303fa016abe04e43b10dd72b1c699bc, type: 3}

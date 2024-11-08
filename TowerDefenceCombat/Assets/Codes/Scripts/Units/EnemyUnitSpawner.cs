@@ -117,7 +117,7 @@ public class EnemyUnitSpawner : MonoBehaviour
     {
         if (unit && unit.UnitType == UnitType.Enemy)
         {
-            EventManager<UnitData>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData);
+            EventManager<float>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData.CoinReward);
             spawnedUnits.Remove(unit);
             UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
         }

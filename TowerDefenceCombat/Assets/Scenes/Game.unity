@@ -7290,7 +7290,7 @@ MonoBehaviour:
   unitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
   spawnedUnits: []
   spawnXAxisOffset: 19
-  spawnYAxisOffset: 0.1
+  spawnYAxisOffset: 0.2
 --- !u!114 &1061984036
 MonoBehaviour:
   m_ObjectHideFlags: 0
