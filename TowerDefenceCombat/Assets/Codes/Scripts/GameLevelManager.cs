@@ -20,6 +20,7 @@ public class GameLevelManager : MonoBehaviour
     private LevelManager levelManager;
     private PauseManager pauseManager;
     private UpgradeManager upgradeManager;
+    private ResearchManager researchManager;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class GameLevelManager : MonoBehaviour
         levelManager = GetComponent<LevelManager>();
         pauseManager = GetComponent<PauseManager>();
         upgradeManager = GetComponent<UpgradeManager>();
+        researchManager = GetComponent<ResearchManager>();
     }
 
     private void Start()
@@ -98,6 +100,7 @@ public class GameLevelManager : MonoBehaviour
     private void HandleDayChanged(int currentDay)
     {
         upgradeManager.HandleUpgradeDayChecking(currentDay);
+        researchManager.HandleResearchDayChecking(currentDay);
     }
 
     private void HandleCoinUpdate(float amount)

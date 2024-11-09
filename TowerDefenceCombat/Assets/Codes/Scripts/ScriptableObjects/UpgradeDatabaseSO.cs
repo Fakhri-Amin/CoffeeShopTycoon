@@ -6,16 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UpgradeDatabaseSO", menuName = "Farou/Upgrade Database")]
 public class UpgradeDatabaseSO : ScriptableObject
 {
-    public float BonusCoinRewardPercentage = 1; // The initial percentage at start
+    [Header("Bonus Coin Reward")]
+    public float BonusCoinRewardPercentage = 0; // The initial percentage at start
     public float BaseUpgradeBonusCoinRewardPrice = 100; // The first price of upgrade
     public float BonusCoinRewardUpgradeAmount = 5; // Every upgrade will give +5%
     public float[] UpgradeBonusCoinRewardPriceList = new float[30];
+
+    [Header("Research")]
+    public float BaseUpgradeResearchPrice = 200; // The first price of upgrade
+    public float[] UpgradeResearchPriceList = new float[30];
 
     private void OnValidate()
     {
 #if UNITY_EDITOR
         // Calculate the prices for upgrading Seed Production Rate
         CalculateUpgradePrices(BaseUpgradeBonusCoinRewardPrice, UpgradeBonusCoinRewardPriceList);
+
+        CalculateUpgradePrices(BaseUpgradeResearchPrice, UpgradeResearchPriceList);
 
         UnityEditor.EditorUtility.SetDirty(this);
 #endif

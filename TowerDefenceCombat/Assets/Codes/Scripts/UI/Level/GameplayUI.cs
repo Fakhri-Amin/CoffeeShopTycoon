@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Farou.Utility;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -22,6 +22,12 @@ public class GameplayUI : MonoBehaviour
 
     [Header("UI : Research")]
     [SerializeField] private Button researchButton;
+    [SerializeField] private ResearchUI researchUI;
+    [SerializeField] private Image researchIcon;
+    [SerializeField] private TMP_Text researchText;
+    [SerializeField] private Image researchCloseIcon;
+    [SerializeField] private TMP_Text researchCloseText;
+    private bool isResearchMenuOpen;
 
     [Header("UI : Upgrade")]
     [SerializeField] private Button upgradeButton;
@@ -30,7 +36,7 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private TMP_Text upgradeText;
     [SerializeField] private Image upgradeCloseIcon;
     [SerializeField] private TMP_Text upgradeCloseText;
-    public bool isUpgradeMenuOpen;
+    private bool isUpgradeMenuOpen;
 
     [Header("UI : Battle")]
     [SerializeField] private Button battleButton;
@@ -41,19 +47,49 @@ public class GameplayUI : MonoBehaviour
     {
         battleButton.onClick.AddListener(() =>
         {
-            GameLevelManager.Instance.SetNight();
+            if (isResearchMenuOpen) ToggleResearchMenu();
+            if (isUpgradeMenuOpen) ToggleUpgradeMenu();
+            GameLevelManager.Instance?.SetNight();
         });
-        upgradeButton.onClick.AddListener(() =>
-        {
-            ToggleUpgradeMenu();
-        });
+
+        upgradeButton.onClick.AddListener(ToggleUpgradeMenu);
+        researchButton.onClick.AddListener(ToggleResearchMenu);
     }
 
     private void Start()
     {
         normalUnitCardTemplate.gameObject.SetActive(false);
 
+        ResetCardSelection();
+        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
+        UpdateDayUI(GameDataManager.Instance.CurrentDay);
+    }
+
+    private void OnEnable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
+        GameDataManager.Instance.OnDayChanged += UpdateDayUI;
+
+        EventManager.Subscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
+    }
+
+    private void OnDisable()
+    {
+        GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
+        GameDataManager.Instance.OnDayChanged -= UpdateDayUI;
+
+        EventManager.UnSubscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
+    }
+
+    private void UpdateUnitCardUI()
+    {
         List<PlayerUnitHero> unlockedUnitHeroList = GameDataManager.Instance.UnlockedUnitList;
+
+        foreach (Transform child in buttonParent)
+        {
+            if (child.GetComponent<UnitCardUI>() == normalUnitCardTemplate) continue;
+            Destroy(child.gameObject);
+        }
 
         foreach (var item in unlockedUnitHeroList)
         {
@@ -66,35 +102,28 @@ public class GameplayUI : MonoBehaviour
             unitCardUI.gameObject.SetActive(true);
             unitCardUIList.Add(unitCardUI);
         }
-
-        foreach (var item in unitCardUIList)
-        {
-            item.Deselect();
-        }
-
-        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
     }
 
-    private void OnEnable()
+    private void ToggleMenu(ref bool isMenuOpen, System.Action openMenuAction, System.Action closeMenuAction)
     {
-        GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
-        GameDataManager.Instance.OnDayChanged += UpdateDayUI;
-    }
+        isMenuOpen = !isMenuOpen;
 
-    private void OnDisable()
-    {
-        GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
-        GameDataManager.Instance.OnDayChanged -= UpdateDayUI;
+        if (isMenuOpen)
+            openMenuAction();
+        else
+            closeMenuAction();
     }
 
     private void ToggleUpgradeMenu()
     {
-        isUpgradeMenuOpen = !isUpgradeMenuOpen;
+        if (isResearchMenuOpen) ToggleResearchMenu();
+        ToggleMenu(ref isUpgradeMenuOpen, OpenUpgradeMenu, CloseUpgradeMenu);
+    }
 
-        if (isUpgradeMenuOpen)
-            OpenUpgradeMenu();
-        else
-            CloseUpgradeMenu();
+    private void ToggleResearchMenu()
+    {
+        if (isUpgradeMenuOpen) ToggleUpgradeMenu();
+        ToggleMenu(ref isResearchMenuOpen, OpenResearchMenu, CloseResearchMenu);
     }
 
     private void OpenUpgradeMenu()
@@ -102,24 +131,28 @@ public class GameplayUI : MonoBehaviour
         upgradeUI.Show();
         SetUpgradeUIState(false);
     }
-
     private void CloseUpgradeMenu()
     {
         upgradeUI.Hide();
         SetUpgradeUIState(true);
     }
 
-    private void SetUpgradeUIState(bool isSelectionClosed)
+    private void OpenResearchMenu()
     {
-        upgradeIcon.gameObject.SetActive(isSelectionClosed);
-        upgradeText.gameObject.SetActive(isSelectionClosed);
-        upgradeCloseIcon.gameObject.SetActive(!isSelectionClosed);
-        upgradeCloseText.gameObject.SetActive(!isSelectionClosed);
+        researchUI.Show();
+        SetResearchUIState(false);
+    }
+    private void CloseResearchMenu()
+    {
+        researchUI.Hide();
+        SetResearchUIState(true);
     }
 
     private void UpdateDayUI(int currentDay)
     {
         dayText.text = $"Day {currentDay}";
+
+        UpdateUnitCardUI();
     }
 
     public void SetWaveProgressionMaxValue(float maxValue)
@@ -135,12 +168,16 @@ public class GameplayUI : MonoBehaviour
 
     public void SelectCard(UnitCardUI unitCardUI)
     {
+        ResetCardSelection();
+        unitCardUIList.Find(i => i == unitCardUI)?.Select();
+    }
+
+    private void ResetCardSelection()
+    {
         foreach (var item in unitCardUIList)
         {
             item.Deselect();
         }
-
-        unitCardUIList.Find(i => i == unitCardUI).Select();
     }
 
     private void CheckForCardClickable(float currentCoin)
@@ -158,6 +195,22 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    private void SetUpgradeUIState(bool isSelectionClosed)
+    {
+        upgradeIcon.gameObject.SetActive(isSelectionClosed);
+        upgradeText.gameObject.SetActive(isSelectionClosed);
+        upgradeCloseIcon.gameObject.SetActive(!isSelectionClosed);
+        upgradeCloseText.gameObject.SetActive(!isSelectionClosed);
+    }
+
+    private void SetResearchUIState(bool isSelectionClosed)
+    {
+        researchIcon.gameObject.SetActive(isSelectionClosed);
+        researchText.gameObject.SetActive(isSelectionClosed);
+        researchCloseIcon.gameObject.SetActive(!isSelectionClosed);
+        researchCloseText.gameObject.SetActive(!isSelectionClosed);
+    }
+
     public void Show()
     {
         panel.gameObject.SetActive(true);
@@ -168,9 +221,6 @@ public class GameplayUI : MonoBehaviour
     public void Hide()
     {
         panel.alpha = 1;
-        panel.DOFade(0, 0.1f).OnComplete(() =>
-        {
-            panel.gameObject.SetActive(false);
-        });
+        panel.DOFade(0, 0.1f).OnComplete(() => panel.gameObject.SetActive(false));
     }
 }

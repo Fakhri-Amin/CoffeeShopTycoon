@@ -14,24 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoldCoinSprite: {fileID: 21300000, guid: 5684db2a4e7d52f489a4e92b8310c3c3, type: 3}
   AzureCoinSprite: {fileID: 21300000, guid: 534e2fea02a200744a476a995f2b62db, type: 3}
-  WorldSpriteReferences:
-  - MapType: 0
-    GroundColor: {r: 1, g: 0.7411765, b: 0.44705883, a: 1}
-    LevelMapSprites:
-    - {fileID: 21300000, guid: 953fda5e597b8f14e8609b065febc231, type: 3}
-    - {fileID: 21300000, guid: 3131adf2183539c478a760ae629836c1, type: 3}
-    - {fileID: 21300000, guid: d24962fa72bf8c640808967449f9d9b5, type: 3}
-  - MapType: 1
-    GroundColor: {r: 0.30588236, g: 0.627451, b: 0.23529412, a: 1}
-    LevelMapSprites:
-    - {fileID: 21300000, guid: b1c2372479fa41d4ea66aa82d4b043d5, type: 3}
-    - {fileID: 21300000, guid: 11d5de36920bc0542ac32fa54614f48b, type: 3}
-    - {fileID: 21300000, guid: fc566305936e16a46a60687cd776b4ab, type: 3}
-    - {fileID: 21300000, guid: 8c457c8e17f95914d9b45ef0918e3d9b, type: 3}
-    - {fileID: 21300000, guid: 4e50d345d876fb6418dedba042654ded, type: 3}
-  - MapType: 2
-    GroundColor: {r: 0.19215687, g: 0.21568628, b: 0.20784314, a: 1}
-    LevelMapSprites:
-    - {fileID: 21300000, guid: ec90d951907bf704196b252f6ad18163, type: 3}
-    - {fileID: 21300000, guid: b888389ce6cac0f4a8ecc86441919c46, type: 3}
-    - {fileID: 21300000, guid: dee3f61e040c50344a2e5c4926b9430d, type: 3}
+  LockedSprite: {fileID: 21300000, guid: 9eb24c6047f827547acee4b920185196, type: 3}

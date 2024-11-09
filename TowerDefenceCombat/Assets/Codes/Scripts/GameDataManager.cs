@@ -13,17 +13,19 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
     public event Action<int> OnDayChanged;
     public event Action<float> OnGoldCoinUpdated;
     public event Action<float, float> OnBonusCoinRewardPercentageChanged;
+    public event Action<float, float> OnResearchLevelChanged;
 
     public UnitDataSO UnitDataSO;
     public LevelWaveDatabaseSO LevelWaveDatabaseSO;
     public UpgradeDatabaseSO UpgradeDatabaseSO;
-    public List<PlayerUnitHero> SelectedUnitList = new List<PlayerUnitHero>(3);
     public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
     public int CurrentDay;
+    public float ResearchLevel;
     public float GoldCoinCollected;
     public float GoldCoin;
     public float BonusCoinRewardPercentage;
     public float UpgradeBonusCoinRewardPrice;
+    public float UpgradeResearchPrice;
 
     public new void Awake()
     {
@@ -32,6 +34,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         var gameData = Data.Get<GameData>();
 
         CurrentDay = gameData.CurrentDay;
+        OnDayChanged?.Invoke(CurrentDay);
 
         GoldCoin = gameData.GoldCoin;
         OnGoldCoinUpdated?.Invoke(GoldCoin);
@@ -41,11 +44,12 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         SetInitialDefaultData();
 
         UpdateBonusCoinRewardPercentage();
+        UpdateResearchLevel();
     }
 
     private void SetInitialDefaultData()
     {
-        if (SelectedUnitList.Count <= 1)
+        if (CurrentDay <= 1)
         {
             // Set default data
             AddDefaultUnlockedUnit(PlayerUnitHero.Bow);
@@ -101,6 +105,37 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         Save();
     }
 
+    public void AddRandomUnit()
+    {
+        // Ensure there are units available to choose from
+        if (UnitDataSO.PlayerUnitStatDataList.Count == 0)
+        {
+            Debug.LogWarning("No units available to unlock.");
+            return;
+        }
+
+        // Filter the list to only include units that haven't been unlocked
+        var unobtainedUnits = UnitDataSO.PlayerUnitStatDataList
+            .Where(unitData => !IsUnitAlreadyUnlocked(unitData.UnitHero))
+            .ToList();
+
+        // Check if there are any unobtained units left
+        if (unobtainedUnits.Count == 0)
+        {
+            Debug.LogWarning("All units have already been unlocked.");
+            return;
+        }
+
+        // Select a random unit from the unobtained units
+        var randomUnitHero = unobtainedUnits[
+            UnityEngine.Random.Range(0, unobtainedUnits.Count)
+        ].UnitHero;
+
+        // Unlock the selected unit
+        AddUnlockedUnit(randomUnitHero);
+    }
+
+
     public bool IsUnitAlreadyUnlocked(PlayerUnitHero unitHero)
     {
         if (UnlockedUnitList.Contains(unitHero))
@@ -110,16 +145,35 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         return false;
     }
 
+    public void UpgradeResearchLevel()
+    {
+        var gameData = Data.Get<GameData>();
+        gameData.ResearchLevel++;
+
+        UpdateResearchLevel();
+        AddRandomUnit();
+    }
+
+    private void UpdateResearchLevel()
+    {
+        var gameData = Data.Get<GameData>();
+
+        ResearchLevel = gameData.ResearchLevel;
+        UpgradeResearchPrice = UpgradeDatabaseSO.UpgradeResearchPriceList[(int)(gameData.ResearchLevel - 1)];
+        OnResearchLevelChanged?.Invoke(ResearchLevel, UpgradeResearchPrice);
+
+        Save();
+    }
+
     public void UpgradeBonusCoinRewardPercentage()
     {
         var gameData = Data.Get<GameData>();
         gameData.BonusCoinRewardLevel++;
-        OnBonusCoinRewardPercentageChanged?.Invoke(BonusCoinRewardPercentage, UpgradeBonusCoinRewardPrice);
 
         UpdateBonusCoinRewardPercentage();
     }
 
-    public void UpdateBonusCoinRewardPercentage()
+    private void UpdateBonusCoinRewardPercentage()
     {
         var gameData = Data.Get<GameData>();
         BonusCoinRewardPercentage = UpgradeDatabaseSO.BonusCoinRewardPercentage + (gameData.BonusCoinRewardLevel - 1) * UpgradeDatabaseSO.BonusCoinRewardUpgradeAmount;
@@ -149,5 +203,4 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
         Save();
     }
-
 }

@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerUnitSpawner.Instance.Initialize(GameDataManager.Instance.SelectedUnitList);
+        PlayerUnitSpawner.Instance.Initialize(GameDataManager.Instance.UnlockedUnitList);
 
         // Hide UI elements initially
         winUI.InstantHide();
@@ -74,6 +74,7 @@ public class LevelManager : MonoBehaviour
         gameplayUI.SetWaveProgressionMaxValue(currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count);
 
         EnemyUnitSpawner.Instance.Initialize(CurrentLevelWave, enemySpawnPoints);
+
         HideInGameHUD();
     }
 

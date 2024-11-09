@@ -10,6 +10,6 @@ namespace Farou.Utility
         OnLevelLose,
         OnEnemyCoinDropped,
         OnEnemyBaseDestroyed,
-        OnUnitSelected
+        OnUIRefresh
     }
 }
