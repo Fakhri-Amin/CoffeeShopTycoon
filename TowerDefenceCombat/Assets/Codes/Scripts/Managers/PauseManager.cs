@@ -22,7 +22,7 @@ public class PauseManager : MonoBehaviour
 
     private void PauseGame()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
 
         pauseUI.Show();
         Time.timeScale = 0;
@@ -30,6 +30,8 @@ public class PauseManager : MonoBehaviour
 
     private void ResumeGame()
     {
+        AudioManager.Instance.PlayClickSound();
+
         Time.timeScale = 1;
         pauseUI.Hide();
     }
@@ -37,7 +39,6 @@ public class PauseManager : MonoBehaviour
     private void GiveUpGame()
     {
         Time.timeScale = 1;
-        // loadMainMenuSceneFeedbacks.PlayFeedbacks();
     }
 }
 

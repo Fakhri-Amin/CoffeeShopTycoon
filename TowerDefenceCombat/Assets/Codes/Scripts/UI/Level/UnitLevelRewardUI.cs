@@ -24,7 +24,7 @@ public class UnitLevelRewardUI : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickSound();
             onContinueButtonClicked?.Invoke();
         });
     }

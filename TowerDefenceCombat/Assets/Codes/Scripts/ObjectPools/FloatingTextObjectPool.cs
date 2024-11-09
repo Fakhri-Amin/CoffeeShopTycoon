@@ -49,6 +49,12 @@ public class FloatingTextObjectPool : Singleton<FloatingTextObjectPool>
         DisplayFloatingText(infoText);
     }
 
+    public void DisplayNoUnitSelected()
+    {
+        string infoText = "No Tower Selected!";
+        DisplayFloatingText(infoText);
+    }
+
     public void DisplayFloatingText(string text)
     {
         TMP_Text infoText = GetPooledObject();

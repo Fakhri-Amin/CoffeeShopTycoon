@@ -87,14 +87,14 @@ public class UnitObjectPool : Singleton<UnitObjectPool>
         return EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Get();
     }
 
-    public void ReturnToPool(PlayerUnitHero unitHero, PlayerUnit effect)
+    public void ReturnToPool(PlayerUnitHero unitHero, PlayerUnit unit)
     {
-        PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
+        PlayerUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(unit);
     }
 
-    public void ReturnToPool(EnemyUnitHero unitHero, EnemyUnit effect)
+    public void ReturnToPool(EnemyUnitHero unitHero, EnemyUnit unit)
     {
-        EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(effect);
+        EnemyUnitHeroReferences.Find(i => i.Type == unitHero).ObjectPool.Release(unit);
     }
 }
 

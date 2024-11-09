@@ -203,4 +203,25 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
         Save();
     }
+
+    public void ClearDatabase()
+    {
+        var gameData = Data.Get<GameData>();
+
+        gameData.GoldCoin = 200;
+        GoldCoin = gameData.GoldCoin;
+
+        gameData.CurrentDay = 1;
+        CurrentDay = gameData.CurrentDay;
+
+        gameData.BonusCoinRewardLevel = 1;
+
+        gameData.ResearchLevel = 1;
+        ResearchLevel = gameData.ResearchLevel;
+
+        gameData.UnlockedUnitList = new List<PlayerUnitHero>() { PlayerUnitHero.Bow };
+        UnlockedUnitList = gameData.UnlockedUnitList;
+
+        Save();
+    }
 }

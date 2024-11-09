@@ -904,7 +904,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -310.4955, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65235571
 MonoBehaviour:
@@ -1089,10 +1089,10 @@ RectTransform:
   m_Father: {fileID: 297593563}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.63275, y: -55.455505}
-  m_SizeDelta: {x: 375.2655, y: 110.91101}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68488305
 MonoBehaviour:
@@ -1671,10 +1671,10 @@ RectTransform:
   m_Father: {fileID: 1246353989}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.2655, y: -169.62}
-  m_SizeDelta: {x: 760.531, y: 259.24}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87086589
 MonoBehaviour:
@@ -7056,10 +7056,10 @@ RectTransform:
   m_Father: {fileID: 1246353989}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.2655, y: -379.6955}
-  m_SizeDelta: {x: 760.531, y: 110.91101}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297593564
 MonoBehaviour:
@@ -11546,15 +11546,15 @@ MonoBehaviour:
   AutoUnparentOnAwake: 1
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
   LevelWaveDatabaseSO: {fileID: 11400000, guid: c0ed0a893a124aa4e8719843acbe6af5, type: 2}
-  SelectedUnitList: 
+  UpgradeDatabaseSO: {fileID: 0}
   UnlockedUnitList: 
+  CurrentDay: 0
+  ResearchLevel: 0
   GoldCoinCollected: 0
   GoldCoin: 0
-  SeedProductionRate: 0
-  BaseHealth: 0
-  UpgradeSeedProductionRatePrice: 0
-  UpgradeBaseHealthPrice: 0
-  IsThereNewPotato: 0
+  BonusCoinRewardPercentage: 0
+  UpgradeBonusCoinRewardPrice: 0
+  UpgradeResearchPrice: 0
 --- !u!1 &482094533
 GameObject:
   m_ObjectHideFlags: 0
@@ -18202,13 +18202,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248161faec94db346b1fbdb4ce80619a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameAssetSO: {fileID: 0}
   panel: {fileID: 1241153467}
-  currentSeedRateText: {fileID: 748580513}
-  upgradeSeedRateButton: {fileID: 1101854426}
-  upgradeSeedRatePriceText: {fileID: 1345004385}
-  currentBaseHealthText: {fileID: 1873234889}
-  upgradeBaseHealthButton: {fileID: 1288980578}
-  upgradeBaseHealthPriceText: {fileID: 1860967669}
+  currentBonusCoinRewardText: {fileID: 0}
+  upgradeBonusCoinRewardButton: {fileID: 0}
+  upgradeBonusCoinRewardPriceText: {fileID: 0}
+  coinIcon: {fileID: 0}
+  timerIcon: {fileID: 0}
+  remainingDayTransform: {fileID: 0}
+  unlockedColor: {r: 0, g: 0, b: 0, a: 0}
+  lockedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &712918277
 GameObject:
   m_ObjectHideFlags: 0
@@ -25333,7 +25336,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -317.2255, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996706226
 MonoBehaviour:
@@ -28894,7 +28897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinStartPosition: {fileID: 1138094303}
   goldCoinEndPosition: {fileID: 152552904}
-  azureCoinEndPosition: {fileID: 2359340204863299034}
   moveDuration: 1
   scaleEase: 7
   moveEase: 26
@@ -31848,10 +31850,10 @@ RectTransform:
   m_Father: {fileID: 297593563}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 582.89825, y: -55.455505}
-  m_SizeDelta: {x: 355.2655, y: 110.91101}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1244597231
 MonoBehaviour:
@@ -37917,7 +37919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1493417483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45793,7 +45795,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -174.48102, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1744062044
 MonoBehaviour:

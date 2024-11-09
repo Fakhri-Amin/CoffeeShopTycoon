@@ -25,13 +25,13 @@ public class QuitConfirmationUI : MonoBehaviour
 
     public void YesQuit()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
         Application.Quit();
     }
 
     public void NoCancel()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
         Hide();
     }
 
@@ -50,6 +50,6 @@ public class QuitConfirmationUI : MonoBehaviour
             panel.gameObject.SetActive(false);
         });
 
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
     }
 }

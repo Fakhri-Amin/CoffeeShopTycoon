@@ -24,12 +24,15 @@ public class UnitCardUI : MonoBehaviour
         unitImage.sprite = unitData.Sprite;
         seedAmountText.text = unitData.CoinCost.ToString();
 
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() =>
         {
-            gameUnitCardUI.SelectCard(this);
             PlayerUnitSpawner.Instance.SetSelectedUnit(unitData.UnitHero);
-            AudioManager.Instance.PlayClickFeedbacks();
+            gameUnitCardUI.SelectCard(this);
+            AudioManager.Instance.PlayClickSound();
         });
+
+        Deselect();
     }
 
     public void Select()

@@ -6,11 +6,11 @@ public class UnitAudio : MonoBehaviour
 {
     public void PlayHitSound()
     {
-        AudioManager.Instance.PlayUnitHitFeedbacks();
+        AudioManager.Instance.PlayUnitHitSound();
     }
 
     public void PlayDeadSound()
     {
-        AudioManager.Instance.PlayUnitDeadFeedbacks();
+        AudioManager.Instance.PlayUnitDeadSound();
     }
 }

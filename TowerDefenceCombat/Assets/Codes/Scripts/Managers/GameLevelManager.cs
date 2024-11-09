@@ -65,6 +65,7 @@ public class GameLevelManager : MonoBehaviour
         {
             GameDataManager.Instance.IncrementCurrentDay();
             CoinEffectManager.Instance.StartSpawnCoins(coinManager.CoinCollected);
+            EventManager.Publish(Farou.Utility.EventType.OnUIRefresh);
         }
     }
 

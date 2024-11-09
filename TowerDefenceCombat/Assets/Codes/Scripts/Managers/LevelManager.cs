@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private UnitLevelRewardUI unitLevelRewardUI;
-    [SerializeField] private float waitTimeBeforeShowingUI = 3f;
+    [SerializeField] private float waitTimeBeforeShowingUI = 2f;
     [SerializeField] private SpriteRenderer nightLayer;
 
     [Header("Grid Settings")]
@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator HandleLevelWin()
     {
-        yield return HideInGameHUDAndWait();
+        yield return DelayTime(waitTimeBeforeShowingUI);
         coinManager.SetFinalCoinCollected(coinManager.CoinCollected + (coinManager.CoinCollected * GameDataManager.Instance.BonusCoinRewardPercentage / 100));
         ShowWinUI();
         CollectCurrencyRewards();
@@ -134,10 +134,8 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator HandleLevelLose()
     {
-        yield return HideInGameHUDAndWait();
-        coinManager.SetFinalCoinCollected(coinManager.CoinCollected + (coinManager.CoinCollected * GameDataManager.Instance.BonusCoinRewardPercentage / 100));
-        loseUI.Show(CurrencyType.GoldCoin, coinManager.CoinCollected, LoadMainMenu);
-        CollectCurrencyRewards();
+        yield return DelayTime(0);
+        loseUI.Show(OnDayEnds);
     }
 
     private void CollectCurrencyRewards()
@@ -147,10 +145,10 @@ public class LevelManager : MonoBehaviour
 
     private void ShowWinUI()
     {
-        winUI.Show(coinManager.CoinCollected, OnWinUIContinue);
+        winUI.Show(coinManager.CoinCollected, OnDayEnds);
     }
 
-    private void OnWinUIContinue()
+    private void OnDayEnds()
     {
         // Handle what happens after the win UI continues, e.g., transition to the next level
         GameLevelManager.Instance.SetDay();
@@ -161,9 +159,9 @@ public class LevelManager : MonoBehaviour
         gameplayUI.Show();
     }
 
-    private IEnumerator HideInGameHUDAndWait()
+    private IEnumerator DelayTime(float delay)
     {
-        yield return new WaitForSeconds(waitTimeBeforeShowingUI);
+        yield return new WaitForSeconds(delay);
     }
 
     public void HideInGameHUD()

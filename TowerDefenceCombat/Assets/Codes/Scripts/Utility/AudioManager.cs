@@ -7,52 +7,71 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField] private AudioClip clickFeedbacks;
-    [SerializeField] private AudioClip levelStartFeedbacks;
-    [SerializeField] private AudioClip coinFeedbacks;
-    [SerializeField] private AudioClip coinSpawnFeedbacks;
-    [SerializeField] private AudioClip coinAddedFeedbacks;
-    [SerializeField] private AudioClip unitHitFeedbacks;
-    [SerializeField] private AudioClip unitDeadFeedbacks;
+    [SerializeField] private AudioClip clickSound;
+    [SerializeField] private AudioClip levelStartSound;
+    [SerializeField] private AudioClip coinSound;
+    [SerializeField] private AudioClip coinSpawnSound;
+    [SerializeField] private AudioClip coinAddedSound;
+    [SerializeField] private AudioClip unitSpawnSound;
+    [SerializeField] private AudioClip[] unitHitSound;
+    [SerializeField] private AudioClip[] unitDeadSound;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayUnitHitFeedbacks()
+    public void PlayUnitHitSound()
     {
-
+        PlaySound(unitHitSound);
     }
 
-    public void PlayLevelStartFeedbacks()
+    public void PlayLevelStartSound()
     {
-
+        PlaySound(levelStartSound);
     }
 
-    public void PlayCoinFeedbacks()
+    public void PlayCoinSound()
     {
-
+        PlaySound(coinSound);
     }
 
-    public void PlayCoinSpawnFeedbacks()
+    public void PlayCoinSpawnSound()
     {
-
+        PlaySound(coinSpawnSound);
     }
 
-    public void PlayCoinAddedFeedbacks()
+    public void PlayCoinAddedSound()
     {
-
+        PlaySound(coinAddedSound);
     }
 
-    public void PlayUnitDeadFeedbacks()
+    public void PlayUnitDeadSound()
     {
-
+        PlaySound(unitDeadSound);
     }
 
-    public void PlayClickFeedbacks()
+    public void PlayClickSound()
     {
+        PlaySound(clickSound);
+    }
 
+    public void PlayUnitSpawnSound()
+    {
+        PlaySound(unitSpawnSound);
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
+    }
+
+    private void PlaySound(AudioClip[] audioClips)
+    {
+        audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)]);
     }
 }

@@ -84,7 +84,7 @@ public class ResearchUI : MonoBehaviour
 
     private void UpgradeResearch()
     {
-        AudioManager.Instance.PlayCoinFeedbacks();
+        AudioManager.Instance.PlayCoinSound();
         var gameDataManager = GameDataManager.Instance;
         if (gameDataManager.GoldCoin >= gameDataManager.UpgradeResearchPrice)
         {
@@ -135,7 +135,7 @@ public class ResearchUI : MonoBehaviour
 
     public void Show()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
 
         panel.gameObject.SetActive(true);
         panel.alpha = 0;
@@ -144,7 +144,7 @@ public class ResearchUI : MonoBehaviour
 
     public void Hide()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
 
         panel.alpha = 1;
         panel.DOFade(0, 0.1f).OnComplete(() =>

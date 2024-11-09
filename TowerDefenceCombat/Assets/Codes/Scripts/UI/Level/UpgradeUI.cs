@@ -84,7 +84,7 @@ public class UpgradeUI : MonoBehaviour
 
     private void UpgradeBonusCoinRewardPercentage()
     {
-        AudioManager.Instance.PlayCoinFeedbacks();
+        AudioManager.Instance.PlayCoinSound();
         var gameDataManager = GameDataManager.Instance;
         if (gameDataManager.GoldCoin >= gameDataManager.UpgradeBonusCoinRewardPrice)
         {
@@ -136,7 +136,7 @@ public class UpgradeUI : MonoBehaviour
 
     public void Show()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
 
         panel.gameObject.SetActive(true);
         panel.alpha = 0;
@@ -145,7 +145,7 @@ public class UpgradeUI : MonoBehaviour
 
     public void Hide()
     {
-        AudioManager.Instance.PlayClickFeedbacks();
+        AudioManager.Instance.PlayClickSound();
 
         panel.alpha = 1;
         panel.DOFade(0, 0.1f).OnComplete(() =>

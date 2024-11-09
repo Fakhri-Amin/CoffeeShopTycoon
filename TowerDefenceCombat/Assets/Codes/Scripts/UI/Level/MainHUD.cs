@@ -39,7 +39,7 @@ public class MainHUD : Singleton<MainHUD>
 
         upgradeButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickSound();
             ToggleUpgradeMenu();
         });
         quitButton.onClick.AddListener(QuitGame);

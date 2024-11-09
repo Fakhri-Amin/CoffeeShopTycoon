@@ -44,11 +44,13 @@ public class PlayerUnitSpawner : MonoBehaviour
     private void OnEnable()
     {
         PlayerUnit.OnAnyUnitDead += PlayerUnit_OnAnyPlayerUnitDead;
+        GameDataManager.Instance.OnDayChanged += ClearSelectedUnit;
     }
 
     private void OnDisable()
     {
         PlayerUnit.OnAnyUnitDead -= PlayerUnit_OnAnyPlayerUnitDead;
+        GameDataManager.Instance.OnDayChanged -= ClearSelectedUnit;
     }
 
     private void OnDestroy()
@@ -96,6 +98,8 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     private void SpawnUnit(SingleGrid singleGrid, PlayerUnitData unitData, Vector2 position)
     {
+        AudioManager.Instance.PlayUnitSpawnSound();
+
         PlayerUnit spawnedUnit = UnitObjectPool.Instance.GetPooledObject(unitData.UnitHero);
         if (spawnedUnit == null)
         {
@@ -143,6 +147,11 @@ public class PlayerUnitSpawner : MonoBehaviour
         this.selectedUnit = selectedUnit;
     }
 
+    public void ClearSelectedUnit(int currentDay)
+    {
+        selectedUnit = PlayerUnitHero.None;
+    }
+
     public bool TryPlaceUnitOnGrid(SingleGrid singleGrid)
     {
         UnitGrid grid = unitGrids.FirstOrDefault(i => i.SingleGrid == singleGrid);
@@ -152,6 +161,7 @@ public class PlayerUnitSpawner : MonoBehaviour
             OnUnitSpawn(singleGrid, singleGrid.transform.position);
             return true;
         }
+        FloatingTextObjectPool.Instance.DisplayInsufficientGoldCoin();
         return false;
     }
 }

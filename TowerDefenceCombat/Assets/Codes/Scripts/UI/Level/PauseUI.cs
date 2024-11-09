@@ -17,12 +17,12 @@ public class PauseUI : MonoBehaviour
         giveUpButton.onClick.RemoveAllListeners();
         resumeButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickSound();
             onResumeButtonClicked();
         });
         giveUpButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickSound();
             onGiveUpButtonClicked();
         });
     }

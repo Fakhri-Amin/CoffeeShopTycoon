@@ -86,7 +86,7 @@ MonoBehaviour:
     AttackRadius: 0.9
     UnitHero: 1
     MoveSpeedType: 2
-    CoinReward: 20
+    CoinReward: 50
   - UnitRangeType: 0
     UnitAttackType: 0
     Prefab: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
     AttackRadius: 0.9
     UnitHero: 2
     MoveSpeedType: 1
-    CoinReward: 50
+    CoinReward: 100
   - UnitRangeType: 0
     UnitAttackType: 0
     Prefab: {fileID: 0}
@@ -110,4 +110,4 @@ MonoBehaviour:
     AttackRadius: 1
     UnitHero: 3
     MoveSpeedType: 0
-    CoinReward: 75
+    CoinReward: 150

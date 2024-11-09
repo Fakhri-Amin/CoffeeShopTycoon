@@ -8,7 +8,7 @@ public class EnemyUnitSpawner : MonoBehaviour
 {
     public static EnemyUnitSpawner Instance { get; private set; }
     [SerializeField] private UnitDataSO unitDataSO;
-    [SerializeField] private List<Unit> spawnedUnits = new List<Unit>();
+    [SerializeField] private List<EnemyUnit> spawnedUnits = new List<EnemyUnit>();
     [SerializeField] private int spawnXAxisOffset = 16;
     [SerializeField] private float spawnYAxisOffset = 0.2f;
 
@@ -68,6 +68,11 @@ public class EnemyUnitSpawner : MonoBehaviour
 
     private void HandleLevelEnd()
     {
+        foreach (var unit in spawnedUnits)
+        {
+            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
+        }
+        spawnedUnits.Clear();
         StopAllCoroutines();
     }
 
@@ -85,6 +90,7 @@ public class EnemyUnitSpawner : MonoBehaviour
             yield return StartCoroutine(SpawnUnitsForWave(wave));
             yield return new WaitForSeconds(delayBetweenWaves); // Delay between waves
         }
+
     }
 
     private IEnumerator SpawnUnitsForWave(WaveData waveData)
@@ -118,11 +124,11 @@ public class EnemyUnitSpawner : MonoBehaviour
         {
             EventManager<float>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData.CoinReward);
             spawnedUnits.Remove(unit);
+            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
             if (spawnedUnits.Count <= 0)
             {
                 EventManager.Publish(Farou.Utility.EventType.OnLevelWin);
             }
-            UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
         }
     }
 

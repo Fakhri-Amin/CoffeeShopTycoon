@@ -49,6 +49,7 @@ public class GameplayUI : MonoBehaviour
         {
             if (isResearchMenuOpen) ToggleResearchMenu();
             if (isUpgradeMenuOpen) ToggleUpgradeMenu();
+            AudioManager.Instance.PlayLevelStartSound();
             GameLevelManager.Instance?.SetNight();
         });
 
@@ -60,25 +61,21 @@ public class GameplayUI : MonoBehaviour
     {
         normalUnitCardTemplate.gameObject.SetActive(false);
 
-        ResetCardSelection();
-        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
         UpdateDayUI(GameDataManager.Instance.CurrentDay);
     }
 
     private void OnEnable()
     {
+        EventManager.Subscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
         GameDataManager.Instance.OnGoldCoinUpdated += CheckForCardClickable;
         GameDataManager.Instance.OnDayChanged += UpdateDayUI;
-
-        EventManager.Subscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
     }
 
     private void OnDisable()
     {
+        EventManager.UnSubscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
         GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
         GameDataManager.Instance.OnDayChanged -= UpdateDayUI;
-
-        EventManager.UnSubscribe(Farou.Utility.EventType.OnUIRefresh, UpdateUnitCardUI);
     }
 
     private void UpdateUnitCardUI()
@@ -90,6 +87,7 @@ public class GameplayUI : MonoBehaviour
             if (child.GetComponent<UnitCardUI>() == normalUnitCardTemplate) continue;
             Destroy(child.gameObject);
         }
+        unitCardUIList.Clear();
 
         foreach (var item in unlockedUnitHeroList)
         {
@@ -101,6 +99,15 @@ public class GameplayUI : MonoBehaviour
             unitCardUI.Initialize(this, unitData);
             unitCardUI.gameObject.SetActive(true);
             unitCardUIList.Add(unitCardUI);
+
+            if (unitCardUI.UnitData.CoinCost > GameDataManager.Instance.GoldCoin)
+            {
+                unitCardUI.Disable();
+            }
+            else
+            {
+                unitCardUI.Enable();
+            }
         }
     }
 
@@ -153,6 +160,7 @@ public class GameplayUI : MonoBehaviour
         dayText.text = $"Day {currentDay}";
 
         UpdateUnitCardUI();
+        CheckForCardClickable(GameDataManager.Instance.GoldCoin);
     }
 
     public void SetWaveProgressionMaxValue(float maxValue)

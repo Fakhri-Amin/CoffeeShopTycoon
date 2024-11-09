@@ -24,10 +24,10 @@ public class WinUI : MonoBehaviour
 
     public void Show(float coinCollectedAmount, Action onContinueButtonClicked)
     {
-        AudioManager.Instance.PlayCoinFeedbacks();
+        AudioManager.Instance.PlayCoinSound();
 
         popup.gameObject.SetActive(true);
-        popup.DOFade(1, 0.1f);
+        popup.DOFade(1, 0.3f);
 
         coinCollectedText.text = "+" + coinCollectedAmount;
         bonusCoinRewardText.text = $"+{GameDataManager.Instance.BonusCoinRewardPercentage}% Bonus Coin Reward";
@@ -38,7 +38,7 @@ public class WinUI : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlayClickFeedbacks();
+            AudioManager.Instance.PlayClickSound();
             Hide();
             onContinueButtonClicked?.Invoke();
         });

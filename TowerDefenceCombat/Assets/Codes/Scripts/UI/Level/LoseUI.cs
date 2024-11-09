@@ -11,58 +11,35 @@ public class LoseUI : MonoBehaviour
     [Header("General")]
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CanvasGroup popup;
-    [SerializeField] private TMP_Text coinCollectedText;
-    [SerializeField] private Image coinImage;
-    [SerializeField] private Image coinOutline;
-    [SerializeField] private Button continueButton;
-    [SerializeField] private Button collectDoubleButton;
+    [SerializeField] private Button playAgainButton;
+    [SerializeField] private Button quitGameButton;
 
     [Header("Gold Coin")]
     [SerializeField] private Color goldCoinOutlineColor;
     [SerializeField] private Color goldCoinButtonColor;
 
-    [Header("Azure Coin")]
-    [SerializeField] private Color azureCoinOutlineColor;
-    [SerializeField] private Color azureCoinButtonColor;
-
-    public void Show(CurrencyType currencyType, float coinCollectedAmount, Action onContinueButtonClicked)
+    public void Show(Action onEnd)
     {
-        AudioManager.Instance.PlayCoinFeedbacks();
+        AudioManager.Instance.PlayCoinSound();
 
         popup.gameObject.SetActive(true);
-        popup.DOFade(1, 0.1f);
+        popup.DOFade(1, 0.3f);
 
-        coinCollectedText.text = "+" + coinCollectedAmount;
-
-        collectDoubleButton.onClick.AddListener(() =>
+        playAgainButton.onClick.RemoveAllListeners();
+        playAgainButton.onClick.AddListener(() =>
         {
-            Debug.Log("Clicked");
-
-            AudioManager.Instance.PlayClickFeedbacks();
-
+            AudioManager.Instance.PlayClickSound();
+            GameDataManager.Instance.ClearDatabase();
+            // GameSceneManager.Instance.LoadCurrentScene();
+            Hide();
+            onEnd?.Invoke();
         });
 
-        if (currencyType == CurrencyType.GoldCoin)
+        quitGameButton.onClick.RemoveAllListeners();
+        quitGameButton.onClick.AddListener(() =>
         {
-            coinImage.sprite = gameAssetSO.GoldCoinSprite;
-            coinOutline.color = goldCoinOutlineColor;
-
-            collectDoubleButton.GetComponent<Image>().color = azureCoinButtonColor;
-        }
-        else
-        {
-            coinImage.sprite = gameAssetSO.AzureCoinSprite;
-            coinOutline.color = azureCoinOutlineColor;
-
-            collectDoubleButton.GetComponent<Image>().color = goldCoinButtonColor;
-        }
-
-        coinCollectedText.text = "+" + coinCollectedAmount;
-        continueButton.onClick.RemoveAllListeners();
-        continueButton.onClick.AddListener(() =>
-        {
-            AudioManager.Instance.PlayClickFeedbacks();
-            onContinueButtonClicked?.Invoke();
+            AudioManager.Instance.PlayClickSound();
+            GameSceneManager.Instance.QuitGame();
         });
     }
 

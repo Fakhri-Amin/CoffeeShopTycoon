@@ -58,10 +58,9 @@ public class Unit : MonoBehaviour, IAttackable
     public virtual void HandleOnDead()
     {
         unitParticle.PlayDeadParticle();
-        // unitAudio.PlayDeadSound();
+        unitAudio.PlayDeadSound();
 
         OnDead?.Invoke();
-        // OnAnyUnitDead?.Invoke(this);
     }
 
     protected void Update()
@@ -86,7 +85,7 @@ public class Unit : MonoBehaviour, IAttackable
     public void Damage(float damageAmount)
     {
         unitParticle.PlayHitParticle();
-        // unitAudio.PlayHitSound();
+        unitAudio.PlayHitSound();
 
         healthSystem.Damage(damageAmount);
     }
