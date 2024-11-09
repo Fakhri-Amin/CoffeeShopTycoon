@@ -19,6 +19,7 @@ public class GameLevelManager : MonoBehaviour
     private CoinManager coinManager;
     private LevelManager levelManager;
     private PauseManager pauseManager;
+    private UpgradeManager upgradeManager;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class GameLevelManager : MonoBehaviour
         coinManager = GetComponent<CoinManager>();
         levelManager = GetComponent<LevelManager>();
         pauseManager = GetComponent<PauseManager>();
+        upgradeManager = GetComponent<UpgradeManager>();
     }
 
     private void Start()
@@ -36,9 +38,9 @@ public class GameLevelManager : MonoBehaviour
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.Subscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
         EventManager<float>.Subscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
-        EventManager.Subscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
         GameDataManager.Instance.OnGoldCoinUpdated += HandleCoinUpdate;
+        GameDataManager.Instance.OnDayChanged += HandleDayChanged;
     }
 
     private void OnDisable()
@@ -46,9 +48,9 @@ public class GameLevelManager : MonoBehaviour
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelWin, OnLevelWin);
         EventManager.UnSubscribe(Farou.Utility.EventType.OnLevelLose, OnLevelLose);
         EventManager<float>.UnSubscribe(Farou.Utility.EventType.OnEnemyCoinDropped, HandleEnemyCoinDropped);
-        EventManager.UnSubscribe(Farou.Utility.EventType.OnEnemyBaseDestroyed, HandleEnemyBaseDestroyed);
 
         GameDataManager.Instance.OnGoldCoinUpdated -= HandleCoinUpdate;
+        GameDataManager.Instance.OnDayChanged -= HandleDayChanged;
     }
 
     public void SetDay()
@@ -93,6 +95,11 @@ public class GameLevelManager : MonoBehaviour
         }
     }
 
+    private void HandleDayChanged(int currentDay)
+    {
+        upgradeManager.HandleUpgradeDayChecking(currentDay);
+    }
+
     private void HandleCoinUpdate(float amount)
     {
         coinManager.UpdateCoinUI(amount);
@@ -101,11 +108,6 @@ public class GameLevelManager : MonoBehaviour
     private void HandleEnemyCoinDropped(float amount)
     {
         coinManager.AddCoins(amount);
-    }
-
-    private void HandleEnemyBaseDestroyed()
-    {
-
     }
 }
 

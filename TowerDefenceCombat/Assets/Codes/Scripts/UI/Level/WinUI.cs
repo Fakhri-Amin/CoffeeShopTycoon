@@ -26,7 +26,6 @@ public class WinUI : MonoBehaviour
     {
         AudioManager.Instance.PlayCoinFeedbacks();
 
-        // popup.alpha = 0;
         popup.gameObject.SetActive(true);
         popup.DOFade(1, 0.1f);
 
@@ -47,7 +46,6 @@ public class WinUI : MonoBehaviour
 
     public void Hide()
     {
-        // popup.alpha = 1;
         popup.DOFade(0, 0.1f).OnComplete(() =>
         {
             popup.gameObject.SetActive(false);

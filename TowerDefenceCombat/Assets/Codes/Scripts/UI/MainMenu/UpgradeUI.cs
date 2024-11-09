@@ -16,6 +16,7 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] private TMP_Text upgradeBonusCoinRewardPriceText;
 
     private GameDataManager gameDataManager;
+    private UpgradeManager upgradeManager;
 
     private void Awake()
     {
@@ -39,6 +40,11 @@ public class UpgradeUI : MonoBehaviour
     private void OnDisable()
     {
         GameDataManager.Instance.OnBonusCoinRewardPercentageChanged -= HandleUpdateUI;
+    }
+
+    public void Initialize(UpgradeManager upgradeManager)
+    {
+        this.upgradeManager = upgradeManager;
     }
 
     public void HandleUpdateUI(float percentage, float price)
@@ -74,7 +80,7 @@ public class UpgradeUI : MonoBehaviour
         if (gameDataManager.GoldCoin >= gameDataManager.UpgradeBonusCoinRewardPrice)
         {
             gameDataManager.ModifyCoin(CurrencyType.GoldCoin, -gameDataManager.UpgradeBonusCoinRewardPrice);
-            gameDataManager.UpgradeBonusCoinRewardPercentage();
+            upgradeManager.SetUpgradeDay(GameDataManager.Instance.CurrentDay); // It takes one day to upgrade
         }
         else
         {
