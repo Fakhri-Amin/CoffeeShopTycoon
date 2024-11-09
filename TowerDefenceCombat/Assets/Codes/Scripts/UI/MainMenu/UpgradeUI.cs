@@ -8,12 +8,20 @@ using DG.Tweening;
 
 public class UpgradeUI : MonoBehaviour
 {
+    [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CanvasGroup panel;
 
     [Header("Bonus Coin Reward Percentage")]
     [SerializeField] private TMP_Text currentBonusCoinRewardText;
     [SerializeField] private Button upgradeBonusCoinRewardButton;
     [SerializeField] private TMP_Text upgradeBonusCoinRewardPriceText;
+    [SerializeField] private Image coinIcon;
+
+    [Header("Warning Label")]
+    [SerializeField] private Image timerIcon;
+    [SerializeField] private Transform remainingDayTransform;
+    [SerializeField] private Color unlockedColor;
+    [SerializeField] private Color lockedColor;
 
     private GameDataManager gameDataManager;
     private UpgradeManager upgradeManager;
@@ -30,6 +38,7 @@ public class UpgradeUI : MonoBehaviour
 
         // Hide();
         panel.gameObject.SetActive(false);
+        UnlockButton();
     }
 
     private void OnEnable()
@@ -86,6 +95,42 @@ public class UpgradeUI : MonoBehaviour
         {
 
             FloatingTextObjectPool.Instance.DisplayInsufficientGoldCoin();
+        }
+    }
+
+    public void UnlockButton()
+    {
+        remainingDayTransform.gameObject.SetActive(false);
+        coinIcon.sprite = gameAssetSO.GoldCoinSprite;
+        upgradeBonusCoinRewardButton.interactable = true;
+        upgradeBonusCoinRewardButton.GetComponent<Image>().color = unlockedColor;
+        upgradeBonusCoinRewardPriceText.gameObject.SetActive(true);
+        StopAllCoroutines();
+    }
+
+    public void LockButton()
+    {
+        remainingDayTransform.gameObject.SetActive(true);
+        coinIcon.sprite = gameAssetSO.LockedSprite;
+        upgradeBonusCoinRewardButton.interactable = false;
+        upgradeBonusCoinRewardButton.GetComponent<Image>().color = lockedColor;
+        upgradeBonusCoinRewardPriceText.gameObject.SetActive(false);
+        StartCoroutine(RotateLockSprite());
+    }
+
+    private IEnumerator RotateLockSprite()
+    {
+        while (true)
+        {
+            if (timerIcon.transform.rotation.z == 0)
+            {
+                timerIcon.transform.DORotate(new Vector3(0, 0, -180.01f), 1f, RotateMode.FastBeyond360);
+            }
+            else
+            {
+                timerIcon.transform.DORotate(new Vector3(0, 0, 0), 1f, RotateMode.FastBeyond360);
+            }
+            yield return new WaitForSeconds(2);
         }
     }
 

@@ -7,4 +7,5 @@ public class GameAssetSO : ScriptableObject
 {
     public Sprite GoldCoinSprite;
     public Sprite AzureCoinSprite;
+    public Sprite LockedSprite;
 }

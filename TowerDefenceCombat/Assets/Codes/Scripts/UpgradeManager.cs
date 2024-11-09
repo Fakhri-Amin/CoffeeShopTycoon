@@ -22,6 +22,7 @@ public class UpgradeManager : MonoBehaviour
         if (dayWhenIsPaidToUpgrade < currentDay)
         {
             gameDataManager.UpgradeBonusCoinRewardPercentage();
+            upgradeUI.UnlockButton();
             isAnyBeingUpgraded = false;
         }
     }
@@ -29,6 +30,7 @@ public class UpgradeManager : MonoBehaviour
     public void SetUpgradeDay(float dayWhenIsPaidToUpgrade)
     {
         this.dayWhenIsPaidToUpgrade = dayWhenIsPaidToUpgrade;
+        upgradeUI.LockButton();
         isAnyBeingUpgraded = true;
     }
 
