@@ -5018,7 +5018,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481438931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -8936,7 +8936,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 180, y: 220}
+  m_SizeDelta: {x: 200, y: 220}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &814852545
 MonoBehaviour:
@@ -9580,7 +9580,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 444.0695, y: -125}
-  m_SizeDelta: {x: 180, y: 305}
+  m_SizeDelta: {x: 200, y: 305}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &891743695
 MonoBehaviour:
@@ -10645,11 +10645,11 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97a96b5f021b97744a11351d9e72261a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

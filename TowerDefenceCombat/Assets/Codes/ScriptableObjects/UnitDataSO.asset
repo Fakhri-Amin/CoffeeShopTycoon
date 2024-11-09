@@ -38,7 +38,7 @@ MonoBehaviour:
   - UnitRangeType: 1
     UnitAttackType: 0
     Prefab: {fileID: 8386274159714352262, guid: 7c27b2b8a4426134f958ecd8b384aeb3, type: 3}
-    Sprite: {fileID: 21300000, guid: 103936f0492fb2e4a8c0723e7c031f84, type: 3}
+    Sprite: {fileID: 21300000, guid: e57a8fd6f51d9ed4c9f00c8536479708, type: 3}
     Name: Bow
     Health: 100
     DamageAmount: 25
@@ -51,7 +51,7 @@ MonoBehaviour:
   - UnitRangeType: 1
     UnitAttackType: 0
     Prefab: {fileID: 8386274159714352262, guid: 49ca4137e7447a548991be9981774818, type: 3}
-    Sprite: {fileID: 21300000, guid: 93ad7e9051eaa8646809e6177a29adf5, type: 3}
+    Sprite: {fileID: 21300000, guid: 9d11dfbde20e5274bbfe24479a29db5e, type: 3}
     Name: Sniper
     Health: 50
     DamageAmount: 70
@@ -64,7 +64,7 @@ MonoBehaviour:
   - UnitRangeType: 1
     UnitAttackType: 0
     Prefab: {fileID: 8386274159714352262, guid: df6dbfd4016df8748aba76d923afcec2, type: 3}
-    Sprite: {fileID: 21300000, guid: df950dd5f21111d4f8418d9d12f09cc8, type: 3}
+    Sprite: {fileID: 21300000, guid: 97a96b5f021b97744a11351d9e72261a, type: 3}
     Name: Blowgun
     Health: 30
     DamageAmount: 30

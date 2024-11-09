@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 787907282948883670, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1690413048071154846, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: unitRangeType
       value: 1
@@ -115,6 +119,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4745636846508086166, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 5421001778425971176, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Name
       value: Player_Unit_Bow
@@ -122,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 6733553593330142665, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8663bcbc0107a9441a9ae5457a3ecf8a, type: 3}
+      objectReference: {fileID: 21300000, guid: 71905435a9ea6bf49b73634807f08061, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ffe94c78db3583418b98185eea64ef1, type: 3}
 --- !u!4 &6559577095128003106 stripped
