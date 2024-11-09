@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
     [SerializeField] private float waitTimeBeforeShowingUI = 3f;
+    [SerializeField] private SpriteRenderer nightLayer;
 
     [Header("Grid Settings")]
     [SerializeField] private GameObject gridPrefab;
@@ -49,6 +50,8 @@ public class LevelManager : MonoBehaviour
 
         gameplayUI.UpdateWaveProgressionUI(0);
 
+        nightLayer.DOFade(0, 0);
+
         SpawnGrids();
     }
 
@@ -75,6 +78,8 @@ public class LevelManager : MonoBehaviour
 
         EnemyUnitSpawner.Instance.Initialize(CurrentLevelWave, enemySpawnPoints);
 
+        nightLayer.DOFade(0.3f, 1f);
+
         HideInGameHUD();
     }
 
@@ -83,6 +88,8 @@ public class LevelManager : MonoBehaviour
         isGameStart = false;
         timePassed = 0;
         gameplayUI.UpdateWaveProgressionUI(0);
+        nightLayer.gameObject.SetActive(true);
+        nightLayer.DOFade(0f, 1f);
         ShowInGameHUD();
     }
 
