@@ -14,6 +14,7 @@ public class EnemyUnitSpawner : MonoBehaviour
 
     private List<Transform> spawnPoints;
     private LevelWaveSO levelWaveSO;
+    private bool hasSpawnAllUnitInWave;
 
     private void Awake()
     {
@@ -73,6 +74,7 @@ public class EnemyUnitSpawner : MonoBehaviour
             UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
         }
         spawnedUnits.Clear();
+        hasSpawnAllUnitInWave = false;
         StopAllCoroutines();
     }
 
@@ -116,6 +118,8 @@ public class EnemyUnitSpawner : MonoBehaviour
                 yield return new WaitForSeconds(delayBetweenUnitSpawn);
             }
         }
+
+        hasSpawnAllUnitInWave = true;
     }
 
     private void EnemyUnit_OnAnyEnemyUnitDead(EnemyUnit unit)
@@ -125,7 +129,7 @@ public class EnemyUnitSpawner : MonoBehaviour
             EventManager<float>.Publish(Farou.Utility.EventType.OnEnemyCoinDropped, unit.UnitData.CoinReward);
             spawnedUnits.Remove(unit);
             UnitObjectPool.Instance.ReturnToPool(unit.UnitData.UnitHero, unit);
-            if (spawnedUnits.Count <= 0)
+            if (spawnedUnits.Count <= 0 && hasSpawnAllUnitInWave)
             {
                 EventManager.Publish(Farou.Utility.EventType.OnLevelWin);
             }

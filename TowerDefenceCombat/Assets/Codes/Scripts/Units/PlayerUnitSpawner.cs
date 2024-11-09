@@ -86,6 +86,7 @@ public class PlayerUnitSpawner : MonoBehaviour
         PlayerUnitData unitData = unitDataSO?.PlayerUnitStatDataList.Find(i => i.UnitHero == selectedUnit);
         if (unitData == null)
         {
+            FloatingTextObjectPool.Instance.DisplayNoUnitSelected();
             Debug.LogWarning("Unit data not found for unitHero: " + selectedUnit);
             return;
         }
@@ -161,7 +162,6 @@ public class PlayerUnitSpawner : MonoBehaviour
             OnUnitSpawn(singleGrid, singleGrid.transform.position);
             return true;
         }
-        FloatingTextObjectPool.Instance.DisplayInsufficientGoldCoin();
         return false;
     }
 }
