@@ -5654,6 +5654,7 @@ MonoBehaviour:
   gameplayUI: {fileID: 14721587}
   winUI: {fileID: 199873501}
   loseUI: {fileID: 1297302555}
+  unitLevelRewardUI: {fileID: 0}
   waitTimeBeforeShowingUI: 2.5
   nightLayer: {fileID: 617487718}
   gridPrefab: {fileID: 1499349115520151881, guid: 7cf35dc79d500b341abe20fd45f45733, type: 3}
@@ -7439,6 +7440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}
   unitGrids: []
+  scaleEase: 16
 --- !u!1001 &697766329
 PrefabInstance:
   m_ObjectHideFlags: 0

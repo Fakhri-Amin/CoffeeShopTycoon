@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameplayUI gameplayUI;
     [SerializeField] private WinUI winUI;
     [SerializeField] private LoseUI loseUI;
+    [SerializeField] private UnitLevelRewardUI unitLevelRewardUI;
     [SerializeField] private float waitTimeBeforeShowingUI = 3f;
     [SerializeField] private SpriteRenderer nightLayer;
 
@@ -75,14 +76,10 @@ public class LevelManager : MonoBehaviour
 
         // Set the max value of the wave progress bar based on wave data
         gameplayUI.SetWaveProgressionMaxValue(currentLevelWave.DelayBetweenWaves * currentLevelWave.WaveDatas.Count);
-
         EnemyUnitSpawner.Instance.Initialize(CurrentLevelWave, enemySpawnPoints);
-
         nightLayer.DOFade(0.3f, 1f);
-
         Camera.main.transform.DOMoveY(0.5f, 0.5f);
         Camera.main.DOOrthoSize(5.7f, 0.5f);
-
         HideInGameHUD();
     }
 

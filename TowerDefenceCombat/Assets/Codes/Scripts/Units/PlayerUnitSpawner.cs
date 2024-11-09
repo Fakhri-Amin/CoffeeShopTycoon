@@ -5,6 +5,7 @@ using System.Linq;
 using Farou.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class PlayerUnitSpawner : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     [SerializeField] private UnitDataSO unitDataSO;
     [SerializeField] private List<UnitGrid> unitGrids = new List<UnitGrid>();
+
+    [Header("Ease and Animation Settings")]
+    [SerializeField] private Ease scaleEase;
 
     private PlayerUnitHero selectedUnit;
     private List<PlayerUnitHero> unlockedUnitHeroList = new List<PlayerUnitHero>();
@@ -98,6 +102,10 @@ public class PlayerUnitSpawner : MonoBehaviour
             Debug.LogWarning((object)("No available pooled object for unit: " + unitData.UnitHero));
             return;
         }
+
+        Vector3 defaultScale = spawnedUnit.transform.localScale;
+        spawnedUnit.transform.localScale = Vector3.zero;
+        spawnedUnit.transform.DOScale(defaultScale, 0.3f).SetEase(scaleEase);
 
         ModifyCoin(-unitData.CoinCost);
         spawnedUnit.transform.position = position;
