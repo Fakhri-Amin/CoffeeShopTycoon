@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Day 03
   m_EditorClassIdentifier: 
   DelayAtStart: 1
-  DelayBetweenWaves: 8
+  DelayBetweenWaves: 10
   WaveDatas:
   - WaveHeroDatas:
     - UnitType: 3
-      Count: 5
+      Count: 3
   - WaveHeroDatas:
     - UnitType: 1
       Count: 5
@@ -26,5 +26,5 @@ MonoBehaviour:
       Count: 6
     - UnitType: 2
       Count: 4
-  TotalCoinReward: 2300
+  TotalCoinReward: 2000
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

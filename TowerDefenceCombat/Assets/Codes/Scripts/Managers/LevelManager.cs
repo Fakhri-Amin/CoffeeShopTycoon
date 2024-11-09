@@ -135,6 +135,7 @@ public class LevelManager : MonoBehaviour
     public IEnumerator HandleLevelLose()
     {
         yield return DelayTime(0);
+        coinManager.Reset();
         loseUI.Show(OnDayEnds);
     }
 
