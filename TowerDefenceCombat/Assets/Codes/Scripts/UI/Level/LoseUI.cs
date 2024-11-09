@@ -30,6 +30,7 @@ public class LoseUI : MonoBehaviour
         {
             AudioManager.Instance.PlayClickSound();
             GameDataManager.Instance.ClearDatabase();
+            PlayerUnitSpawner.Instance.ClearAllUnits();
             // GameSceneManager.Instance.LoadCurrentScene();
             Hide();
             onEnd?.Invoke();

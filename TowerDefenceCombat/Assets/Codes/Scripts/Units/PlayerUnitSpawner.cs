@@ -148,6 +148,15 @@ public class PlayerUnitSpawner : MonoBehaviour
         this.selectedUnit = selectedUnit;
     }
 
+    public void ClearAllUnits()
+    {
+        foreach (var item in unitGrids)
+        {
+            Destroy(item.Unit.gameObject);
+        }
+        unitGrids.Clear();
+    }
+
     public void ClearSelectedUnit(int currentDay)
     {
         selectedUnit = PlayerUnitHero.None;

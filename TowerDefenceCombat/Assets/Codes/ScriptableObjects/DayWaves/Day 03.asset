@@ -23,8 +23,8 @@ MonoBehaviour:
       Count: 5
   - WaveHeroDatas:
     - UnitType: 3
-      Count: 6
+      Count: 3
     - UnitType: 2
       Count: 4
-  TotalCoinReward: 2000
+  TotalCoinReward: 1550
   UnitDataSO: {fileID: 11400000, guid: 2b7253e49d1220f469c62f8fe9eba376, type: 2}

@@ -54,7 +54,7 @@ public class UnitCardUI : MonoBehaviour
     public void Disable()
     {
         button.interactable = false;
-        UpdateUI(opaque: false, frameColor: inActiveColor, outlineColor: activeColor);
+        Deselect();
     }
 
     private void UpdateUI(bool opaque, Color frameColor, Color outlineColor)

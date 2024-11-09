@@ -222,6 +222,11 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         gameData.UnlockedUnitList = new List<PlayerUnitHero>() { PlayerUnitHero.Bow };
         UnlockedUnitList = gameData.UnlockedUnitList;
 
+        OnGoldCoinUpdated?.Invoke(GoldCoin);
+        OnDayChanged?.Invoke(CurrentDay);
+        UpdateBonusCoinRewardPercentage();
+        UpdateResearchLevel();
+
         Save();
     }
 }
