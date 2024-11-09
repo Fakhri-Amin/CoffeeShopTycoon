@@ -80,6 +80,9 @@ public class LevelManager : MonoBehaviour
 
         nightLayer.DOFade(0.3f, 1f);
 
+        Camera.main.transform.DOMoveY(0.5f, 0.5f);
+        Camera.main.DOOrthoSize(5.7f, 0.5f);
+
         HideInGameHUD();
     }
 
@@ -90,6 +93,8 @@ public class LevelManager : MonoBehaviour
         gameplayUI.UpdateWaveProgressionUI(0);
         nightLayer.gameObject.SetActive(true);
         nightLayer.DOFade(0f, 1f);
+        Camera.main.transform.DOMoveY(-0.7f, 0.5f);
+        Camera.main.DOOrthoSize(6.5f, 0.5f);
         ShowInGameHUD();
     }
 

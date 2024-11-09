@@ -5656,7 +5656,6 @@ MonoBehaviour:
   loseUI: {fileID: 1297302555}
   waitTimeBeforeShowingUI: 2.5
   nightLayer: {fileID: 617487718}
-  nightColor: {r: 0.039215688, g: 0, b: 0.4627451, a: 0.23529412}
   gridPrefab: {fileID: 1499349115520151881, guid: 7cf35dc79d500b341abe20fd45f45733, type: 3}
   gridLayout: {fileID: 899857458}
   gridColor1: {r: 0.5568628, g: 0.75686276, b: 0.23921569, a: 1}
