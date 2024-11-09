@@ -117,6 +117,7 @@ public class LevelManager : MonoBehaviour
     public IEnumerator HandleLevelWin()
     {
         yield return HideInGameHUDAndWait();
+        coinManager.SetFinalCoinCollected(coinManager.CoinCollected + (coinManager.CoinCollected * GameDataManager.Instance.BonusCoinRewardPercentage / 100));
         ShowWinUI();
         CollectCurrencyRewards();
     }
@@ -124,6 +125,7 @@ public class LevelManager : MonoBehaviour
     public IEnumerator HandleLevelLose()
     {
         yield return HideInGameHUDAndWait();
+        coinManager.SetFinalCoinCollected(coinManager.CoinCollected + (coinManager.CoinCollected * GameDataManager.Instance.BonusCoinRewardPercentage / 100));
         loseUI.Show(CurrencyType.GoldCoin, coinManager.CoinCollected, LoadMainMenu);
         CollectCurrencyRewards();
     }

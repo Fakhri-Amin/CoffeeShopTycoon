@@ -74,6 +74,9 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     public void OnUnitSpawn(SingleGrid singleGrid, Vector2 position)
     {
+        bool isOverUI = EventSystem.current.IsPointerOverGameObject();
+        if (isOverUI) return;
+
         PlayerUnitData unitData = unitDataSO?.PlayerUnitStatDataList.Find(i => i.UnitHero == selectedUnit);
         if (unitData == null)
         {

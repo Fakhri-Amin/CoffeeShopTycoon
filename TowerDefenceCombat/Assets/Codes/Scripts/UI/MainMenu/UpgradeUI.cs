@@ -10,29 +10,22 @@ public class UpgradeUI : MonoBehaviour
 {
     [SerializeField] private CanvasGroup panel;
 
-    [Header("Seed Production Rate")]
-    [SerializeField] private TMP_Text currentSeedRateText;
-    [SerializeField] private Button upgradeSeedRateButton;
-    [SerializeField] private TMP_Text upgradeSeedRatePriceText;
-
-    [Header("Base Health")]
-    [SerializeField] private TMP_Text currentBaseHealthText;
-    [SerializeField] private Button upgradeBaseHealthButton;
-    [SerializeField] private TMP_Text upgradeBaseHealthPriceText;
+    [Header("Bonus Coin Reward Percentage")]
+    [SerializeField] private TMP_Text currentBonusCoinRewardText;
+    [SerializeField] private Button upgradeBonusCoinRewardButton;
+    [SerializeField] private TMP_Text upgradeBonusCoinRewardPriceText;
 
     private GameDataManager gameDataManager;
 
     private void Awake()
     {
-        upgradeSeedRateButton.onClick.AddListener(UpgradeSeedProductionRate);
-        upgradeBaseHealthButton.onClick.AddListener(UpgradeBaseHealth);
+        upgradeBonusCoinRewardButton.onClick.AddListener(UpgradeBonusCoinRewardPercentage);
     }
 
     private void Start()
     {
         gameDataManager = GameDataManager.Instance;
-        HandleUpdateSeedUI(gameDataManager.SeedProductionRate, gameDataManager.UpgradeSeedProductionRatePrice);
-        HandleUpdateBaseHealth(gameDataManager.BaseHealth, gameDataManager.UpgradeBaseHealthPrice);
+        HandleUpdateUI(gameDataManager.BonusCoinRewardPercentage, gameDataManager.UpgradeBonusCoinRewardPrice);
 
         // Hide();
         panel.gameObject.SetActive(false);
@@ -40,91 +33,48 @@ public class UpgradeUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameDataManager.Instance.OnSeedProductionRateChanged += HandleUpdateSeedUI;
-        GameDataManager.Instance.OnBaseHealthChanged += HandleUpdateBaseHealth;
+        GameDataManager.Instance.OnBonusCoinRewardPercentageChanged += HandleUpdateUI;
     }
 
     private void OnDisable()
     {
-        GameDataManager.Instance.OnSeedProductionRateChanged -= HandleUpdateSeedUI;
-        GameDataManager.Instance.OnBaseHealthChanged -= HandleUpdateBaseHealth;
+        GameDataManager.Instance.OnBonusCoinRewardPercentageChanged -= HandleUpdateUI;
     }
 
-    public void HandleUpdateSeedUI(float rate, float price)
+    public void HandleUpdateUI(float percentage, float price)
     {
-        currentSeedRateText.text = rate + "/s";
+        currentBonusCoinRewardText.text = percentage + "%";
 
         if (price >= 1000000)
         {
             // Format for values over a million (e.g., 1.2M for 1,200,000)
-            upgradeSeedRatePriceText.text = (price / 1000000f).ToString("0.#") + "M";
+            upgradeBonusCoinRewardPriceText.text = (price / 1000000f).ToString("0.#") + "M";
         }
         else if (price >= 100000)
         {
             // Format for values over 100,000 without decimals (e.g., 123K for 123,456)
-            upgradeSeedRatePriceText.text = (price / 1000f).ToString("0") + "K";
+            upgradeBonusCoinRewardPriceText.text = (price / 1000f).ToString("0") + "K";
         }
         else if (price >= 1000)
         {
             // Format for values below 100,000 with one decimal (e.g., 1.23K for 1,230)
-            upgradeSeedRatePriceText.text = (price / 1000f).ToString("0.##") + "K";
+            upgradeBonusCoinRewardPriceText.text = (price / 1000f).ToString("0.##") + "K";
         }
         else
         {
             // Display the value normally if below 1000
-            upgradeSeedRatePriceText.text = price.ToString();
+            upgradeBonusCoinRewardPriceText.text = price.ToString();
         }
     }
 
-    public void HandleUpdateBaseHealth(float health, float price)
-    {
-        currentBaseHealthText.text = health.ToString();
-
-        if (price >= 1000000)
-        {
-            // Format for values over a million (e.g., 1.2M for 1,200,000)
-            upgradeBaseHealthPriceText.text = (price / 1000000f).ToString("0.#") + "M";
-        }
-        else if (price >= 100000)
-        {
-            // Format for values over 100,000 without decimals (e.g., 123K for 123,456)
-            upgradeBaseHealthPriceText.text = (price / 1000f).ToString("0") + "K";
-        }
-        else if (price >= 1000)
-        {
-            // Format for values below 100,000 with one decimal (e.g., 1.23K for 1,230)
-            upgradeBaseHealthPriceText.text = (price / 1000f).ToString("0.##") + "K";
-        }
-        else
-        {
-            // Display the value normally if below 1000
-            upgradeBaseHealthPriceText.text = price.ToString();
-        }
-    }
-
-    private void UpgradeSeedProductionRate()
+    private void UpgradeBonusCoinRewardPercentage()
     {
         AudioManager.Instance.PlayCoinFeedbacks();
         var gameDataManager = GameDataManager.Instance;
-        if (gameDataManager.GoldCoin >= gameDataManager.UpgradeSeedProductionRatePrice)
+        if (gameDataManager.GoldCoin >= gameDataManager.UpgradeBonusCoinRewardPrice)
         {
-            gameDataManager.ModifyCoin(CurrencyType.GoldCoin, -gameDataManager.UpgradeSeedProductionRatePrice);
-        }
-        else
-        {
-
-            FloatingTextObjectPool.Instance.DisplayInsufficientGoldCoin();
-        }
-    }
-
-    private void UpgradeBaseHealth()
-    {
-        AudioManager.Instance.PlayCoinFeedbacks();
-        var gameDataManager = GameDataManager.Instance;
-        if (gameDataManager.GoldCoin >= gameDataManager.UpgradeBaseHealthPrice)
-        {
-            gameDataManager.ModifyCoin(CurrencyType.GoldCoin, -gameDataManager.UpgradeBaseHealthPrice);
-            gameDataManager.UpgradeBaseHealth();
+            gameDataManager.ModifyCoin(CurrencyType.GoldCoin, -gameDataManager.UpgradeBonusCoinRewardPrice);
+            gameDataManager.UpgradeBonusCoinRewardPercentage();
         }
         else
         {
@@ -135,6 +85,8 @@ public class UpgradeUI : MonoBehaviour
 
     public void Show()
     {
+        AudioManager.Instance.PlayClickFeedbacks();
+
         panel.gameObject.SetActive(true);
         panel.alpha = 0;
         panel.DOFade(1, 0.1f);
@@ -142,6 +94,8 @@ public class UpgradeUI : MonoBehaviour
 
     public void Hide()
     {
+        AudioManager.Instance.PlayClickFeedbacks();
+
         panel.alpha = 1;
         panel.DOFade(0, 0.1f).OnComplete(() =>
         {

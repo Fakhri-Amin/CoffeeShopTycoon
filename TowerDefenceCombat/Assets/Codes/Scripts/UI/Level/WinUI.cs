@@ -12,6 +12,7 @@ public class WinUI : MonoBehaviour
     [SerializeField] private GameAssetSO gameAssetSO;
     [SerializeField] private CanvasGroup popup;
     [SerializeField] private TMP_Text coinCollectedText;
+    [SerializeField] private TMP_Text bonusCoinRewardText;
     [SerializeField] private Image coinImage;
     [SerializeField] private Image coinOutline;
     [SerializeField] private Button continueButton;
@@ -19,10 +20,6 @@ public class WinUI : MonoBehaviour
     [Header("Gold Coin")]
     [SerializeField] private Color goldCoinOutlineColor;
     [SerializeField] private Color goldCoinButtonColor;
-
-    [Header("Azure Coin")]
-    [SerializeField] private Color azureCoinOutlineColor;
-    [SerializeField] private Color azureCoinButtonColor;
 
 
     public void Show(float coinCollectedAmount, Action onContinueButtonClicked)
@@ -34,6 +31,7 @@ public class WinUI : MonoBehaviour
         popup.DOFade(1, 0.1f);
 
         coinCollectedText.text = "+" + coinCollectedAmount;
+        bonusCoinRewardText.text = $"+{GameDataManager.Instance.BonusCoinRewardPercentage}% Bonus Coin Reward";
 
         coinImage.sprite = gameAssetSO.GoldCoinSprite;
         coinOutline.color = goldCoinOutlineColor;

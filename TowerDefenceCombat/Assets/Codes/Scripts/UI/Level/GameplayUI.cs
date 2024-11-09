@@ -16,14 +16,24 @@ public class GameplayUI : MonoBehaviour
     [SerializeField] private TMP_Text dayText;
     [SerializeField] private Slider waveProgressionBar;
 
-    [Header("UI : Card")]
+    [Header("UI : Unit Card")]
     [SerializeField] private Transform buttonParent;
     [SerializeField] private UnitCardUI normalUnitCardTemplate;
 
-    [Header("UI : Button")]
-    [SerializeField] private Button battleButton;
-    [SerializeField] private Button upgradeButton;
+    [Header("UI : Research")]
     [SerializeField] private Button researchButton;
+
+    [Header("UI : Upgrade")]
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private UpgradeUI upgradeUI;
+    [SerializeField] private Image upgradeIcon;
+    [SerializeField] private TMP_Text upgradeText;
+    [SerializeField] private Image upgradeCloseIcon;
+    [SerializeField] private TMP_Text upgradeCloseText;
+    public bool isUpgradeMenuOpen;
+
+    [Header("UI : Battle")]
+    [SerializeField] private Button battleButton;
 
     private List<UnitCardUI> unitCardUIList = new List<UnitCardUI>();
 
@@ -32,6 +42,10 @@ public class GameplayUI : MonoBehaviour
         battleButton.onClick.AddListener(() =>
         {
             GameLevelManager.Instance.SetNight();
+        });
+        upgradeButton.onClick.AddListener(() =>
+        {
+            ToggleUpgradeMenu();
         });
     }
 
@@ -71,6 +85,36 @@ public class GameplayUI : MonoBehaviour
     {
         GameDataManager.Instance.OnGoldCoinUpdated -= CheckForCardClickable;
         GameDataManager.Instance.OnDayChanged -= UpdateDayUI;
+    }
+
+    private void ToggleUpgradeMenu()
+    {
+        isUpgradeMenuOpen = !isUpgradeMenuOpen;
+
+        if (isUpgradeMenuOpen)
+            OpenUpgradeMenu();
+        else
+            CloseUpgradeMenu();
+    }
+
+    private void OpenUpgradeMenu()
+    {
+        upgradeUI.Show();
+        SetUpgradeUIState(false);
+    }
+
+    private void CloseUpgradeMenu()
+    {
+        upgradeUI.Hide();
+        SetUpgradeUIState(true);
+    }
+
+    private void SetUpgradeUIState(bool isSelectionClosed)
+    {
+        upgradeIcon.gameObject.SetActive(isSelectionClosed);
+        upgradeText.gameObject.SetActive(isSelectionClosed);
+        upgradeCloseIcon.gameObject.SetActive(!isSelectionClosed);
+        upgradeCloseText.gameObject.SetActive(!isSelectionClosed);
     }
 
     private void UpdateDayUI(int currentDay)

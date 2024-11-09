@@ -12,21 +12,18 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 {
     public event Action<int> OnDayChanged;
     public event Action<float> OnGoldCoinUpdated;
-    public event Action<float, float> OnSeedProductionRateChanged;
-    public event Action<float, float> OnBaseHealthChanged;
+    public event Action<float, float> OnBonusCoinRewardPercentageChanged;
 
     public UnitDataSO UnitDataSO;
     public LevelWaveDatabaseSO LevelWaveDatabaseSO;
+    public UpgradeDatabaseSO UpgradeDatabaseSO;
     public List<PlayerUnitHero> SelectedUnitList = new List<PlayerUnitHero>(3);
     public List<PlayerUnitHero> UnlockedUnitList = new List<PlayerUnitHero>();
     public int CurrentDay;
     public float GoldCoinCollected;
     public float GoldCoin;
-    public float SeedProductionRate;
-    public float BaseHealth;
-    public float UpgradeSeedProductionRatePrice;
-    public float UpgradeBaseHealthPrice;
-    public bool IsThereNewPotato;
+    public float BonusCoinRewardPercentage;
+    public float UpgradeBonusCoinRewardPrice;
 
     public new void Awake()
     {
@@ -43,8 +40,7 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
 
         SetInitialDefaultData();
 
-        UpdateSeedProductionRate();
-        UpdateBaseHealth();
+        UpdateBonusCoinRewardPercentage();
     }
 
     private void SetInitialDefaultData()
@@ -53,13 +49,6 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         {
             // Set default data
             AddDefaultUnlockedUnit(PlayerUnitHero.Bow);
-
-            List<PlayerUnitHero> unitHeroes = new List<PlayerUnitHero>
-            {
-                PlayerUnitHero.Bow,
-                PlayerUnitHero.None,
-                PlayerUnitHero.None
-            };
         }
     }
 
@@ -121,26 +110,21 @@ public class GameDataManager : PersistentSingleton<GameDataManager>
         return false;
     }
 
-    public void UpdateSeedProductionRate()
+    public void UpgradeBonusCoinRewardPercentage()
     {
         var gameData = Data.Get<GameData>();
-        OnSeedProductionRateChanged?.Invoke(SeedProductionRate, UpgradeSeedProductionRatePrice);
+        gameData.BonusCoinRewardLevel++;
+        OnBonusCoinRewardPercentageChanged?.Invoke(BonusCoinRewardPercentage, UpgradeBonusCoinRewardPrice);
 
-        Save();
+        UpdateBonusCoinRewardPercentage();
     }
 
-    public void UpgradeBaseHealth()
+    public void UpdateBonusCoinRewardPercentage()
     {
         var gameData = Data.Get<GameData>();
-        gameData.BaseHealthLevel++;
-
-        UpdateBaseHealth();
-    }
-
-    public void UpdateBaseHealth()
-    {
-        var gameData = Data.Get<GameData>();
-        OnBaseHealthChanged?.Invoke(BaseHealth, UpgradeBaseHealthPrice);
+        BonusCoinRewardPercentage = UpgradeDatabaseSO.BonusCoinRewardPercentage + (gameData.BonusCoinRewardLevel - 1) * UpgradeDatabaseSO.BonusCoinRewardUpgradeAmount;
+        UpgradeBonusCoinRewardPrice = UpgradeDatabaseSO.UpgradeBonusCoinRewardPriceList[(int)(gameData.BonusCoinRewardLevel - 1)];
+        OnBonusCoinRewardPercentageChanged?.Invoke(BonusCoinRewardPercentage, UpgradeBonusCoinRewardPrice);
 
         Save();
     }

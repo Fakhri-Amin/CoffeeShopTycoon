@@ -54,12 +54,14 @@ public class GameLevelManager : MonoBehaviour
     public void SetDay()
     {
         gameState = GameState.Day;
-        GameDataManager.Instance.IncrementCurrentDay();
         levelManager.StopGame();
         HandleCoinUpdate(GameDataManager.Instance.GoldCoin);
 
-        if (coinManager.CoinCollected > 0)
+        if (coinManager.CoinCollected > 0) // Meaning if the first time open the game, this condition is not met
+        {
+            GameDataManager.Instance.IncrementCurrentDay();
             CoinEffectManager.Instance.StartSpawnCoins(coinManager.CoinCollected);
+        }
     }
 
     public void SetNight()
@@ -78,6 +80,7 @@ public class GameLevelManager : MonoBehaviour
     {
         if (this != null && levelManager != null)
         {
+
             StartCoroutine(levelManager.HandleLevelWin());
         }
     }

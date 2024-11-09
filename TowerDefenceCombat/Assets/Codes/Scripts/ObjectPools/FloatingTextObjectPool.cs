@@ -45,13 +45,7 @@ public class FloatingTextObjectPool : Singleton<FloatingTextObjectPool>
 
     public void DisplayInsufficientGoldCoin()
     {
-        string infoText = "You don't have enough gold coins!";
-        DisplayFloatingText(infoText);
-    }
-
-    public void DisplayInsufficientAzureCoin()
-    {
-        string infoText = "You don't have enough azure coins!";
+        string infoText = "You don't have enough coins!";
         DisplayFloatingText(infoText);
     }
 

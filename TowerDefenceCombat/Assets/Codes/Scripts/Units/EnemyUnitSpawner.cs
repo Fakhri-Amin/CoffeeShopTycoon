@@ -33,7 +33,6 @@ public class EnemyUnitSpawner : MonoBehaviour
         this.levelWaveSO = levelWaveSO;
         this.spawnPoints = spawnPoints;
         StartCoroutine(SpawnUnitWaveRoutine());
-        // SpawnUnit(UnitHero.Sword);
     }
 
     private void OnEnable()

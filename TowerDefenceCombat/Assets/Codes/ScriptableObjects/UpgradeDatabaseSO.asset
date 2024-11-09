@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0601aa9f6cda3574d96c09241def04f0, type: 3}
+  m_Name: UpgradeDatabaseSO
+  m_EditorClassIdentifier: 
+  BonusCoinRewardPercentage: 0
+  BaseUpgradeBonusCoinRewardPrice: 100
+  BonusCoinRewardUpgradeAmount: 5
+  UpgradeBonusCoinRewardPriceList:
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  - 600
+  - 700
+  - 800
+  - 900
+  - 1000
+  - 1100
+  - 1200
+  - 1300
+  - 1400
+  - 1500
+  - 1600
+  - 1700
+  - 1800
+  - 1900
+  - 2000
+  - 2100
+  - 2200
+  - 2300
+  - 2400
+  - 2500
+  - 2600
+  - 2700
+  - 2800
+  - 2900
+  - 3000

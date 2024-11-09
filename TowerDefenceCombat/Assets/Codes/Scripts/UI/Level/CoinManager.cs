@@ -14,6 +14,11 @@ public class CoinManager : MonoBehaviour
         UpdateCoinUI(CoinCollected);
     }
 
+    public void SetFinalCoinCollected(float amount)
+    {
+        CoinCollected = amount;
+    }
+
     public void AddCoins(float amount)
     {
         CoinCollected += amount;
